@@ -1,8 +1,11 @@
 package com.ssafy.dundins.service;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ssafy.dundins.dto.notice.NoticeDto;
+import com.ssafy.dundins.dto.notice.NoticeOriginDto;
 import com.ssafy.dundins.dto.notice.NoticeParamDto;
 import com.ssafy.dundins.dto.notice.NoticeResultDto;
 
@@ -14,4 +17,6 @@ public interface NoticeService {
 	public NoticeResultDto noticeList(NoticeParamDto noticeParamDto);
 	public NoticeResultDto noticeLatestList(NoticeParamDto noticeParamDto);
 	public NoticeResultDto noticeListSearchWord(NoticeParamDto noticeParamDto);
+	
+	public List<NoticeOriginDto> getNotices();
 }

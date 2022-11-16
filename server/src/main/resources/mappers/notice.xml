@@ -97,4 +97,8 @@
 		UPDATE NOTICE set READ_COUNT = READ_COUNT + 1
 		 WHERE NOTICE_ID = #{noticeId}
 	</update>
+	
+	<select id="getNotices" resultType="com.ssafy.dundins.dto.notice.NoticeOriginDto">
+		SELECT * FROM NOTICE
+	</select>
 </mapper>

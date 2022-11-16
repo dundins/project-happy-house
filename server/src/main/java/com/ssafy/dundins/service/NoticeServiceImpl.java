@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.ssafy.dundins.dao.NoticeDao;
 import com.ssafy.dundins.dto.notice.NoticeDto;
 import com.ssafy.dundins.dto.notice.NoticeFileDto;
+import com.ssafy.dundins.dto.notice.NoticeOriginDto;
 import com.ssafy.dundins.dto.notice.NoticeParamDto;
 import com.ssafy.dundins.dto.notice.NoticeResultDto;
 
@@ -256,6 +257,11 @@ public class NoticeServiceImpl implements NoticeService {
 	    }
 	    
 	    return noticeResultDto;
+	}
+
+	@Override
+	public List<NoticeOriginDto> getNotices() {
+		return dao.getNotices();
 	}
 
 

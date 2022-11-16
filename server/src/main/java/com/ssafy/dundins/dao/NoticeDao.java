@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ssafy.dundins.dto.notice.NoticeDto;
 import com.ssafy.dundins.dto.notice.NoticeFileDto;
+import com.ssafy.dundins.dto.notice.NoticeOriginDto;
 import com.ssafy.dundins.dto.notice.NoticeParamDto;
 
 @Mapper
@@ -38,4 +39,6 @@ public interface NoticeDao {
 	public int noticeListSearchWordTotalCount(NoticeParamDto noticeParamDto);
 
 	public int noticeUpdate(NoticeDto dto);
+	
+	public List<NoticeOriginDto> getNotices();
 }
