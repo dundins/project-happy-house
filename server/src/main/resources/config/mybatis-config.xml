@@ -8,6 +8,6 @@
     </settings>
 		
 	<mappers>
-	    <mapper resource="mapper/notice.xml" />
+	    <mapper resource="mappers/notice.xml" />
 	</mappers>
 </configuration>
