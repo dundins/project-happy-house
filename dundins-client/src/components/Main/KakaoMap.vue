@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="map"></div>
-    <div class="button-group">
+    <!-- <div class="button-group">
       <button @click="changeSize(0)">Hide</button>
       <button @click="changeSize(800)">show</button>
       <button @click="displayMarker(markerPositions1)">marker set 1</button>
@@ -9,7 +9,7 @@
       <button @click="displayMarker([])">marker set 3 (empty)</button>
       <button @click="displayInfoWindow">infowindow</button>
       <button @click="displayTraffic">실시간 교통정보</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -149,7 +149,7 @@ export default {
 <style scoped>
 #map {
   width: 100%;
-  height: 800px;
+  height: 100%;
 }
 
 .button-group {

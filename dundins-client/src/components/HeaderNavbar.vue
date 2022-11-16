@@ -1,31 +1,33 @@
 <template>
-  <v-app-bar color="white" flat>
+  <!-- <v-app-bar color="white" flat>
     <v-container class="py-0 fill-height">
-      <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
-
       <router-link to="/" tag="v-btn">
-        <v-btn rounded>Main</v-btn>
+        <v-btn>Main</v-btn>
       </router-link>
       <router-link to="/about" tag="v-btn">
-        <v-btn rounded>About</v-btn>
+        <v-btn>게시판</v-btn>
       </router-link>
       <router-link to="/apt" tag="v-btn">
-        <v-btn rounded>Apt</v-btn>
+        <v-btn>Apt</v-btn>
       </router-link>
-
-      <v-spacer></v-spacer>
-
-      <v-responsive max-width="260">
-        <v-text-field
-          dense
-          flat
-          hide-details
-          rounded
-          solo-inverted
-        ></v-text-field>
-      </v-responsive>
     </v-container>
-  </v-app-bar>
+  </v-app-bar> -->
+
+  <!-- <v-col style="display: flex" class="d-flex" lg="10">
+    <v-select :items="items" label="시 선택" dense></v-select>
+    <v-select :items="items" label="구 선택" dense></v-select>
+    <v-select :items="items" label="동 선택" dense></v-select>
+  </v-col> -->
+  <v-container class="grey lighten-5">
+    <v-row class="mb-6" no-gutters>
+      <v-col md="6" offset-md="3">
+        <v-card class="pa-2" outlined tile> .col-md-3 .offset-md-3 </v-card>
+      </v-col>
+      <v-col md="6" offset-md="3">
+        <v-card class="pa-2" outlined tile> .col-md-3 .offset-md-3 </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

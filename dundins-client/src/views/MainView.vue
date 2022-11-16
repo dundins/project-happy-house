@@ -1,39 +1,36 @@
 <template>
-  <div>
+  <div class="mainview">
     <kakao-map class="map"></kakao-map>
-    <div>
-      <h1 class="dashboard">asdasd</h1>
-    </div>
+    <side-menu-bar class="dashboard"></side-menu-bar>
   </div>
 </template>
 
 <script>
 import KakaoMap from "@/components/Main/KakaoMap.vue";
+import SideMenuBar from "@/components/Main/SideMenuBar.vue";
 
 export default {
-  components: { KakaoMap },
+  components: { KakaoMap, SideMenuBar },
   name: "AppMain",
-  props: {
-    msg: String,
-  },
-  comments: {
-    KakaoMap,
-  },
 };
 </script>
 
 <style scoped>
+.mapview {
+  width: 100%;
+  height: 100%;
+}
 .map {
   position: absolute;
   z-index: 1;
   width: 100%;
+  height: 100%;
 }
 .dashboard {
   z-index: 2;
   position: absolute;
-  border-radius: 10px;
-  border-block-color: black;
+  margin: 1%;
+  height: 90%;
   width: 400px;
-  height: 50%;
 }
 </style>
