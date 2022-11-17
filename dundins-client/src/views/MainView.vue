@@ -1,43 +1,39 @@
 <template>
-  <v-card class="d-flex pa-2" outlined tile>
+  <div>
+    <kakao-map class="map"></kakao-map>
     <div>
-      <kakao-map></kakao-map>
+      <h1 class="dashboard">asdasd</h1>
     </div>
-    <div>
-      <map-search class="-"></map-search>
-    </div>
-  </v-card>
+  </div>
 </template>
 
 <script>
 import KakaoMap from "@/components/Main/KakaoMap.vue";
-import MapSearch from "@/components/Main/MapSearch.vue";
 
 export default {
-  components: { KakaoMap, MapSearch },
+  components: { KakaoMap },
   name: "AppMain",
   props: {
     msg: String,
   },
   comments: {
     KakaoMap,
-    MapSearch,
   },
 };
 </script>
 
 <style scoped>
-.floatmenu {
+.map {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  z-index: 1;
+  width: 100%;
 }
-.underline-steelblue {
-  display: inline-block;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 70%,
-    rgba(72, 190, 233, 0.3) 30%
-  );
+.dashboard {
+  z-index: 2;
+  position: absolute;
+  border-radius: 10px;
+  border-block-color: black;
+  width: 400px;
+  height: 50%;
 }
 </style>
