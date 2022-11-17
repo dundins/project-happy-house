@@ -1,16 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import AboutView from "../views/AboutView.vue";
-import AptMainView from "../views/AptMainView.vue";
+import MainView from "@/views/MainView.vue";
+import AboutView from "@/views/AboutView.vue";
+import AptMainView from "@/views/AptMainView.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    name: "AppMain",
+    component: MainView,
   },
   {
     path: "/about",
