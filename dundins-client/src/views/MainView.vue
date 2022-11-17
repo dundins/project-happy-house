@@ -30,7 +30,7 @@ export default {
   z-index: 2;
   position: absolute;
   margin: 1%;
-  height: 90%;
-  width: 400px;
+  height: auto;
+  width: 500px;
 }
 </style>
