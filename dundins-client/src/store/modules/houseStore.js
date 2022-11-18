@@ -1,20 +1,24 @@
-import { sidoList, gugunList, houseList } from "@/api/house.js";
+import { sidoList, gugunList, dongList, houseList } from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
   state: {
-    sidos: [{ value: null, text: "선택하세요" }],
-    guguns: [{ value: null, text: "선택하세요" }],
+    sidos: [],
+    guguns: [],
+    dongs: [],
     houses: [],
     house: null,
   },
   getters: {},
   mutations: {
     CLEAR_SIDO_LIST(state) {
-      state.sidos = [{ value: null, text: "선택하세요" }];
+      state.sidos = [];
     },
     CLEAR_GUGUN_LIST(state) {
-      state.guguns = [{ value: null, text: "선택하세요" }];
+      state.guguns = [];
+    },
+    CLEAR_DONG_LIST(state) {
+      state.dongs = [];
     },
     CLEAR_APT_LIST(state) {
       state.houses = [];
@@ -30,6 +34,11 @@ const houseStore = {
         state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
       });
     },
+    SET_DONG_LIST(state, dongs) {
+      dongs.forEach((dong) => {
+        state.dongs.push({ value: dongs.dongCode, text: dong.dongName });
+      });
+    },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
     },
@@ -41,6 +50,7 @@ const houseStore = {
     getSido: ({ commit }) => {
       sidoList(
         ({ data }) => {
+          console.log(data);
           commit("SET_SIDO_LIST", data);
         },
         (error) => {
@@ -60,16 +70,30 @@ const houseStore = {
         }
       );
     },
-    getHouseList: ({ commit }, gugunCode) => {
+    getDong: ({ commit }, gugunCode) => {
+      const params = { gugun: gugunCode };
+      dongList(
+        params,
+        ({ data }) => {
+          commit("SET_DONG_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getHouseList: ({ commit }, dongCode) => {
       const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
       const params = {
-        LAWD_CD: gugunCode,
+        numOfRows: 10,
+        LAWD_CD: dongCode,
         DEAL_YMD: "202207",
         serviceKey: decodeURIComponent(SERVICE_KEY),
       };
       houseList(
         params,
         ({ data }) => {
+          console.log(data.response);
           commit("SET_HOUSE_LIST", data.response.body.items.item);
         },
         (error) => {
