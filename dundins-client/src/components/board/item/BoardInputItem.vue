@@ -1,60 +1,62 @@
 <template>
-  <v-row class="mb-1">
-    <v-col style="text-align: left">
-      <v-form @submit="onSubmit" @reset="onReset">
-        <v-form-group
-          id="userid-group"
-          label="작성자:"
-          label-for="userid"
-          description="작성자를 입력하세요."
-        >
-          <v-form-input
-            id="userid"
-            :disabled="isUserid"
-            v-model="article.userid"
-            type="text"
-            required
-            placeholder="작성자 입력..."
-          ></v-form-input>
-        </v-form-group>
-
-        <v-form-group
-          id="subject-group"
-          label="제목:"
-          label-for="subject"
-          description="제목을 입력하세요."
-        >
-          <v-form-input
-            id="subject"
-            v-model="article.subject"
-            type="text"
-            required
-            placeholder="제목 입력..."
-          ></v-form-input>
-        </v-form-group>
-
-        <v-form-group id="content-group" label="내용:" label-for="content">
-          <v-form-textarea
-            id="content"
-            v-model="article.content"
-            placeholder="내용 입력..."
-            rows="10"
-            max-rows="15"
-          ></v-form-textarea>
-        </v-form-group>
-
-        <v-button
-          type="submit"
-          variant="primary"
-          class="m-1"
-          v-if="this.type === 'register'"
-          >글작성</v-button
-        >
-        <v-button type="submit" variant="primary" class="m-1" v-else
-          >글수정</v-button
-        >
-        <v-button type="reset" variant="danger" class="m-1">초기화</v-button>
-      </v-form>
+  <v-row justify="end">
+    <v-col cols="2" />
+    <v-col cols="8">
+      <v-card class="pa-3">
+        <v-form @submit="onSubmit" @reset="onReset">
+          <v-card-text>
+            <v-col cols="12">
+              <v-text-field
+                id="userid"
+                :disabled="isUserid"
+                v-model="article.userid"
+                type="text"
+                label="작성자"
+                filled
+                required
+              ></v-text-field>
+              <!-- readonly -->
+            </v-col>
+            <v-col cols="12">
+              <v-text-field
+                id="subject"
+                v-model="article.subject"
+                type="text"
+                label="제목"
+                filled
+                :rules="subjectRules"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12">
+              <v-textarea
+                id="content"
+                v-model="article.content"
+                filled
+                :rules="contentRules"
+                required
+              >
+                <template v-slot:label>
+                  <div>내용</div>
+                </template>
+              </v-textarea>
+            </v-col>
+          </v-card-text>
+          <v-divider class="mt-12"></v-divider>
+          <v-card-actions>
+            <v-col cols="12">
+              <v-btn
+                color="#42A5F5"
+                type="submit"
+                v-if="this.type === 'register'"
+                >작성</v-btn
+              >
+              <v-btn type="submit" color="#42A5F5" v-else>수정</v-btn>
+              <v-btn type="reset" color="#EF5350">취소</v-btn>
+            </v-col>
+          </v-card-actions>
+        </v-form>
+      </v-card>
     </v-col>
   </v-row>
 </template>
@@ -73,6 +75,8 @@ export default {
         content: "",
       },
       isUserid: false,
+      subjectRules: [(v) => !!v || "제목을 입력하세요."],
+      contentRules: [(v) => !!v || "내용을 입력하세요."],
     };
   },
   props: {
@@ -84,10 +88,10 @@ export default {
       getArticle(
         param,
         ({ data }) => {
-          // this.article.articleno = data.article.articleno;
-          // this.article.userid = data.article.userid;
-          // this.article.subject = data.article.subject;
-          // this.article.content = data.article.content;
+          this.article.articleno = data.article.articleno;
+          this.article.userid = data.article.userid;
+          this.article.subject = data.article.subject;
+          this.article.content = data.article.content;
           this.article = data;
         },
         (error) => {
@@ -180,4 +184,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+button {
+  margin: 0 10px;
+}
+</style>

@@ -1,8 +1,8 @@
 <template>
-  <v-container class="bv-example-row mt-3">
+  <v-container>
     <v-row>
       <v-col>
-        <v-alert show><h3>글작성</h3></v-alert>
+        <h3>글작성</h3>
       </v-col>
     </v-row>
     <board-input-item type="register" />

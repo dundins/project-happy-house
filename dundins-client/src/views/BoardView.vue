@@ -1,7 +1,7 @@
 <template>
   <v-container class="bv-example-row mt-3 text-center">
     <h3 class="underline-hotpink">
-      <v-icon icon="journals"></v-icon> Board Service
+      <v-icon icon="journals"></v-icon> 공지사항
     </h3>
     <router-view></router-view>
   </v-container>

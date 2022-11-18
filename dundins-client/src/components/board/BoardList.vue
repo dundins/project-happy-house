@@ -1,26 +1,43 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col>
-        <h3>글목록</h3>
-      </v-col>
-    </v-row>
+    <v-card>
+      <v-card-title>
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="articles"
+        :search="search"
+        :page.sync="page"
+        :items-per-page="itemsPerPage"
+        hide-default-footer
+        class="elevation-1"
+        @page-count="pageCount = $event"
+      ></v-data-table>
+      <div class="text-center pt-2">
+        <v-pagination v-model="page" :length="pageCount"></v-pagination>
+        <v-text-field
+          :value="itemsPerPage"
+          label="Items per page"
+          type="number"
+          min="-1"
+          max="15"
+          @input="itemsPerPage = parseInt($event, 10)"
+        ></v-text-field>
+      </div>
+    </v-card>
+    <br />
     <v-row>
       <v-col cols="10" />
       <v-col cols="2">
-        <v-btn @click="moveWrite()">글쓰기</v-btn>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <!-- <v-data-able
-          striped
-          hover
-          :items="articles"
-          :fields="fields"
-          @row-clicked="viewArticle"
-        >
-        </v-data-able> -->
+        <v-btn @click="moveWrite()">글 작성</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -33,14 +50,18 @@ export default {
   name: "BoardList",
   data() {
     return {
-      articles: [],
-      fields: [
-        { key: "articleno", label: "글번호", tdClass: "tdClass" },
-        { key: "subject", label: "제목", tdClass: "tdSubject" },
-        { key: "userid", label: "작성자", tdClass: "tdClass" },
-        { key: "regtime", label: "작성일", tdClass: "tdClass" },
-        { key: "hit", label: "조회수", tdClass: "tdClass" },
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 20,
+      search: "",
+      headers: [
+        { text: "번호", value: "articleno" },
+        { text: "글 제목", value: "subject" },
+        { text: "작성자", value: "userid" },
+        { text: "작성일", value: "regtime" },
+        { text: "조회수", value: "hit" },
       ],
+      articles: [],
     };
   },
   created() {
