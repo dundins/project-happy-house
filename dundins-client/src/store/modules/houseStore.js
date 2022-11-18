@@ -92,6 +92,7 @@ const houseStore = {
       houseList(
         params,
         ({ data }) => {
+          console.log(data.response.body.items.item);
           commit("SET_HOUSE_LIST", data.response.body.items.item);
         },
         (error) => {

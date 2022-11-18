@@ -26,6 +26,7 @@
           v-model="dongCode"
           :items="dongs"
           label="동 선택"
+          @change="searchApt"
           dense
         ></v-select>
       </v-col>
@@ -81,7 +82,8 @@ export default {
       if (this.gugunCode) this.getDong(this.gugunCode);
     },
     searchApt() {
-      if (this.dongCode) this.getHouseList(this.dongCode);
+      // if (this.dongCode) this.getHouseList(this.dongCode);
+      if (this.gugunCode) this.getHouseList(this.gugunCode);
     },
   },
 };
