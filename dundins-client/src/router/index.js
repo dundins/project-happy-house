@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import MainView from "@/views/MainView.vue";
-import AboutView from "@/views/AboutView.vue";
+import BoardView from "@/views/BoardView.vue";
 import AptMainView from "@/views/AptMainView.vue";
 
 Vue.use(VueRouter);
@@ -13,9 +13,9 @@ const routes = [
     component: MainView,
   },
   {
-    path: "/about",
-    name: "about",
-    component: AboutView,
+    path: "/board",
+    name: "board",
+    component: BoardView,
   },
   {
     path: "/apt",
