@@ -1,5 +1,6 @@
 package com.ssafy.dundins.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -72,5 +73,10 @@ public class BoardServiceImpl implements BoardService {
 	public boolean deleteArticle(int articleno) throws Exception {
 		sqlSession.getMapper(BoardMapper.class).deleteMemo(articleno);
 		return sqlSession.getMapper(BoardMapper.class).deleteArticle(articleno) == 1;
+	}
+
+	@Override
+	public int getArticleCount() throws SQLException {
+		return sqlSession.getMapper(BoardMapper.class).getArticleCount();
 	}
 }

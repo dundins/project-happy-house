@@ -19,6 +19,7 @@
           v-model="gugunCode"
           :items="guguns"
           label="구 선택"
+          @change="dongList"
           dense
         ></v-select>
         <v-select
@@ -47,29 +48,40 @@ export default {
     };
   },
   computed: {
-    ...mapState(houseStore, ["sidos", "guguns", "houses"]),
+    ...mapState(houseStore, ["sidos", "guguns", "dongs", "houses"]),
   },
   created() {
     this.CLEAR_SIDO_LIST();
     this.CLEAR_GUGUN_LIST();
+    this.CLEAR_DONG_LIST();
     this.CLEAR_APT_LIST();
     this.getSido();
   },
   methods: {
-    ...mapActions(houseStore, ["getSido", "getGugun", "getHouseList"]),
+    ...mapActions(houseStore, [
+      "getSido",
+      "getGugun",
+      "getDong",
+      "getHouseList",
+    ]),
     ...mapMutations(houseStore, [
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",
+      "CLEAR_DONG_LIST",
       "CLEAR_APT_LIST",
     ]),
     gugunList() {
-      // console.log(this.sidoCode);
       this.CLEAR_GUGUN_LIST();
       this.gugunCode = null;
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
+    dongList() {
+      this.CLEAR_DONG_LIST();
+      this.dongCode = null;
+      if (this.gugunCode) this.getDong(this.gugunCode);
+    },
     searchApt() {
-      if (this.gugunCode) this.getHouseList(this.gugunCode);
+      if (this.dongCode) this.getHouseList(this.dongCode);
     },
   },
 };
