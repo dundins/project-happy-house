@@ -4,6 +4,9 @@
     <div><h1>굳</h1></div>
   </div>
   <div v-else>
+    <div class="purple darken-2 text-center">
+      <span class="white--text">Lorem ipsum</span>
+    </div>
     <div id="map"></div>
   </div>
 </template>
@@ -85,6 +88,9 @@ export default {
       // this.getHouseReview(houseNo);
       // if (!this.listVisible) this.listVisible = true;
       // console.log("showHouseDetail" + index);
+      if (this.map.getLevel() >= 5) {
+        this.map.setLevel(3);
+      }
       this.map.panTo(coords);
     },
 
@@ -92,11 +98,13 @@ export default {
     addMarkerHandler(marker, coords, index) {
       let $this = this;
       kakao.maps.event.addListener(marker, "click", function () {
-        console.log("??");
         $this.showHouseDetail(coords, index);
       });
     },
-    addMarkerWithAddress(bounds, address, index) {
+    test() {
+      console.log("click!");
+    },
+    addMarkerWithAddress(image, bounds, address, index) {
       // 주소-좌표 변환 객체를 생성합니다
       var geocoder = new kakao.maps.services.Geocoder();
       const $this = this;
@@ -107,14 +115,35 @@ export default {
       geocoder.addressSearch(address, function (result, status) {
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
-          // console.log($map);
           let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
           // 결과값으로 받은 위치를 마커로 표시합니다
-          var marker = new kakao.maps.Marker({
+          // var marker = new kakao.maps.Marker({
+          //   map: $map,
+          //   position: coords,
+          //   image: image,
+          // });
+
+          const content =
+            `<div id="customoverlay">` +
+            // `<div id="customoverlay" @click="${$this.showHouseDetail(coords, index)}">` +
+            `  <a href="javascript:void(0);" onclick="${$this.showHouseDetail(
+              coords,
+              index
+            )}">` +
+            `    <span class="title">${$this.priceFormatting(
+              $this.houses[index].거래금액
+            )}</span>` +
+            "  </a>" +
+            "</div>";
+
+          let marker = new kakao.maps.CustomOverlay({
             map: $map,
             position: coords,
+            content: content,
+            yAnchor: 1,
           });
-          $this.addMarkerHandler(marker, coords, index);
+
+          // $this.addMarkerHandler(marker, coords, index);
           marker.setMap($map);
           bounds.extend(coords);
 
@@ -133,12 +162,49 @@ export default {
         }
       });
     },
+    priceFormatting(price) {
+      price = price.replace(",", "");
+      let inputNumber = price < 0 ? false : price;
+      let unitWords = ["천", "억", "조", "경"];
+      let splitUnit = 10000;
+      let splitCount = unitWords.length;
+      let resultArray = [];
+      let resultString = "";
+
+      for (let i = 0; i < splitCount; i++) {
+        let unitResult =
+          (inputNumber % Math.pow(splitUnit, i + 1)) / Math.pow(splitUnit, i);
+        unitResult = Math.floor(unitResult);
+        if (unitResult > 0) {
+          resultArray[i] = unitResult;
+        }
+      }
+      for (let i = resultArray.length - 1; i >= 0; i--) {
+        if (!resultArray[i]) continue;
+
+        if (i == 0) {
+          resultString += String(resultArray[i]).substring(0, 1) + unitWords[i];
+        } else {
+          resultString += String(resultArray[i]) + unitWords[i];
+        }
+      }
+      return resultString;
+    },
     addMarkers(list) {
       let bounds = new kakao.maps.LatLngBounds();
-
+      const markerImageSrc = require("../../assets/home-address.png");
+      // "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png";
+      const imageSize = new kakao.maps.Size(44, 44),
+        imageOptions = { offset: new kakao.maps.Point(27, 69) };
       list.forEach((data, index) => {
+        // 마커이미지와 마커를 생성합니다
+        const markerImage = this.createMarkerImage(
+          markerImageSrc,
+          imageSize,
+          imageOptions
+        );
         const address = `${data.도로명} ${data.도로명건물본번호코드}`;
-        this.addMarkerWithAddress(bounds, address, index);
+        this.addMarkerWithAddress(markerImage, bounds, address, index);
       });
       // list.forEach(({ lat, lng }, index) => {
       //   console.log(`forEach ${index}`);
@@ -170,6 +236,11 @@ export default {
       this.markers.forEach((m) => m.setMap(null));
       this.markers = [];
     },
+    // 마커 이미지 생성
+    createMarkerImage(src, size, options) {
+      var markerImage = new kakao.maps.MarkerImage(src, size, options);
+      return markerImage;
+    },
   },
   created() {},
   watch: {
@@ -186,9 +257,54 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 #map {
   width: 100%;
   height: 100%;
+}
+.customoverlay {
+  position: relative;
+  bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #ddd;
+  float: left;
+}
+.customoverlay:nth-of-type(n) {
+  border: 0;
+  box-shadow: 0px 1px 2px #888;
+}
+/* .customoverlay a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  overflow: hidden;
+  background: #d95050;
+  background: #d95050
+    url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
+    no-repeat right 14px center;
+} */
+.customoverlay .title {
+  display: block;
+  text-align: center;
+  background: #fff;
+  /* margin-right: 35px;*/
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.customoverlay:after {
+  content: "";
+  position: absolute;
+  margin-left: -12px;
+  left: 50%;
+  bottom: -12px;
+  width: 22px;
+  height: 12px;
+  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png");
 }
 </style>
