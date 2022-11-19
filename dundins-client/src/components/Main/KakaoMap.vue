@@ -87,21 +87,20 @@ export default {
     },
 
     // 지도 관련 메소드
-    addMarkerByOne(markerPosition, index) {
-      // console.log(markerPosition, index);
-      let marker = new kakao.maps.Marker({
-        position: markerPosition,
-      });
+    addMarkerHandler(marker, markerPosition, index) {
+      // let marker = new kakao.maps.Marker({
+      //   position: markerPosition,
+      // });
       let $this = this;
       kakao.maps.event.addListener(marker, "click", function () {
+        console.log("??");
         $this.showHouseDetail(index);
       });
-      this.markers.push(marker);
-      marker.setMap(this.map);
     },
-    addMarkerWithAddress(bounds, address) {
+    addMarkerWithAddress(bounds, address, index) {
       // 주소-좌표 변환 객체를 생성합니다
       var geocoder = new kakao.maps.services.Geocoder();
+      const $this = this;
       const $map = this.map;
       let $marker = this.markers;
 
@@ -116,6 +115,7 @@ export default {
             map: $map,
             position: coords,
           });
+          $this.addMarkerHandler(marker, coords, index);
           marker.setMap($map);
           bounds.extend(coords);
 
@@ -137,9 +137,9 @@ export default {
     addMarkers(list) {
       let bounds = new kakao.maps.LatLngBounds();
 
-      list.forEach((data) => {
+      list.forEach((data, index) => {
         const address = `${data.도로명} ${data.도로명건물본번호코드}`;
-        this.addMarkerWithAddress(bounds, address);
+        this.addMarkerWithAddress(bounds, address, index);
       });
       // list.forEach(({ lat, lng }, index) => {
       //   console.log(`forEach ${index}`);
