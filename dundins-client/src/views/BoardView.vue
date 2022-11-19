@@ -3,6 +3,9 @@
     <h3 class="underline-hotpink">
       <v-icon icon="journals"></v-icon> 공지사항
     </h3>
+    <div class="purple darken-2 text-center">
+      <span class="white--text">Lorem ipsum</span>
+    </div>
     <router-view></router-view>
   </v-container>
 </template>
