@@ -38,7 +38,7 @@
     <v-row>
       <v-col cols="10" />
       <v-col cols="2">
-        <v-btn @click="moveWrite()">글 작성</v-btn>
+        <v-btn color="primary" @click="moveWrite()">글 작성</v-btn>
       </v-col>
     </v-row>
   </v-container>

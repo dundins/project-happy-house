@@ -1,7 +1,6 @@
 <template>
   <v-row justify="end">
-    <v-col cols="2" />
-    <v-col cols="8">
+    <v-col cols="12">
       <v-card class="pa-3">
         <v-form @submit="onSubmit">
           <v-card-text>
@@ -36,13 +35,13 @@
           <v-card-actions>
             <v-col cols="12">
               <v-btn
-                color="#42A5F5"
+                color="primary"
                 type="submit"
                 v-if="this.type === 'register'"
                 >작성</v-btn
               >
-              <v-btn type="submit" color="#42A5F5" v-else>수정</v-btn>
-              <v-btn @click="onReset($event)" color="#EF5350">취소</v-btn>
+              <v-btn type="submit" color="success" v-else>수정</v-btn>
+              <v-btn @click="onReset($event)" color="error">취소</v-btn>
             </v-col>
           </v-card-actions>
         </v-form>

@@ -5,36 +5,40 @@
         <h3>글보기</h3>
       </v-col>
     </v-row>
-    <v-row class="mb-1">
-      <v-col class="text-left">
-        <v-btn variant="outline-primary" @click="moveList">목록</v-btn>
-      </v-col>
-      <v-col class="text-right" v-if="userInfo.userid === article.userid">
-        <v-btn
-          variant="outline-info"
-          size="sm"
-          @click="moveModifyArticle"
-          class="mr-2"
-          >글수정</v-btn
-        >
-        <v-btn variant="outline-danger" size="sm" @click="deleteArticle"
-          >글삭제</v-btn
-        >
-      </v-col>
-    </v-row>
-    <v-row class="mb-1">
+    <v-row>
       <v-col>
-        <v-card
+        <v-card>
+          <v-card-text>
+            <v-row>
+              <v-avatar color="grey"></v-avatar>
+              <strong class="text-h6">Title</strong>
+            </v-row>
+            <v-row class="text-left">
+              <p v-text="message"></p>
+            </v-row>
+          </v-card-text>
+        </v-card>
+        <!-- <v-card
+          :elevation="30"
           :header-html="`<h3>${article.articleno}.
           ${article.subject} [${article.hit}]</h3><div><h6>${article.userid}</div><div>${article.regtime}</h6></div>`"
           class="mb-2"
           border-variant="dark"
           no-body
         >
-          <v-card-body class="text-left">
+          <v-card-text class="text-left">
             <div v-html="message"></div>
-          </v-card-body>
-        </v-card>
+          </v-card-text>
+        </v-card> -->
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-btn color="success" @click="moveList">목록</v-btn>
+      </v-col>
+      <v-col v-if="userInfo.userid === article.userid">
+        <v-btn color="primary" @click="moveModifyArticle">글수정</v-btn>
+        <v-btn color="error" @click="deleteArticle">글삭제</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -67,6 +71,7 @@ export default {
     getArticle(
       param,
       ({ data }) => {
+        console.log(data);
         this.article = data;
       },
       (error) => {

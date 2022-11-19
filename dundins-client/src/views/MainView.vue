@@ -1,8 +1,12 @@
 <template>
-  <div class="mainview">
-    <kakao-map class="map"></kakao-map>
-    <side-menu-bar class="dashboard"></side-menu-bar>
-  </div>
+  <v-app>
+    <v-main>
+      <div class="mainview">
+        <kakao-map class="map"></kakao-map>
+        <side-menu-bar class="dashboard"></side-menu-bar>
+      </div>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
