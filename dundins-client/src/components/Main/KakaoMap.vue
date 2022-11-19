@@ -76,25 +76,24 @@ export default {
       }
     },
 
-    showHouseDetail(index) {
+    showHouseDetail(coords, index) {
+      console.log(this.houses[index].아파트);
       // this.curIndex = index;
       // const houseNo = this.houseList[index].houseNo;
       // this.getHouseDeal(houseNo);
       // this.getOngoingList(houseNo);
       // this.getHouseReview(houseNo);
       // if (!this.listVisible) this.listVisible = true;
-      console.log("showHouseDetail" + index);
+      // console.log("showHouseDetail" + index);
+      this.map.panTo(coords);
     },
 
     // 지도 관련 메소드
-    addMarkerHandler(marker, markerPosition, index) {
-      // let marker = new kakao.maps.Marker({
-      //   position: markerPosition,
-      // });
+    addMarkerHandler(marker, coords, index) {
       let $this = this;
       kakao.maps.event.addListener(marker, "click", function () {
         console.log("??");
-        $this.showHouseDetail(index);
+        $this.showHouseDetail(coords, index);
       });
     },
     addMarkerWithAddress(bounds, address, index) {
