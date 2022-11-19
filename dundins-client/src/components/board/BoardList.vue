@@ -19,6 +19,7 @@
         :items-per-page="itemsPerPage"
         hide-default-footer
         class="elevation-1"
+        @click:row="handleClick"
         @page-count="pageCount = $event"
       ></v-data-table>
       <div class="text-center pt-2">
@@ -85,6 +86,10 @@ export default {
   methods: {
     moveWrite() {
       this.$router.push({ name: "boardwrite" });
+    },
+    handleClick(value) {
+      console.log(value);
+      this.viewArticle(value);
     },
     viewArticle(article) {
       this.$router.push({

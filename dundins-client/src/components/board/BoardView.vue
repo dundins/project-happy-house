@@ -1,24 +1,24 @@
 <template>
-  <v-container class="bv-example-row mt-3">
+  <v-container>
     <v-row>
       <v-col>
-        <v-alert show><h3>글보기</h3></v-alert>
+        <h3>글보기</h3>
       </v-col>
     </v-row>
     <v-row class="mb-1">
       <v-col class="text-left">
-        <vb-button variant="outline-primary" @click="moveList">목록</vb-button>
+        <v-btn variant="outline-primary" @click="moveList">목록</v-btn>
       </v-col>
       <v-col class="text-right" v-if="userInfo.userid === article.userid">
-        <v-button
+        <v-btn
           variant="outline-info"
           size="sm"
           @click="moveModifyArticle"
           class="mr-2"
-          >글수정</v-button
+          >글수정</v-btn
         >
-        <v-button variant="outline-danger" size="sm" @click="deleteArticle"
-          >글삭제</v-button
+        <v-btn variant="outline-danger" size="sm" @click="deleteArticle"
+          >글삭제</v-btn
         >
       </v-col>
     </v-row>
