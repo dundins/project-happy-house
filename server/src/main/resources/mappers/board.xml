@@ -69,5 +69,8 @@
 		where articleno = #{articleno}
 	</delete>
 
+	<select id="getArticleCount" resultType="int">
+		select count(*) from board
+	</select>
 </mapper>
 
