@@ -36,7 +36,7 @@ const houseStore = {
     },
     SET_DONG_LIST(state, dongs) {
       dongs.forEach((dong) => {
-        state.dongs.push({ value: dongs.dongCode, text: dong.dongName });
+        state.dongs.push({ value: dong.dongCode, text: dong.dongName });
       });
     },
     SET_HOUSE_LIST(state, houses) {
@@ -50,7 +50,6 @@ const houseStore = {
     getSido: ({ commit }) => {
       sidoList(
         ({ data }) => {
-          console.log(data);
           commit("SET_SIDO_LIST", data);
         },
         (error) => {
@@ -83,18 +82,13 @@ const houseStore = {
       );
     },
     getHouseList: ({ commit }, dongCode) => {
-      // const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
       const params = {
-        numOfRows: 10,
-        LAWD_CD: dongCode,
-        DEAL_YMD: "202207",
-        // serviceKey: decodeURIComponent(SERVICE_KEY),
+        dongCode: dongCode,
       };
       houseList(
         params,
         ({ data }) => {
-          console.log(data.response);
-          commit("SET_HOUSE_LIST", data.response.body.items.item);
+          commit("SET_HOUSE_LIST", data);
         },
         (error) => {
           console.log(error);

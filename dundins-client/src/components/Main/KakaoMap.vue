@@ -8,9 +8,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapMutations, mapState } from "vuex";
 
 const houseStore = "houseStore";
+const kakaoStore = "kakaoStore";
 
 export default {
   name: "KakaoMap",
@@ -18,11 +19,17 @@ export default {
     return {
       mapInfo: "",
       markers: [],
+      polygonMarkers: [],
       markerOnMap: [],
     };
   },
   computed: {
     ...mapState(houseStore, ["houses"]),
+    ...mapState(kakaoStore, ["sigs", "emds"]),
+  },
+  created() {
+    this.CLEAR_SIG_LIST();
+    this.CLEAR_EMD_LIST();
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
@@ -32,11 +39,18 @@ export default {
       /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=20eae81b3a2499aad461a35f363d719b&libraries=services";
+        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=be099b89e17f279641425236a83dc97a&libraries=services";
       document.head.appendChild(script);
     }
   },
   methods: {
+    // ...mapActions(kakaoStore, ["getSig"]),
+    ...mapMutations(kakaoStore, [
+      "CLEAR_SIG_LIST",
+      "CLEAR_EMD_LIST",
+      "SET_SIG_LIST",
+      "SET_EMD_LIST",
+    ]),
     initMap() {
       const mapContainer = document.getElementById("map");
       const mapOption = {
@@ -57,12 +71,6 @@ export default {
       // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
       const zoomControl = new kakao.maps.ZoomControl();
       this.map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
-      // const markerPositions = new kakao.maps.LatLng(37.5013, 127.0397);
-      // const marker = new kakao.maps.Marker({
-      //   position: markerPositions,
-      // });
-      // marker.setMap(this.map);
     },
     displayTraffic() {
       this.btnClick1++;
@@ -77,7 +85,7 @@ export default {
     },
 
     showHouseDetail(coords, index) {
-      console.log(this.houses[index].아파트);
+      console.log(this.houses[index].aptName);
       // this.curIndex = index;
       // const houseNo = this.houseList[index].houseNo;
       // this.getHouseDeal(houseNo);
@@ -90,76 +98,6 @@ export default {
       }
       this.map.panTo(coords);
     },
-
-    // 지도 관련 메소드
-    addMarkerHandler(marker, coords, index) {
-      let $this = this;
-      kakao.maps.event.addListener(marker, "click", function () {
-        $this.showHouseDetail(coords, index);
-      });
-    },
-    // addMarkerWithAddress(content, bounds, address, index) {
-    //   // 주소-좌표 변환 객체를 생성합니다
-    //   var geocoder = new kakao.maps.services.Geocoder();
-    //   const $this = this;
-
-    //   // 주소로 좌표를 검색합니다
-    //   geocoder.addressSearch(address, function (result, status) {
-    //     // 정상적으로 검색이 완료됐으면
-    //     if (status === kakao.maps.services.Status.OK) {
-    //       let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-    //       let price = $this.removeComma($this.houses[index].거래금액);
-    //       let scale = $this.houses[index].전용면적;
-    //       let aptName = $this.houses[index].아파트;
-
-    //       var content = document.createElement("div");
-    //       content.className = "customoverlay";
-    //       if (price > 100000) {
-    //         content.innerHTML = `<span class="title1"><div id="scale">${$this.calcSize(
-    //           scale
-    //         )}</div><div>${$this.priceFormatting(price)}</div>
-    //         </span>`;
-    //       } else {
-    //         content.innerHTML = `<span class="title2"><div id="scale">${$this.calcSize(
-    //           scale
-    //         )}</div><div>${$this.priceFormatting(price)}</div>
-    //         </span>`;
-    //       }
-
-    //       let marker = null;
-    //       if (!$this.markerOnMap.includes(aptName)) {
-    //         $this.markerOnMap.push(aptName);
-    //         marker = new kakao.maps.CustomOverlay({
-    //           map: $this.map,
-    //           position: coords,
-    //           content: content,
-    //           yAnchor: 1,
-    //         });
-
-    //         marker.setMap($this.map);
-
-    //         $this.markers.push(marker);
-    //       }
-
-    //       content.addEventListener("click", function () {
-    //         $this.showHouseDetail(coords, index);
-    //       });
-
-    //       bounds.extend(coords);
-    //       // $this.map.setBounds(bounds);
-
-    //       // console.log();
-    //       // 인포윈도우로 장소에 대한 설명을 표시합니다
-    //       // var infowindow = new kakao.maps.InfoWindow({
-    //       //   content:
-    //       //     '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
-    //       // });
-    //       // infowindow.open($map, marker);
-    //       // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-    //       // $map.setCenter(coords);
-    //     }
-    //   });
-    // },
     calcSize(size) {
       return Math.floor((size / 3) * 10) / 10 + "평";
     },
@@ -175,8 +113,8 @@ export default {
       let resultString = "";
 
       for (let i = 0; i < splitCount; i++) {
-        let unitResult =
-          (inputNumber % Math.pow(splitUnit, i + 1)) / Math.pow(splitUnit, i);
+        // eslint-disable-next-line prettier/prettier
+        let unitResult = (inputNumber % Math.pow(splitUnit, i + 1)) / Math.pow(splitUnit, i);
         unitResult = Math.floor(unitResult);
         if (unitResult > 0) {
           resultArray[i] = unitResult;
@@ -193,10 +131,10 @@ export default {
       }
       return resultString;
     },
-    addMarkerWithAddress2(coords, index) {
-      let price = this.removeComma(this.houses[index].거래금액);
-      let scale = this.houses[index].전용면적;
-      let aptName = this.houses[index].아파트;
+    addMarkerWithAddress(coords, index) {
+      let price = this.removeComma(this.houses[index].recentPrice);
+      let scale = this.houses[index].area;
+      let aptName = this.houses[index].aptName;
       let $this = this;
       let content = document.createElement("div");
       content.className = "customoverlay";
@@ -219,7 +157,6 @@ export default {
           map: this.map,
           position: coords,
           content: content,
-          yAnchor: 1,
         });
 
         marker.setMap(this.map);
@@ -233,55 +170,60 @@ export default {
       // $this.map.setBounds(bounds);
     },
     addMarkers(list) {
-      // let bounds = new kakao.maps.LatLngBounds();
-
-      // const content = `<div id="customoverlay"></div>`;
-
-      // list.forEach((data, index) => {
-      //   const address = `${data.도로명} ${data.도로명건물본번호코드}`;
-      //   this.addMarkerWithAddress(content, bounds, address, index);
-      // });
-      // console.log(this.markerOnMap);
-      // this.map.setBounds(bounds);
-
       let bounds = new kakao.maps.LatLngBounds();
-      var geocoder = new kakao.maps.services.Geocoder();
-      let $this = this;
-      const addressSearch = (address) => {
-        return new Promise((resolve) => {
-          geocoder.addressSearch(address, function (result, status) {
-            console.log("결과스");
-            console.log(result);
-            if (status === kakao.maps.services.Status.OK) {
-              resolve({ lat: result[0].y, lng: result[0].x });
-            } else {
-              console.log("키키" + result);
-            }
-          });
-        });
-      };
 
-      // async-await
-      (async () => {
-        try {
-          const positions = [];
+      list.forEach((li, index) => {
+        let coords = new kakao.maps.LatLng(li.lat, li.lng);
+        this.addMarkerWithAddress(coords, index);
+        bounds.extend(coords);
+      });
 
-          for (const address of list) {
-            const addr = `${address.도로명} ${address.도로명건물본번호코드}`;
-            const result = await addressSearch(addr);
-            positions.push(result);
-          }
+      this.map.setBounds(bounds);
+      // let bounds = new kakao.maps.LatLngBounds();
+      // var geocoder = new kakao.maps.services.Geocoder();
+      // let $this = this;
+      // const addressSearch = (address) => {
+      //   return new Promise((resolve) => {
+      //     geocoder.addressSearch(address, function (result, status) {
+      //       if (status === kakao.maps.services.Status.OK) {
+      //         resolve({ lat: result[0].y, lng: result[0].x });
+      //       } else {
+      //         resolve({ lat: null });
+      //       }
+      //     });
+      //   });
+      // };
 
-          positions.map(function (position, index) {
-            let coords = new kakao.maps.LatLng(position.lat, position.lng);
-            $this.addMarkerWithAddress2(coords, index);
-            bounds.extend(coords);
-          });
-          $this.map.setBounds(bounds);
-        } catch (e) {
-          console.log(e);
-        }
-      })();
+      // // async-await
+      // (async () => {
+      //   try {
+      //     const positions = [];
+
+      //     let idx = 0;
+      //     for (const address of list) {
+      //       const addr = `${address.도로명} ${address.도로명건물본번호코드}`;
+      //       const result = await addressSearch(addr);
+      //       if (result.lat !== null) {
+      //         console.log(`결과`);
+      //         console.log(result);
+      //         positions.push({ position: result, index: idx });
+      //       }
+      //       idx++;
+      //     }
+
+      //     positions.map(function (v) {
+      //       console.log(v);
+      //       let coords = new kakao.maps.LatLng(v.position.lat, v.position.lng);
+      //       $this.addMarkerWithAddress2(coords, v.index);
+      //       bounds.extend(coords);
+      //     });
+      //     console.log(this.markerOnMap);
+      //     console.log(this.houses);
+      //     $this.map.setBounds(bounds);
+      //   } catch (e) {
+      //     console.log(e);
+      //   }
+      // })();
     },
     addInfoWindow() {
       // console.log("addiw");
@@ -303,6 +245,7 @@ export default {
     },
     removeMarkers() {
       this.markers.forEach((m) => m.setMap(null));
+      this.polygonMarkers.forEach((m) => m.setMap(null));
       this.markers = [];
       this.markerOnMap = [];
     },
@@ -311,14 +254,40 @@ export default {
       var markerImage = new kakao.maps.MarkerImage(src, size, options);
       return markerImage;
     },
+    displayAreas() {
+      let dong = this.houses[0].dongCode;
+      this.CLEAR_EMD_LIST();
+      this.SET_EMD_LIST(dong);
+
+      // let name = this.sigs[0].properties.SIG_CD;
+      let path = [];
+      this.emds[0].forEach((v) => {
+        path.push(new kakao.maps.LatLng(v[1], v[0]));
+      });
+      let area = { code: dong, path: path };
+      this.displayArea(area);
+      return;
+    },
+    // 다각형을 생상하고 이벤트를 등록하는 함수입니다
+    displayArea(area) {
+      // 다각형을 생성합니다
+      let polygon = new kakao.maps.Polygon({
+        map: this.map, // 다각형을 표시할 지도 객체
+        path: area.path,
+        strokeWeight: 2,
+        strokeColor: "#000",
+        strokeOpacity: 0.5,
+        fillColor: "#f5e4e2",
+        fillOpacity: 0.4,
+      });
+      this.polygonMarkers.push(polygon);
+    },
   },
-  created() {},
   watch: {
     houses: function () {
-      // console.log("정보 갱신!");
-      // console.log(this.houses);
       this.removeMarkers();
       if (this.houses.length) {
+        this.displayAreas();
         this.addMarkers(this.houses);
       }
     },
@@ -343,20 +312,6 @@ export default {
   border: 0;
   box-shadow: 0px 1px 2px #888;
 }
-/* .customoverlay a {
-  display: block;
-  text-decoration: none;
-  color: #000;
-  text-align: center;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
-  overflow: hidden;
-  background: #d95050;
-  background: #d95050
-    url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
-    no-repeat right 14px center;
-} */
 #scale {
   font-size: 12px;
 }
@@ -401,7 +356,7 @@ export default {
   bottom: -10px;
   width: 22px;
   height: 12px;
-  background: url("../../assets/vertex_D32F2F.png");
+  background: url("../../assets/img/vertex_D32F2F.png");
 }
 .title2:after {
   content: "";
@@ -411,6 +366,6 @@ export default {
   bottom: -9px;
   width: 22px;
   height: 12px;
-  background: url("../../assets/vertex_1E88E5.png");
+  background: url("../../assets/img/vertex_1E88E5.png");
 }
 </style>

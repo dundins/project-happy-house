@@ -1,9 +1,16 @@
 <template>
   <v-col>
     <v-row>
+      <!-- <span class="material-icons"> search </span>
+        원하시는 지역을 선택해주세요. -->
       <v-col>
-        <span class="material-icons"> search </span>
-        원하시는 지역을 선택해주세요.
+        <div>
+          <span class="material-icons"> home</span>
+          <v-text-field
+            label="원하시는 지역을 검색하세요!"
+            placeholder="구군, 법정동으로 검색해보세요!"
+          ></v-text-field>
+        </div>
       </v-col>
     </v-row>
     <v-row>
@@ -59,12 +66,8 @@ export default {
     this.getSido();
   },
   methods: {
-    ...mapActions(houseStore, [
-      "getSido",
-      "getGugun",
-      "getDong",
-      "getHouseList",
-    ]),
+    // eslint-disable-next-line prettier/prettier
+    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouseList"]),
     ...mapMutations(houseStore, [
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",
@@ -82,8 +85,7 @@ export default {
       if (this.gugunCode) this.getDong(this.gugunCode);
     },
     searchApt() {
-      // if (this.dongCode) this.getHouseList(this.dongCode);
-      if (this.gugunCode) this.getHouseList(this.gugunCode);
+      if (this.dongCode) this.getHouseList(this.dongCode);
     },
   },
 };
