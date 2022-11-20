@@ -1,16 +1,21 @@
 <template>
   <v-col>
-    <v-row>
+    <v-row no-gutters>
       <!-- <span class="material-icons"> search </span>
         원하시는 지역을 선택해주세요. -->
-      <v-col>
-        <div>
-          <span class="material-icons"> home</span>
-          <v-text-field
-            label="원하시는 지역을 검색하세요!"
-            placeholder="구군, 법정동으로 검색해보세요!"
-          ></v-text-field>
-        </div>
+      <v-col md="10">
+        <v-text-field
+          v-model="dongCode"
+          @keyup.enter="searchApt"
+          label="원하시는 지역을 검색하세요👋🏻"
+          placeholder="행정구, 법정동으로 검색해보세요!"
+        ></v-text-field>
+        <p>{{ dongCode }}</p>
+      </v-col>
+      <v-col md="2">
+        <v-btn elevation="0" rounded>
+          <span class="material-icons">search</span>
+        </v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -53,6 +58,7 @@ export default {
       sidoCode: null,
       gugunCode: null,
       dongCode: null,
+      searchCode: null,
     };
   },
   computed: {
