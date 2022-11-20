@@ -85,6 +85,8 @@ export default {
     },
 
     showHouseDetail(coords, index) {
+      console.log(index);
+      console.log(this.houses);
       console.log(this.houses[index].aptName);
       // this.curIndex = index;
       // const houseNo = this.houseList[index].houseNo;

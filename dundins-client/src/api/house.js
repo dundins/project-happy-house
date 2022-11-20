@@ -16,19 +16,12 @@ function dongList(params, success, fail) {
   api.get(`/map/dong`, { params: params }).then(success).catch(fail);
 }
 
-// function houseList(params, success, fail) {
-//   // api.get(`/map/aptlist`, { params: params }).then(success).catch(fail);
-//   api
-//     .get(`/map/aptlist/${params.LAWD_CD}/${params.DEAL_YMD}`)
-//     .then(success)
-//     .catch(fail);
-// }
-
 function houseList(params, success, fail) {
-  // api.get(`/map/aptlist`, { params: params }).then(success).catch(fail);
-  // console.log(params.dongCode);
-  // api.get(`/map/apt?dong=${params.dongCode}`).then(success).catch(fail);
   api.get(`/map/apt?dong=${params.dongCode}`).then(success).catch(fail);
 }
 
-export { sidoList, gugunList, dongList, houseList };
+function searchList(params, success, fail) {
+  api.post(`/map/search`, params).then(success).catch(fail);
+}
+
+export { sidoList, gugunList, dongList, houseList, searchList };

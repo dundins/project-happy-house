@@ -5,15 +5,14 @@
         원하시는 지역을 선택해주세요. -->
       <v-col md="10">
         <v-text-field
-          v-model="dongCode"
-          @keyup.enter="searchApt"
+          v-model="searchCode"
+          @keyup.enter="searchBarApt"
           label="원하시는 지역을 검색하세요👋🏻"
           placeholder="행정구, 법정동으로 검색해보세요!"
         ></v-text-field>
-        <p>{{ dongCode }}</p>
       </v-col>
       <v-col md="2">
-        <v-btn elevation="0" rounded>
+        <v-btn elevation="0" rounded @click="searchBarApt">
           <span class="material-icons">search</span>
         </v-btn>
       </v-col>
@@ -73,7 +72,7 @@ export default {
   },
   methods: {
     // eslint-disable-next-line prettier/prettier
-    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouseList"]),
+    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouseList", "getSearchList"]),
     ...mapMutations(houseStore, [
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",
@@ -92,6 +91,10 @@ export default {
     },
     searchApt() {
       if (this.dongCode) this.getHouseList(this.dongCode);
+    },
+    searchBarApt() {
+      console.log(this.searchCode);
+      if (this.searchCode) this.getSearchList(this.searchCode);
     },
   },
 };

@@ -1,4 +1,5 @@
-import { sidoList, gugunList, dongList, houseList } from "@/api/house.js";
+/* eslint-disable prettier/prettier */
+import { sidoList, gugunList, dongList, houseList, searchList } from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
@@ -87,6 +88,17 @@ const houseStore = {
       };
       houseList(
         params,
+        ({ data }) => {
+          commit("SET_HOUSE_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getSearchList: ({ commit }, code) => {
+      searchList(
+        code,
         ({ data }) => {
           commit("SET_HOUSE_LIST", data);
         },
