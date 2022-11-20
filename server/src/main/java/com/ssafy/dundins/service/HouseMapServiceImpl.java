@@ -1,6 +1,8 @@
 package com.ssafy.dundins.service;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,11 @@ public class HouseMapServiceImpl implements HouseMapService {
 	@Override
 	public List<HouseInfoDto> getAptInDong(String dong) throws Exception {
 		return sqlSession.getMapper(HouseMapMapper.class).getAptInDong(dong);
+	}
+
+	@Override
+	public List<HouseInfoDto> getAptInSearch(Map<String, String> map) throws SQLException {
+		return sqlSession.getMapper(HouseMapMapper.class).getAptInSearch(map);
 	}
 
 }

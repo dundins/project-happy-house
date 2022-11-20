@@ -17,14 +17,13 @@ export default {
   name: "KakaoMap",
   data() {
     return {
-      mapInfo: "",
       markers: [],
       polygonMarkers: [],
       markerOnMap: [],
     };
   },
   computed: {
-    ...mapState(houseStore, ["houses"]),
+    ...mapState(houseStore, ["houses", "type"]),
     ...mapState(kakaoStore, ["sigs", "emds"]),
   },
   created() {
@@ -85,8 +84,6 @@ export default {
     },
 
     showHouseDetail(coords, index) {
-      console.log(index);
-      console.log(this.houses);
       console.log(this.houses[index].aptName);
       // this.curIndex = index;
       // const houseNo = this.houseList[index].houseNo;
@@ -256,17 +253,26 @@ export default {
       var markerImage = new kakao.maps.MarkerImage(src, size, options);
       return markerImage;
     },
-    displayAreas() {
-      let dong = this.houses[0].dongCode;
-      this.CLEAR_EMD_LIST();
-      this.SET_EMD_LIST(dong);
-
-      // let name = this.sigs[0].properties.SIG_CD;
+    displayAreas(searchType) {
+      let code = this.houses[0].dongCode;
       let path = [];
-      this.emds[0].forEach((v) => {
-        path.push(new kakao.maps.LatLng(v[1], v[0]));
-      });
-      let area = { code: dong, path: path };
+
+      if (searchType == "dong") {
+        this.CLEAR_EMD_LIST();
+        this.SET_EMD_LIST(code);
+        this.emds[0].forEach((v) => {
+          path.push(new kakao.maps.LatLng(v[1], v[0]));
+        });
+      } else {
+        code = code.substring(0, 5);
+        this.CLEAR_SIG_LIST();
+        this.SET_SIG_LIST(code);
+        this.sigs[0].forEach((v) => {
+          path.push(new kakao.maps.LatLng(v[1], v[0]));
+        });
+      }
+
+      let area = { code: code, path: path };
       this.displayArea(area);
       return;
     },
@@ -289,7 +295,7 @@ export default {
     houses: function () {
       this.removeMarkers();
       if (this.houses.length) {
-        this.displayAreas();
+        this.displayAreas(this.type);
         this.addMarkers(this.houses);
       }
     },

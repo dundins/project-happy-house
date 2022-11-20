@@ -8,6 +8,7 @@ const houseStore = {
     guguns: [],
     dongs: [],
     houses: [],
+    type: null,
     house: null,
   },
   getters: {},
@@ -23,6 +24,7 @@ const houseStore = {
     },
     CLEAR_APT_LIST(state) {
       state.houses = [];
+      state.type = null;
       state.house = null;
     },
     SET_SIDO_LIST(state, sidos) {
@@ -42,6 +44,9 @@ const houseStore = {
     },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
+    },
+    SET_SEARCH_TYPE(state, type) {
+      state.type = type;
     },
     SET_DETAIL_HOUSE(state, house) {
       state.house = house;
@@ -100,7 +105,8 @@ const houseStore = {
       searchList(
         code,
         ({ data }) => {
-          commit("SET_HOUSE_LIST", data);
+          commit("SET_SEARCH_TYPE", data.type);
+          commit("SET_HOUSE_LIST", data.data);
         },
         (error) => {
           console.log(error);

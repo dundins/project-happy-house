@@ -25,15 +25,36 @@
 	</select>
 	
 	<select id="getAptInDong" parameterType="string" resultType="houseInfoDto">
-		select h.aptCode, h.aptName, h.buildyear, h.dongCode, h.dongName, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname,
-				(select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode)) recentPrice
+		select h.aptCode, h.aptName, h.buildyear, h.dongCode, h.dongName, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname, TRIM(d.dealAmount) recentPrice, d.area, d.dealYear, d.dealMonth
 		from houseinfo h
 		left join sidocode si
 		on left(h.dongcode,2) = left(si.sidocode,2)
 		left join guguncode gu
 		on left(h.dongcode,5) = left(gu.guguncode,5)
-		where dongCode = #{dong} 
-		order by aptName
+		join housedeal d
+		on h.aptCode = h.aptCode
+		where dongCode = #{dong}  and no = (select max(no) from housedeal where aptCode = h.aptCode)
+		limit 100
 	</select>
 	
+	<select id="getAptInSearch" parameterType="string" resultType="houseInfoDto">
+		select h.aptCode, h.aptName, h.buildyear, h.dongCode, h.dongName, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname, TRIM(d.dealAmount) recentPrice, d.area, d.dealYear, d.dealMonth
+		from houseinfo h
+		left join sidocode si
+		on left(h.dongcode,2) = left(si.sidocode,2)
+		left join guguncode gu
+		on left(h.dongcode,5) = left(gu.guguncode,5)
+		join housedeal d
+		on h.aptCode = h.aptCode
+		<if test="code != null and code != ''">
+			<if test="key == 'dong'">
+				where dongName = #{code}
+			</if>
+			<if test="key == 'gugun'">
+				where gugunname = #{code}
+			</if>
+		</if>
+		and no = (select max(no) from housedeal where aptCode = h.aptCode)
+		limit 100
+	</select>
 </mapper>
