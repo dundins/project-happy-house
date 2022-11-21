@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import KakaoMap from "@/components/main/KakaoMap.vue";
+import KakaoMap from "@/components/home/KakaoMap.vue";
 import SideMenuBar from "@/components/sidebar/SideMenuBar.vue";
 
 export default {
