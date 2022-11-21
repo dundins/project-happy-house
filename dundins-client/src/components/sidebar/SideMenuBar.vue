@@ -1,14 +1,13 @@
 <template>
-  <v-card class="bar" elevation="10">
-    <v-container data-app>
-      <v-col></v-col>
+  <div class="bar" elevation="10">
+    <div class="container">
+      <b-col></b-col>
       <side-move-bar></side-move-bar>
-      <v-col></v-col>
-      <v-divider></v-divider>
-      <v-col></v-col>
+      <b-col></b-col>
+      <b-col></b-col>
       <side-search-bar></side-search-bar>
-    </v-container>
-  </v-card>
+    </div>
+  </div>
 </template>
 
 <script>

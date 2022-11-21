@@ -1,9 +1,16 @@
 <template>
-  <div>board!</div>
+  <div>
+    <header-navbar></header-navbar>
+  </div>
 </template>
 
 <script>
-export default {};
+import HeaderNavbar from "@/components/HeaderNavbar";
+
+export default {
+  name: "HeaderNavber",
+  components: { HeaderNavbar },
+};
 </script>
 
 <style></style>

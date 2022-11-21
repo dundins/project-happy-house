@@ -8,8 +8,8 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "AppMain",
+    path: "/main",
+    name: "main",
     component: MainView,
   },
   {

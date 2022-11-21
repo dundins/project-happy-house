@@ -1,48 +1,48 @@
 <template>
-  <v-col>
-    <v-row no-gutters>
+  <b-container class="bv-example-row">
+    <b-row>
       <!-- <span class="material-icons"> search </span>
         원하시는 지역을 선택해주세요. -->
-      <v-col md="10">
-        <v-text-field
+      <b-col md="10">
+        <b-form-input
           v-model="searchCode"
           @keyup.enter="searchBarApt"
           label="원하시는 지역을 검색하세요👋🏻"
           placeholder="아파트, 지역으로 검색해보세요!"
-        ></v-text-field>
-      </v-col>
-      <v-col md="2">
-        <v-btn elevation="0" rounded @click="searchBarApt">
+        ></b-form-input>
+      </b-col>
+      <b-col md="2">
+        <b-button elevation="0" rounded @click="searchBarApt">
           <span class="material-icons">search</span>
-        </v-btn>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col style="display: flex" class="d-flex">
-        <v-select
+        </b-button>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col style="display: flex" class="d-flex">
+        <b-form-select
           v-model="sidoCode"
           :items="sidos"
           label="시 선택"
           @change="gugunList"
           dense
-        ></v-select>
-        <v-select
+        ></b-form-select>
+        <b-form-select
           v-model="gugunCode"
           :items="guguns"
           label="구 선택"
           @change="dongList"
           dense
-        ></v-select>
-        <v-select
+        ></b-form-select>
+        <b-form-select
           v-model="dongCode"
           :items="dongs"
           label="동 선택"
           @change="searchApt"
           dense
-        ></v-select>
-      </v-col>
-    </v-row>
-  </v-col>
+        ></b-form-select>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -72,7 +72,13 @@ export default {
   },
   methods: {
     // eslint-disable-next-line prettier/prettier
-    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouseList", "getSearchList"]),
+    ...mapActions(houseStore, [
+      "getSido",
+      "getGugun",
+      "getDong",
+      "getHouseList",
+      "getSearchList",
+    ]),
     ...mapMutations(houseStore, [
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",

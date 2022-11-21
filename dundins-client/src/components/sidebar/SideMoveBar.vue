@@ -1,42 +1,42 @@
 <template>
-  <v-row no-gutters>
-    <v-row>
-      <v-col>
+  <b-row>
+    <b-row>
+      <b-col>
         <router-link style="text-decoration: none" to="/">
-          <v-btn>
+          <b-button>
             <span class="material-icons"> home</span>
             메인 화면
-          </v-btn>
+          </b-button>
         </router-link>
-      </v-col>
-      <v-col>
+      </b-col>
+      <b-col>
         <router-link style="text-decoration: none" to="/board">
-          <v-btn>
+          <b-button>
             <span class="material-icons"> post_add</span>
             게시판
-          </v-btn>
+          </b-button>
         </router-link>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
         <router-link style="text-decoration: none" to="/apt">
-          <v-btn>
+          <b-button>
             <span class="material-icons"> room</span>
             관심 매물
-          </v-btn>
+          </b-button>
         </router-link>
-      </v-col>
-      <v-col>
+      </b-col>
+      <b-col>
         <router-link style="text-decoration: none" to="/login">
-          <v-btn>
+          <b-button>
             <span class="material-icons"> people</span>
             로그인
-          </v-btn>
+          </b-button>
         </router-link>
-      </v-col>
-    </v-row>
-  </v-row>
+      </b-col>
+    </b-row>
+  </b-row>
 </template>
 
 <script>

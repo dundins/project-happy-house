@@ -1,10 +1,10 @@
 <template>
-  <v-main v-if="houses && houses.length != 0">
+  <div v-if="houses && houses.length != 0">
     <div id="map"></div>
-  </v-main>
-  <v-main v-else>
+  </div>
+  <div v-else>
     <div id="map"></div>
-  </v-main>
+  </div>
 </template>
 
 <script>
@@ -113,7 +113,8 @@ export default {
 
       for (let i = 0; i < splitCount; i++) {
         // eslint-disable-next-line prettier/prettier
-        let unitResult = (inputNumber % Math.pow(splitUnit, i + 1)) / Math.pow(splitUnit, i);
+        let unitResult =
+          (inputNumber % Math.pow(splitUnit, i + 1)) / Math.pow(splitUnit, i);
         unitResult = Math.floor(unitResult);
         if (unitResult > 0) {
           resultArray[i] = unitResult;
