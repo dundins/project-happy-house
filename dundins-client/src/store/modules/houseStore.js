@@ -1,23 +1,30 @@
-import { sidoList, gugunList, houseList } from "@/api/house.js";
+/* eslint-disable prettier/prettier */
+import { sidoList, gugunList, dongList, houseList, searchList } from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
   state: {
-    sidos: [{ value: null, text: "선택하세요" }],
-    guguns: [{ value: null, text: "선택하세요" }],
+    sidos: [],
+    guguns: [],
+    dongs: [],
     houses: [],
+    type: null,
     house: null,
   },
   getters: {},
   mutations: {
     CLEAR_SIDO_LIST(state) {
-      state.sidos = [{ value: null, text: "선택하세요" }];
+      state.sidos = [];
     },
     CLEAR_GUGUN_LIST(state) {
-      state.guguns = [{ value: null, text: "선택하세요" }];
+      state.guguns = [];
+    },
+    CLEAR_DONG_LIST(state) {
+      state.dongs = [];
     },
     CLEAR_APT_LIST(state) {
       state.houses = [];
+      state.type = null;
       state.house = null;
     },
     SET_SIDO_LIST(state, sidos) {
@@ -30,8 +37,16 @@ const houseStore = {
         state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
       });
     },
+    SET_DONG_LIST(state, dongs) {
+      dongs.forEach((dong) => {
+        state.dongs.push({ value: dong.dongCode, text: dong.dongName });
+      });
+    },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
+    },
+    SET_SEARCH_TYPE(state, type) {
+      state.type = type;
     },
     SET_DETAIL_HOUSE(state, house) {
       state.house = house;
@@ -60,17 +75,38 @@ const houseStore = {
         }
       );
     },
-    getHouseList: ({ commit }, gugunCode) => {
-      const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
+    getDong: ({ commit }, gugunCode) => {
+      const params = { gugun: gugunCode };
+      dongList(
+        params,
+        ({ data }) => {
+          commit("SET_DONG_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getHouseList: ({ commit }, dongCode) => {
       const params = {
-        LAWD_CD: gugunCode,
-        DEAL_YMD: "202207",
-        serviceKey: decodeURIComponent(SERVICE_KEY),
+        dongCode: dongCode,
       };
       houseList(
         params,
         ({ data }) => {
-          commit("SET_HOUSE_LIST", data.response.body.items.item);
+          commit("SET_HOUSE_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getSearchList: ({ commit }, code) => {
+      searchList(
+        code,
+        ({ data }) => {
+          commit("SET_SEARCH_TYPE", data.type);
+          commit("SET_HOUSE_LIST", data.data);
         },
         (error) => {
           console.log(error);

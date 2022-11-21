@@ -1,5 +1,6 @@
 package com.ssafy.dundins.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.ssafy.dundins.dto.BoardDto;
@@ -15,4 +16,5 @@ public interface BoardService {
 	public void updateHit(int articleno) throws Exception;
 	public boolean modifyArticle(BoardDto boardDto) throws Exception;
 	public boolean deleteArticle(int articleno) throws Exception;
+	public int getArticleCount() throws SQLException;
 }

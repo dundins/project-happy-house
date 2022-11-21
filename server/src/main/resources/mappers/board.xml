@@ -12,7 +12,7 @@
 	<select id="listArticle" parameterType="map" resultType="boardDto">
 		select articleno, userid, subject, content, hit,
 				case when date_format(regtime, '%Y%m%d') = date_format(now(), '%Y%m%d')
-				then date_format(regtime, '%H:%i:%s')
+				then date_format(regtime, '%H:%i')
 				else date_format(regtime, '%y.%m.%d')
 				end regtime
 		from board
@@ -25,7 +25,6 @@
 			</if>
 		</if>
 		order by articleno desc
-		limit #{start}, #{spp}
 	</select>
 	
 	<select id="getTotalCount" parameterType="map" resultType="int">
@@ -69,5 +68,8 @@
 		where articleno = #{articleno}
 	</delete>
 
+	<select id="getArticleCount" resultType="int">
+		select count(*) from board
+	</select>
 </mapper>
 

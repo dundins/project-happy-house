@@ -30,6 +30,12 @@ public class HouseInfoDto {
 	private String img;
 	@ApiModelProperty(value = "매매가격")
 	private String recentPrice;
+	@ApiModelProperty(value = "전용면적")
+	private float area;
+	@ApiModelProperty(value = "년")
+	private int dealYear;
+	@ApiModelProperty(value = "월")
+	private int dealMonth;
 
 	public int getAptCode() {
 		return aptCode;
@@ -125,5 +131,29 @@ public class HouseInfoDto {
 
 	public void setRecentPrice(String recentPrice) {
 		this.recentPrice = recentPrice;
+	}
+
+	public float getArea() {
+		return area;
+	}
+
+	public void setArea(float area) {
+		this.area = area;
+	}
+
+	public int getDealYear() {
+		return dealYear;
+	}
+
+	public void setDealYear(int dealYear) {
+		this.dealYear = dealYear;
+	}
+
+	public int getDealMonth() {
+		return dealMonth;
+	}
+
+	public void setDealMonth(int dealMonth) {
+		this.dealMonth = dealMonth;
 	}
 }
