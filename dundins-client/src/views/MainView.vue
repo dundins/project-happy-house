@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import KakaoMap from "@/components/main/KakaoMap.vue";
+import KakaoMap from "@/components/home/KakaoMap.vue";
 import SideMenuBar from "@/components/sidebar/SideMenuBar.vue";
 
 export default {
@@ -25,7 +25,6 @@ export default {
 .dashboard {
   z-index: 2;
   position: absolute;
-  margin: 1%;
   height: auto;
   width: 375px;
 }

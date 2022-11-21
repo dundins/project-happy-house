@@ -10,7 +10,7 @@
         </router-link>
       </v-col>
       <v-col>
-        <router-link style="text-decoration: none" to="/about">
+        <router-link style="text-decoration: none" to="/board">
           <v-btn>
             <span class="material-icons"> post_add</span>
             게시판

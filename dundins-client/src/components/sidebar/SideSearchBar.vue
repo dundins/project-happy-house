@@ -8,7 +8,7 @@
           v-model="searchCode"
           @keyup.enter="searchBarApt"
           label="원하시는 지역을 검색하세요👋🏻"
-          placeholder="행정구, 법정동으로 검색해보세요!"
+          placeholder="아파트, 지역으로 검색해보세요!"
         ></v-text-field>
       </v-col>
       <v-col md="2">
