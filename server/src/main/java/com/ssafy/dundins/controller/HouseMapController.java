@@ -122,7 +122,8 @@ public class HouseMapController {
 		else if (keyCode.equals("동"))
 			map.put("key", "dong");
 		else
-			return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+			map.put("key", "apt");
+//			return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
 
 		map.put("code", searchCode);
 		System.out.println(map);
