@@ -257,18 +257,17 @@ export default {
     displayAreas(searchType) {
       let code = this.houses[0].dongCode;
       let path = [];
-
-      if (searchType == "dong") {
-        this.CLEAR_EMD_LIST();
-        this.SET_EMD_LIST(code);
-        this.emds[0].forEach((v) => {
-          path.push(new kakao.maps.LatLng(v[1], v[0]));
-        });
-      } else {
+      if (searchType == "gugun") {
         code = code.substring(0, 5);
         this.CLEAR_SIG_LIST();
         this.SET_SIG_LIST(code);
         this.sigs[0].forEach((v) => {
+          path.push(new kakao.maps.LatLng(v[1], v[0]));
+        });
+      } else {
+        this.CLEAR_EMD_LIST();
+        this.SET_EMD_LIST(code);
+        this.emds[0].forEach((v) => {
           path.push(new kakao.maps.LatLng(v[1], v[0]));
         });
       }

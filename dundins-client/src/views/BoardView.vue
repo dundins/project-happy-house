@@ -1,6 +1,9 @@
 <template>
-  <div>
+  <div id="boardview">
     <header-navbar></header-navbar>
+    <b-container class="bv-example-row mt-3 text-center">
+      <router-view></router-view>
+    </b-container>
   </div>
 </template>
 
@@ -13,4 +16,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#boardview {
+  background-color: white;
+}
+</style>

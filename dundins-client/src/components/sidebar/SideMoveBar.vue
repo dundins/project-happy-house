@@ -1,5 +1,27 @@
 <template>
-  <b-row>
+  <div>
+    <b-nav>
+      <b-nav-item active>
+        <router-link style="text-decoration: none" to="/home">
+          <img
+            src="@/assets/img/ssafy-logo.png"
+            style="width: 50px"
+            alt="Kitten"
+        /></router-link>
+      </b-nav-item>
+      <b-nav-item>
+        <router-link style="text-decoration: none" to="/board">
+          공지 사항
+        </router-link>
+      </b-nav-item>
+      <b-nav-item>
+        <router-link style="text-decoration: none" to="/user">
+          마이 페이지
+        </router-link>
+      </b-nav-item>
+    </b-nav>
+  </div>
+  <!-- <b-row>
     <b-row>
       <b-col>
         <router-link style="text-decoration: none" to="/">
@@ -36,7 +58,7 @@
         </router-link>
       </b-col>
     </b-row>
-  </b-row>
+  </b-row> -->
 </template>
 
 <script>

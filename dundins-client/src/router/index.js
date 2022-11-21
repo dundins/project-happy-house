@@ -1,26 +1,55 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import MainView from "@/views/MainView.vue";
-import AptMainView from "@/views/AptMainView.vue";
 import BoardView from "@/views/BoardView.vue";
+import BoardList from "@/components/board/BoardList.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/main",
-    name: "main",
-    component: MainView,
+    path: "/",
+    name: "apt",
+    component: () => import("@/views/ApartView"),
+  },
+  {
+    path: "/house",
+    name: "house",
+    component: () => import("@/views/HouseView"),
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: () => import("@/views/HomeView"),
+  },
+  {
+    path: "/user",
+    name: "user",
+    component: () => import("@/views/UserView"),
   },
   {
     path: "/board",
     name: "board",
     component: BoardView,
-  },
-  {
-    path: "/apt",
-    name: "apt",
-    component: AptMainView,
+    redirect: "/board/list",
+    children: [
+      {
+        path: "list",
+        name: "boardlist",
+        component: BoardList,
+      },
+      {
+        path: "write",
+        name: "boardwrite",
+        // beforeEnter: onlyAuthUser,
+        component: () => import("@/components/board/BoardWrite"),
+      },
+      {
+        path: "detail/:articleno",
+        name: "boarddetail",
+        // beforeEnter: onlyAuthUser,
+        component: () => import("@/components/board/BoardDetail"),
+      },
+    ],
   },
 ];
 

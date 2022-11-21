@@ -1,13 +1,10 @@
 <template>
-  <div class="bar" elevation="10">
+  <b-card>
     <div class="container">
-      <b-col></b-col>
       <side-move-bar></side-move-bar>
-      <b-col></b-col>
-      <b-col></b-col>
       <side-search-bar></side-search-bar>
     </div>
-  </div>
+  </b-card>
 </template>
 
 <script>

@@ -1,9 +1,10 @@
 <template>
   <b-container class="bv-example-row">
-    <b-row>
-      <!-- <span class="material-icons"> search </span>
-        원하시는 지역을 선택해주세요. -->
-      <b-col md="10">
+    <div class="col-xs-12" style="height: 10px"></div>
+    <hr class="my-2" />
+    <div class="col-xs-12" style="height: 10px"></div>
+    <div>
+      <b-col>
         <b-form-input
           v-model="searchCode"
           @keyup.enter="searchBarApt"
@@ -11,36 +12,68 @@
           placeholder="아파트, 지역으로 검색해보세요!"
         ></b-form-input>
       </b-col>
-      <b-col md="2">
-        <b-button elevation="0" rounded @click="searchBarApt">
-          <span class="material-icons">search</span>
-        </b-button>
-      </b-col>
-    </b-row>
+    </div>
+    <div class="col-xs-12" style="height: 10px"></div>
+
+    <div class="col-xs-12" style="height: 10px"></div>
     <b-row>
-      <b-col style="display: flex" class="d-flex">
-        <b-form-select
-          v-model="sidoCode"
-          :items="sidos"
-          label="시 선택"
-          @change="gugunList"
-          dense
-        ></b-form-select>
-        <b-form-select
-          v-model="gugunCode"
-          :items="guguns"
-          label="구 선택"
-          @change="dongList"
-          dense
-        ></b-form-select>
-        <b-form-select
-          v-model="dongCode"
-          :items="dongs"
-          label="동 선택"
-          @change="searchApt"
-          dense
-        ></b-form-select>
-      </b-col>
+      <b-col cols="4">
+        <fieldset>
+          <select
+            v-model="sidoCode"
+            @change="gugunList"
+            class="array-select form-control form-select"
+            aria-label="example"
+          >
+            <option value="default" disabled selected>시 선택</option>
+            <option
+              v-for="(item, index) in sidos"
+              :key="index"
+              :value="item.value"
+            >
+              {{ item.text }}
+            </option>
+          </select>
+        </fieldset></b-col
+      >
+      <b-col cols="4">
+        <fieldset>
+          <select
+            v-model="gugunCode"
+            @change="dongList"
+            class="array-select form-control form-select"
+            aria-label="example"
+          >
+            <option value="default" disabled selected>구 선택</option>
+            <option
+              v-for="(item, index) in guguns"
+              :key="index"
+              :value="item.value"
+            >
+              {{ item.text }}
+            </option>
+          </select>
+        </fieldset></b-col
+      >
+      <b-col cols="4">
+        <fieldset>
+          <select
+            v-model="dongCode"
+            @change="searchApt"
+            class="array-select form-control form-select"
+            aria-label="example"
+          >
+            <option value="default" disabled selected>동 선택</option>
+            <option
+              v-for="(item, index) in dongs"
+              :key="index"
+              :value="item.value"
+            >
+              {{ item.text }}
+            </option>
+          </select>
+        </fieldset></b-col
+      >
     </b-row>
   </b-container>
 </template>
@@ -96,10 +129,10 @@ export default {
       if (this.gugunCode) this.getDong(this.gugunCode);
     },
     searchApt() {
+      console.log(this.dongCode);
       if (this.dongCode) this.getHouseList(this.dongCode);
     },
     searchBarApt() {
-      console.log(this.searchCode);
       if (this.searchCode) this.getSearchList(this.searchCode);
     },
   },

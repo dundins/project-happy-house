@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import KakaoMap from "@/components/home/KakaoMap.vue";
+import KakaoMap from "@/components/apt/KakaoMap.vue";
 import SideMenuBar from "@/components/sidebar/SideMenuBar.vue";
 
 export default {
@@ -26,6 +26,6 @@ export default {
   z-index: 2;
   position: absolute;
   height: auto;
-  width: 375px;
+  width: 530px;
 }
 </style>
