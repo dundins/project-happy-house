@@ -1,39 +1,28 @@
 <template>
   <div id="homeview">
     <header-navbar></header-navbar>
-    <section>
-      <div class="bg"></div>
-      <h1>Learn to code by cloning real services</h1>
-      <p>
-        Over 6,000+ students are cloning Instagram, Bitcoin, Netflix, Uber, and
-        More!
-      </p>
-      <a href="#" class="btn">Start Coding Like a Boss</a>
-    </section>
-    <!-- <div>
-      <b-card
-        overlay
-        img-src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg"
-        img-alt="Card Image"
-        text-variant="white"
-        title="Image Overlay"
-        sub-title="Subtitle"
-      >
-        <b-card-text>
-          Some quick example text to build on the card and make up the bulk of
-          the card's content.
-        </b-card-text>
-      </b-card>
-    </div> -->
+    <home-center></home-center>
+    <div>
+      <home-news></home-news>
+      <home-board></home-board>
+    </div>
   </div>
 </template>
 
 <script>
 import HeaderNavbar from "@/components/HeaderNavbar";
+import HomeCenter from "@/components/home/HomeCenter";
+// import HomeNews from "@/components/home/HomeNews";
+// import HomeBoard from "@/components/home/HomeBoard";
 
 export default {
   name: "HomeView",
-  components: { HeaderNavbar },
+  components: {
+    HeaderNavbar,
+    HomeCenter,
+    // HomeNews,
+    // HomeBoard,
+  },
 };
 </script>
 
@@ -46,7 +35,7 @@ export default {
   top: 0px;
 }
 section {
-  background-image: url(https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg);
+  background-image: url(https://cdn.pixabay.com/photo/2022/04/04/13/54/city-7111380_960_720.jpg);
   background-size: cover;
   display: block;
   width: 100%;

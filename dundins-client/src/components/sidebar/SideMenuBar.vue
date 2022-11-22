@@ -1,10 +1,8 @@
 <template>
-  <b-card>
-    <div class="container">
-      <side-move-bar></side-move-bar>
-      <side-search-bar></side-search-bar>
-    </div>
-  </b-card>
+  <div class="container">
+    <side-move-bar></side-move-bar>
+    <side-search-bar></side-search-bar>
+  </div>
 </template>
 
 <script>
@@ -19,4 +17,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  padding: auto;
+}
+</style>

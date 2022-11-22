@@ -1,6 +1,5 @@
 <template>
   <b-container class="bv-example-row">
-    <div class="col-xs-12" style="height: 10px"></div>
     <hr class="my-2" />
     <div class="col-xs-12" style="height: 10px"></div>
     <div>
@@ -105,13 +104,7 @@ export default {
   },
   methods: {
     // eslint-disable-next-line prettier/prettier
-    ...mapActions(houseStore, [
-      "getSido",
-      "getGugun",
-      "getDong",
-      "getHouseList",
-      "getSearchList",
-    ]),
+    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouseList", "getSearchList"]),
     ...mapMutations(houseStore, [
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",

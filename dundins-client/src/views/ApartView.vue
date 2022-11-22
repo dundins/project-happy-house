@@ -1,7 +1,9 @@
 <template>
   <div>
     <kakao-map class="map"></kakao-map>
-    <side-menu-bar class="dashboard"></side-menu-bar>
+    <b-card>
+      <side-menu-bar class="dashboard"></side-menu-bar>
+    </b-card>
   </div>
 </template>
 
@@ -18,14 +20,15 @@ export default {
 <style scoped>
 .map {
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   width: 100%;
   height: 100%;
 }
 .dashboard {
-  z-index: 2;
   position: absolute;
+  /* z-index: 2; */
   height: auto;
-  width: 530px;
+  width: 520px;
+  border-radius: 20px;
 }
 </style>

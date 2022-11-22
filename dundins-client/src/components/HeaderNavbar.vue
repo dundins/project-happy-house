@@ -1,48 +1,28 @@
 <template>
-  <div class="navbar navbar-expand-lg sticky-top py-md-2 border-bottom">
-    <div class="container">
-      <div class="left d-flex">
-        <router-link class="navbar-brand" to="/home">
-          <img style="width: 64px" src="../assets/img/dundins-logo.png" />
-        </router-link>
-      </div>
-      <div
-        class="collapse navbar-collapse justify-content-between"
-        id="navbar-collapse"
-      >
-        <ul class="navbar-nav">
-          <li class="ms-lg-2 ms-md-1 nav-item">
-            <router-link class="nav-link" to="/board">공지사항</router-link>
-          </li>
-          <li class="ms-lg-2 ms-md-1 nav-item">
-            <router-link class="nav-link" to="/">실거래가</router-link>
-          </li>
-          <li class="ms-lg-2 ms-md-1 nav-item">
-            <router-link class="nav-link" to="/house">매물</router-link>
-          </li>
-        </ul>
-      </div>
+  <div>
+    <b-navbar toggleable="md" variant="info" class="bg-white">
+      <router-link class="navbar-brand" to="/home">
+        <img style="width: 64px" src="@/assets/img/dundins-logo.png" />
+      </router-link>
 
-      <div class="right d-flex">
-        <div v-if="!userInfo">
-          <ul class="navbar-nav">
-            <li class="ms-lg-2 ms-md-1 nav-item">
-              <router-link class="nav-link" to="/user/login"
-                >로그인</router-link
-              >
-            </li>
-            <li class="ms-lg-2 ms-md-1 nav-item">
-              <router-link class="nav-link" to="/user/join"
-                >회원가입</router-link
-              >
-            </li>
-          </ul>
-        </div>
-        <div v-else>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <router-link class="nav-link" to="/board">공지사항</router-link>
+          <router-link class="nav-link" to="/">실거래가</router-link>
+          <router-link class="nav-link" to="/house">매물</router-link>
+        </b-navbar-nav>
+
+        <b-navbar-nav v-if="!userInfo" class="ml-auto">
+          <router-link class="nav-link" to="/user/login">로그인</router-link>
+          <router-link class="nav-link" to="/user/join">회원가입</router-link>
+        </b-navbar-nav>
+        <b-navbar-nav v-else class="ml-auto">
           <button @click="onClickLogout()">로그아웃</button>
-        </div>
-      </div>
-    </div>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
   </div>
 </template>
 
@@ -83,17 +63,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.link {
-  text-decoration: none;
-}
-
-#header {
-  background-color: #fafaf8;
-  height: 80px;
-  box-shadow: 0px 0.1px 1px 1px #deddd6;
-}
-#dd {
-  width: 50px;
-}
-</style>
+<style></style>
