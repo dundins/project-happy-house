@@ -1,6 +1,5 @@
 <template>
   <b-container class="bv-example-row">
-    <div class="col-xs-12" style="height: 10px"></div>
     <hr class="my-2" />
     <div class="col-xs-12" style="height: 10px"></div>
     <div>
@@ -16,8 +15,8 @@
     <div class="col-xs-12" style="height: 10px"></div>
 
     <div class="col-xs-12" style="height: 10px"></div>
-    <b-row>
-      <b-col cols="4">
+    <b-row class="no-gutters">
+      <b-col cols="4" class="p-1">
         <fieldset>
           <select
             v-model="sidoCode"
@@ -25,7 +24,7 @@
             class="array-select form-control form-select"
             aria-label="example"
           >
-            <option value="null" disabled selected>시 선택</option>
+            <option value="null" disabled selected>-- 시/도 --</option>
             <option
               v-for="(item, index) in sidos"
               :key="index"
@@ -34,9 +33,9 @@
               {{ item.text }}
             </option>
           </select>
-        </fieldset></b-col
-      >
-      <b-col cols="4">
+        </fieldset>
+      </b-col>
+      <b-col cols="4" class="p-1">
         <fieldset>
           <select
             v-model="gugunCode"
@@ -53,9 +52,9 @@
               {{ item.text }}
             </option>
           </select>
-        </fieldset></b-col
-      >
-      <b-col cols="4">
+        </fieldset>
+      </b-col>
+      <b-col cols="4" class="p-1">
         <fieldset>
           <select
             v-model="dongCode"
@@ -72,8 +71,8 @@
               {{ item.text }}
             </option>
           </select>
-        </fieldset></b-col
-      >
+        </fieldset>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -105,13 +104,7 @@ export default {
   },
   methods: {
     // eslint-disable-next-line prettier/prettier
-    ...mapActions(houseStore, [
-      "getSido",
-      "getGugun",
-      "getDong",
-      "getHouseList",
-      "getSearchList",
-    ]),
+    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouseList", "getSearchList"]),
     ...mapMutations(houseStore, [
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",

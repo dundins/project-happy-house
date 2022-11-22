@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import HeaderNavbar from "@/components/HeaderNavbar";
+import HeaderNavbar from "@/components/layout/HeaderNavbar";
 import BasicHeader from "@/components/layout/BasicHeader.vue";
 
 export default {

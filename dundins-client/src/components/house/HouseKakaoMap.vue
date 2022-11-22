@@ -14,7 +14,7 @@ const houseStore = "houseStore";
 const kakaoStore = "kakaoStore";
 
 export default {
-  name: "KakaoMap",
+  name: "HouseKakaoMap",
   data() {
     return {
       markers: [],

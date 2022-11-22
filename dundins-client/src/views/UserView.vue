@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import HeaderNavbar from "@/components/HeaderNavbar";
+import HeaderNavbar from "@/components/layout/HeaderNavbar";
 
 export default {
   name: "UserView",

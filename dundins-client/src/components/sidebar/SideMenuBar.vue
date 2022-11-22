@@ -1,9 +1,7 @@
 <template>
-  <b-card>
-    <div class="container">
-      <side-move-bar></side-move-bar>
-      <side-search-bar></side-search-bar>
-    </div>
+  <b-card class="no-paddings">
+    <side-move-bar></side-move-bar>
+    <side-search-bar></side-search-bar>
   </b-card>
 </template>
 
