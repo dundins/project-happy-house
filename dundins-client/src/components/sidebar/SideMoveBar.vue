@@ -4,7 +4,7 @@
       <b-nav-item active>
         <router-link style="text-decoration: none" to="/home">
           <img
-            src="@/assets/img/ssafy-logo.png"
+            src="@/assets/img/dundins-logo.png"
             style="width: 50px"
             alt="Kitten"
         /></router-link>

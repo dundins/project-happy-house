@@ -3,7 +3,7 @@
     <div class="container">
       <div class="left d-flex">
         <router-link class="navbar-brand" to="/home">
-          <img style="width: 64px" src="../assets/img/ssafy-logo.png" />
+          <img style="width: 64px" src="../assets/img/dundins-logo.png" />
         </router-link>
       </div>
       <div
