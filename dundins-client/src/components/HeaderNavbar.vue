@@ -9,9 +9,9 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <router-link class="nav-link" to="/board">공지사항</router-link>
           <router-link class="nav-link" to="/">실거래가</router-link>
-          <router-link class="nav-link" to="/house">매물</router-link>
+          <router-link class="nav-link" to="/house">부동산 매물</router-link>
+          <router-link class="nav-link" to="/board">공지사항</router-link>
         </b-navbar-nav>
 
         <b-navbar-nav v-if="!userInfo" class="ml-auto">

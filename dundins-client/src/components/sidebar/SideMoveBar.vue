@@ -1,13 +1,13 @@
 <template>
   <div>
-    <b-navbar variant="info" class="bg-white">
+    <b-navbar style="padding: 0" variant="info" class="bg-white">
       <router-link class="navbar-brand" to="/home">
         <img style="width: 64px" src="@/assets/img/dundins-logo.png" />
       </router-link>
 
       <b-navbar-nav>
+        <router-link class="nav-link" to="/house">부동산 매물</router-link>
         <router-link class="nav-link" to="/board">공지사항</router-link>
-        <router-link class="nav-link" to="/house">매물</router-link>
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
@@ -21,4 +21,4 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped></style>

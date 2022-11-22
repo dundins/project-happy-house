@@ -1,9 +1,7 @@
 <template>
   <div>
     <kakao-map class="map"></kakao-map>
-    <b-card>
-      <side-menu-bar class="dashboard"></side-menu-bar>
-    </b-card>
+    <side-menu-bar class="dashboard"></side-menu-bar>
   </div>
 </template>
 
@@ -28,7 +26,7 @@ export default {
   position: absolute;
   /* z-index: 2; */
   height: auto;
-  width: 520px;
+  width: 500px;
   border-radius: 20px;
 }
 </style>

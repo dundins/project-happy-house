@@ -7,7 +7,6 @@
         Over 6,000+ students are cloning Instagram, Bitcoin, Netflix, Uber, and
         More!
       </p>
-      <a href="#" class="btn">Start Coding Like a Boss</a>
     </section>
   </div>
 </template>
