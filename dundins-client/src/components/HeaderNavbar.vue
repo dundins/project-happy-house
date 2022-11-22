@@ -22,71 +22,24 @@
           </li>
         </ul>
       </div>
-      <div class="d-flex align-items-center">
-        <div class="d-flex profile-dropdown">
-          <!-- <div class="dropdown" v-show="isAuth">
-            <a
-              href="javascript:void(0);"
-              role="button"
-              data-bs-toggle="dropdown"
-            >
-              <img
-                v-if="profileImgUrl"
-                :src="profileImgUrl"
-                alt="프로필 이미지"
-                class="avatar rounded-circle"
-              />
-              <img
-                v-else
-                :src="require(`@/assets/img/account.png`)"
-                alt="기본 프로필 이미지"
-                class="avatar rounded-circle"
-              />
-            </a>
-            &nbsp;{{ name }}님 환영합니다.
-            <ul class="dropdown-menu dropdown-menu-end shadow border-0 m-0 p-3">
-              <li>
-                <router-link
-                  class="dropdown-item py-2 rounded"
-                  to="/myaccount/profile"
-                  ><i class="fa fa-user me-3"></i>마이 페이지</router-link
-                >
-              </li>
-              <li>
-                <a class="dropdown-item py-2 rounded" @click="onClickLogout"
-                  ><i class="fa fa-info-circle me-3"></i>로그아웃</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="isNotAuth" v-show="!isAuth">
-            <ul class="navbar-nav">
-              <li class="ms-lg-2 ms-md-1 nav-item">
-                <router-link class="nav-link" to="/user/login"
-                  >로그인</router-link
-                >
-              </li>
-              <li class="ms-lg-2 ms-md-1 nav-item">
-                <router-link class="nav-link" to="/user/join"
-                  >회원가입</router-link
-                >
-              </li>
-            </ul>
-          </div> -->
-          <div class="isNotAuth">
-            <ul class="navbar-nav">
-              <li class="ms-lg-2 ms-md-1 nav-item">
-                <router-link class="nav-link" to="/user/login"
-                  >로그인</router-link
-                >
-              </li>
-              <li class="ms-lg-2 ms-md-1 nav-item">
-                <router-link class="nav-link" to="/user/join"
-                  >회원가입</router-link
-                >
-              </li>
-            </ul>
-          </div>
+
+      <div class="right d-flex">
+        <div v-if="!userInfo">
+          <ul class="navbar-nav">
+            <li class="ms-lg-2 ms-md-1 nav-item">
+              <router-link class="nav-link" to="/user/login"
+                >로그인</router-link
+              >
+            </li>
+            <li class="ms-lg-2 ms-md-1 nav-item">
+              <router-link class="nav-link" to="/user/join"
+                >회원가입</router-link
+              >
+            </li>
+          </ul>
+        </div>
+        <div v-else>
+          <button @click="onClickLogout()">로그아웃</button>
         </div>
       </div>
     </div>
@@ -113,15 +66,19 @@ export default {
       // this.SET_USER_INFO(null);
       // sessionStorage.removeItem("access-token");
       // if (this.$route.path != "/") this.$router.push({ name: "main" });
-      console.log(this.userInfo.userid);
-      //vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
-      //+ satate에 isLogin, userInfo 정보 변경)
-      // this.$store.dispatch("userLogout", this.userInfo.userid);
+      // console.log(this.userInfo.userid);
+      // //vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
+      // //+ satate에 isLogin, userInfo 정보 변경)
+      // // this.$store.dispatch("userLogout", this.userInfo.userid);
       this.userLogout(this.userInfo.userid);
       sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
       sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
-      if (this.$route.path != "/") this.$router.push({ name: "main" });
+      // if (this.$route.path != "/home") this.$router.push({ name: "home" });
+      this.$router.push({ name: "user" });
     },
+  },
+  mounted() {
+    console.log(this.isLogin);
   },
 };
 </script>
@@ -135,5 +92,8 @@ export default {
   background-color: #fafaf8;
   height: 80px;
   box-shadow: 0px 0.1px 1px 1px #deddd6;
+}
+#dd {
+  width: 50px;
 }
 </style>

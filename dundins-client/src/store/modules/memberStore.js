@@ -7,7 +7,7 @@ const memberStore = {
   state: {
     isLogin: false,
     isLoginError: false,
-    userInfo: "ssafy",
+    userInfo: null,
     isValidToken: false,
   },
   getters: {
@@ -138,6 +138,7 @@ const memberStore = {
           }
         },
         (error) => {
+          console.log(userid, error);
           console.log(error);
         }
       );
