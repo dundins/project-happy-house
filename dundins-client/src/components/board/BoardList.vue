@@ -13,7 +13,6 @@
       <b-row>
         <b-col class="d-flex justify-content-start"> <h4>공지 사항</h4></b-col>
       </b-row>
-
       <div class="col-xs-12" style="height: 10px"></div>
     </b-row> -->
     <b-row>
@@ -35,17 +34,29 @@
                 params: { articleno: data.item.articleno },
               }"
             >
+              <div class="col-xs-12" style="height: 7px"></div>
               {{ data.item.subject }}
+              <div class="col-xs-12" style="height: 7px"></div>
             </router-link>
           </template>
+          <template #cell(articleno)>
+            <div class="col-xs-12" style="height: 7px"></div>
+            <span id="type">공지</span>
+            <div class="col-xs-12" style="height: 7px"></div>
+          </template>
+          <template #cell(regtime)="data">
+            <div class="col-xs-12" style="height: 7px"></div>
+            {{ data.item.regtime }}
+            <div class="col-xs-12" style="height: 7px"></div>
+          </template>
         </b-table>
-        <b-col class="d-flex justify-content-end" style="float: right">
+        <!-- <b-col class="d-flex justify-content-end" style="float: right">
           <b-button variant="outline-primary" @click="moveWrite()"
             >글 작성</b-button
           >
-        </b-col>
+        </b-col> -->
         <b-pagination
-          size="sm"
+          id="bpage"
           align="center"
           v-model="currentPage"
           :total-rows="rows"
@@ -59,7 +70,6 @@
 
 <script>
 import { listArticle } from "@/api/board";
-
 export default {
   data() {
     return {
@@ -67,11 +77,9 @@ export default {
       currentPage: 1,
       articles: [],
       fields: [
-        { key: "articleno", label: "번호", tdClass: "tdClass" },
+        { key: "articleno", label: "분류", tdClass: "tdClass" },
         { key: "subject", label: "제목", tdClass: "tdSubject" },
-        { key: "userid", label: "작성자", tdClass: "tdClass" },
         { key: "regtime", label: "작성일", tdClass: "tdClass" },
-        { key: "hit", label: "조회수", tdClass: "tdClass" },
       ],
     };
   },
@@ -126,9 +134,11 @@ export default {
 #title {
   text-decoration: none;
   color: gray;
-  font-weight: bold;
 }
 #title:hover {
+  color: #254baa;
+}
+#type {
   color: #254baa;
   font-weight: bold;
 }

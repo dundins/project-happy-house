@@ -19,7 +19,7 @@
         </router-link>
       </b-nav-item>
       <b-nav-item>
-        <router-link style="text-decoration: none" to="/user">
+        <router-link style="text-decoration: none" to="/login">
           마이 페이지
         </router-link>
       </b-nav-item>

@@ -1,5 +1,8 @@
 <template>
-  <div class="navbar navbar-expand-lg sticky-top py-md-2 border-bottom">
+  <div
+    id="header"
+    class="navbar navbar-expand-lg sticky-top py-md-2 border-bottom"
+  >
     <div class="container">
       <div class="left d-flex">
         <router-link class="navbar-brand" to="/home">
@@ -12,10 +15,10 @@
       >
         <ul class="navbar-nav">
           <li class="ms-lg-2 ms-md-1 nav-item">
-            <router-link class="nav-link" to="/board">공지사항</router-link>
+            <router-link class="nav-link" to="/">실거래가</router-link>
           </li>
           <li class="ms-lg-2 ms-md-1 nav-item">
-            <router-link class="nav-link" to="/">실거래가</router-link>
+            <router-link class="nav-link" to="/board">공지사항</router-link>
           </li>
           <li class="ms-lg-2 ms-md-1 nav-item">
             <router-link class="nav-link" to="/house">매물</router-link>
@@ -24,22 +27,39 @@
       </div>
 
       <div class="right d-flex">
-        <div v-if="!userInfo">
+        <div v-if="userInfo">
+          <ul class="navbar-nav">
+            <b-nav-item-dropdown right>
+              <template #button-content>
+                {{ userInfo.username }} 님
+                <b-icon icon="people" font-scale="2"></b-icon>
+              </template>
+              <b-dropdown-item>
+                <span @click="onClickAccount()">
+                  <b-icon icon="person-circle"></b-icon> 마이 페이지
+                </span>
+              </b-dropdown-item>
+              <b-dropdown-item>
+                <span @click="onClickLogout()">
+                  <b-icon icon="key"></b-icon> 로그아웃
+                </span>
+              </b-dropdown-item>
+            </b-nav-item-dropdown>
+          </ul>
+        </div>
+        <div v-else>
           <ul class="navbar-nav">
             <li class="ms-lg-2 ms-md-1 nav-item">
-              <router-link class="nav-link" to="/user/login"
+              <router-link class="nav-link" :to="{ name: 'login' }"
                 >로그인</router-link
               >
             </li>
             <li class="ms-lg-2 ms-md-1 nav-item">
-              <router-link class="nav-link" to="/user/join"
+              <router-link class="nav-link" :to="{ name: 'regist' }"
                 >회원가입</router-link
               >
             </li>
           </ul>
-        </div>
-        <div v-else>
-          <button @click="onClickLogout()">로그아웃</button>
         </div>
       </div>
     </div>
@@ -62,23 +82,14 @@ export default {
   methods: {
     ...mapActions(memberStore, ["userLogout"]),
     onClickLogout() {
-      // this.SET_IS_LOGIN(false);
-      // this.SET_USER_INFO(null);
-      // sessionStorage.removeItem("access-token");
-      // if (this.$route.path != "/") this.$router.push({ name: "main" });
-      // console.log(this.userInfo.userid);
-      // //vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
-      // //+ satate에 isLogin, userInfo 정보 변경)
-      // // this.$store.dispatch("userLogout", this.userInfo.userid);
       this.userLogout(this.userInfo.userid);
       sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
       sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
-      // if (this.$route.path != "/home") this.$router.push({ name: "home" });
-      this.$router.push({ name: "user" });
+      this.$router.push({ name: "login" });
     },
-  },
-  mounted() {
-    console.log(this.isLogin);
+    onClickAccount() {
+      this.$router.push({ name: "account" });
+    },
   },
 };
 </script>
@@ -93,7 +104,7 @@ export default {
   height: 80px;
   box-shadow: 0px 0.1px 1px 1px #deddd6;
 }
-#dd {
-  width: 50px;
+#header {
+  background-color: white;
 }
 </style>

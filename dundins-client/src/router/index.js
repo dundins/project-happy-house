@@ -27,9 +27,19 @@ const routes = [
     component: () => import("@/views/UserView"),
     children: [
       {
-        path: "login",
+        path: "/login",
         name: "login",
-        component: () => import("@/components/user/LoginComp"),
+        component: () => import("@/components/user/UserLogin"),
+      },
+      {
+        path: "/regist",
+        name: "regist",
+        component: () => import("@/components/user/UserRegist"),
+      },
+      {
+        path: "/account",
+        name: "account",
+        component: () => import("@/components/user/UserAccount"),
       },
     ],
   },
