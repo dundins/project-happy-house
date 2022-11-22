@@ -25,7 +25,7 @@
             class="array-select form-control form-select"
             aria-label="example"
           >
-            <option value="default" disabled selected>시 선택</option>
+            <option value="null" disabled selected>시 선택</option>
             <option
               v-for="(item, index) in sidos"
               :key="index"
@@ -44,7 +44,7 @@
             class="array-select form-control form-select"
             aria-label="example"
           >
-            <option value="default" disabled selected>구 선택</option>
+            <option value="null" disabled selected>구 선택</option>
             <option
               v-for="(item, index) in guguns"
               :key="index"
@@ -63,7 +63,7 @@
             class="array-select form-control form-select"
             aria-label="example"
           >
-            <option value="default" disabled selected>동 선택</option>
+            <option value="null" disabled selected>동 선택</option>
             <option
               v-for="(item, index) in dongs"
               :key="index"

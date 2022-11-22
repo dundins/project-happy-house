@@ -25,6 +25,13 @@ const routes = [
     path: "/user",
     name: "user",
     component: () => import("@/views/UserView"),
+    children: [
+      {
+        path: "login",
+        name: "Login",
+        component: () => import("@/components/user/LoginComp"),
+      },
+    ],
   },
   {
     path: "/board",
@@ -41,13 +48,13 @@ const routes = [
         path: "write",
         name: "boardwrite",
         // beforeEnter: onlyAuthUser,
-        component: () => import("@/components/board/BoardWrite"),
+        component: () => import("@/components/board/BoardWrite.vue"),
       },
       {
         path: "detail/:articleno",
         name: "boarddetail",
         // beforeEnter: onlyAuthUser,
-        component: () => import("@/components/board/BoardDetail"),
+        component: () => import("@/components/board/BoardDetail.vue"),
       },
     ],
   },

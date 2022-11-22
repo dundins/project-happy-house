@@ -1,18 +1,18 @@
 <template>
   <div id="boardview">
     <header-navbar></header-navbar>
-    <b-container class="bv-example-row mt-3 text-center">
-      <router-view></router-view>
-    </b-container>
+    <BasicHeader name="공지사항" />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import HeaderNavbar from "@/components/HeaderNavbar";
+import BasicHeader from "@/components/layout/BasicHeader.vue";
 
 export default {
-  name: "HeaderNavber",
-  components: { HeaderNavbar },
+  name: "BoardView",
+  components: { HeaderNavbar, BasicHeader },
 };
 </script>
 

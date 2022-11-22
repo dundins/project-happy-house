@@ -10,7 +10,11 @@
         /></router-link>
       </b-nav-item>
       <b-nav-item>
-        <router-link style="text-decoration: none" to="/board">
+        <router-link
+          style="text-decoration: none"
+          to="/board"
+          :key="$route.fullPath"
+        >
           공지 사항
         </router-link>
       </b-nav-item>

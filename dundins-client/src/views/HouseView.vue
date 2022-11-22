@@ -1,9 +1,19 @@
 <template>
-  <div>아파트 매물</div>
+  <div>
+    <header-navbar></header-navbar>
+    <BasicHeader name="매물 관리" />
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-export default {};
+import HeaderNavbar from "@/components/HeaderNavbar";
+import BasicHeader from "@/components/layout/BasicHeader.vue";
+
+export default {
+  name: "HouseView",
+  components: { HeaderNavbar, BasicHeader },
+};
 </script>
 
 <style></style>

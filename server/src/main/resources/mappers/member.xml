@@ -4,34 +4,41 @@
 
 <mapper namespace="com.ssafy.dundins.dao.MemberMapper">
 
-	<select id="login" parameterType="memberDto" resultType="memberDto">
+	<select id="login" parameterType="memberDto"
+		resultType="memberDto">
 		select username, userid, email
 		from member
-		where userid = #{userid} and userpwd = #{userpwd}
+		where userid =
+		#{userid} and userpwd = #{userpwd}
 	</select>
-	
-	<select id="userInfo" parameterType="string" resultType="memberDto">
+
+	<select id="userInfo" parameterType="string"
+		resultType="memberDto">
 		select username, userid, email, joindate
 		from member
-		where userid = #{userid}
+		where
+		userid = #{userid}
 	</select>
-	
-	<select id="getRefreshToken" parameterType="string" resultType="string">
+
+	<select id="getRefreshToken" parameterType="string"
+		resultType="string">
 		select token
 		from member
 		where userid = #{userid}
 	</select>
-	
+
 	<update id="saveRefreshToken" parameterType="map">
 		update member
-		set token = #{token}
+		set
+		token = #{token}
 		where userid = #{userid}
 	</update>
-	
+
 	<update id="deleteRefreshToken" parameterType="map">
 		update member
-		set token = #{token, jdbcType=VARCHAR}
+		set
+		token = #{token, jdbcType=VARCHAR}
 		where userid = #{userid}
 	</update>
-	
+
 </mapper>

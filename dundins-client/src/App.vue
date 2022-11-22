@@ -31,4 +31,7 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+* {
+  @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap");
+}
 </style>

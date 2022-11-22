@@ -10,8 +10,8 @@ import KakaoMap from "@/components/apt/KakaoMap.vue";
 import SideMenuBar from "@/components/sidebar/SideMenuBar.vue";
 
 export default {
+  name: "ApartView",
   components: { KakaoMap, SideMenuBar },
-  name: "AppMain",
 };
 </script>
 

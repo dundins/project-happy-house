@@ -1,21 +1,25 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <b-row>
-      <b-col>
-        <b-alert show><h3>글목록</h3></b-alert>
-      </b-col>
-    </b-row>
-    <b-row class="mb-1">
-      <b-col class="text-right">
-        <b-button variant="outline-primary" @click="moveWrite()"
-          >글쓰기</b-button
-        >
-      </b-col>
-    </b-row>
+    <!-- <b-row style="height: 130px">
+      <div style="height: 30px"></div>
+      <b-row id="board-header"
+        ><b-col class="d-flex justify-content-start"
+          ><span style="font-weight: bold; color: #254baa">Home /</span>
+          <div style="width: 10px"></div>
+          <span>공지 사항</span>
+        </b-col></b-row
+      >
+      <div style="height: 30px"></div>
+      <b-row>
+        <b-col class="d-flex justify-content-start"> <h4>공지 사항</h4></b-col>
+      </b-row>
+
+      <div class="col-xs-12" style="height: 10px"></div>
+    </b-row> -->
     <b-row>
       <b-col>
         <b-table
-          striped
+          id="tboard"
           hover
           :per-page="perPage"
           :current-page="currentPage"
@@ -25,6 +29,7 @@
         >
           <template #cell(subject)="data">
             <router-link
+              id="title"
               :to="{
                 name: 'boarddetail',
                 params: { articleno: data.item.articleno },
@@ -34,6 +39,11 @@
             </router-link>
           </template>
         </b-table>
+        <b-col class="d-flex justify-content-end" style="float: right">
+          <b-button variant="outline-primary" @click="moveWrite()"
+            >글 작성</b-button
+          >
+        </b-col>
         <b-pagination
           size="sm"
           align="center"
@@ -57,7 +67,7 @@ export default {
       currentPage: 1,
       articles: [],
       fields: [
-        { key: "articleno", label: "글번호", tdClass: "tdClass" },
+        { key: "articleno", label: "번호", tdClass: "tdClass" },
         { key: "subject", label: "제목", tdClass: "tdSubject" },
         { key: "userid", label: "작성자", tdClass: "tdClass" },
         { key: "regtime", label: "작성일", tdClass: "tdClass" },
@@ -112,5 +122,14 @@ export default {
 .tdSubject {
   width: 300px;
   text-align: left;
+}
+#title {
+  text-decoration: none;
+  color: gray;
+  font-weight: bold;
+}
+#title:hover {
+  color: #254baa;
+  font-weight: bold;
 }
 </style>
