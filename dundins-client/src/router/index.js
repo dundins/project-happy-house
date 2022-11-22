@@ -28,7 +28,7 @@ const routes = [
     children: [
       {
         path: "login",
-        name: "Login",
+        name: "login",
         component: () => import("@/components/user/LoginComp"),
       },
     ],

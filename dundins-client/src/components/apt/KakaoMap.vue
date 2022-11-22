@@ -283,7 +283,7 @@ export default {
         map: this.map, // 다각형을 표시할 지도 객체
         path: area.path,
         strokeWeight: 2,
-        strokeColor: "#000",
+        strokeColor: "hotpink",
         strokeOpacity: 0.5,
         fillColor: "#f5e4e2",
         fillOpacity: 0.4,

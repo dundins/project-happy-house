@@ -76,7 +76,7 @@
           <div class="isNotAuth">
             <ul class="navbar-nav">
               <li class="ms-lg-2 ms-md-1 nav-item">
-                <router-link class="nav-link" :to="{ name: 'login' }"
+                <router-link class="nav-link" to="/user/login"
                   >로그인</router-link
                 >
               </li>
@@ -94,13 +94,35 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions } from "vuex";
+const memberStore = "memberStore";
+
 export default {
   name: "HeaderNavbar",
   data() {
     return {};
   },
-  computed: {},
-  methods: {},
+  computed: {
+    ...mapState(memberStore, ["isLogin", "userInfo"]),
+    ...mapGetters(["checkUserInfo"]),
+  },
+  methods: {
+    ...mapActions(memberStore, ["userLogout"]),
+    onClickLogout() {
+      // this.SET_IS_LOGIN(false);
+      // this.SET_USER_INFO(null);
+      // sessionStorage.removeItem("access-token");
+      // if (this.$route.path != "/") this.$router.push({ name: "main" });
+      console.log(this.userInfo.userid);
+      //vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
+      //+ satate에 isLogin, userInfo 정보 변경)
+      // this.$store.dispatch("userLogout", this.userInfo.userid);
+      this.userLogout(this.userInfo.userid);
+      sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
+      sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
+      if (this.$route.path != "/") this.$router.push({ name: "main" });
+    },
+  },
 };
 </script>
 
