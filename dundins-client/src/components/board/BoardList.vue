@@ -17,6 +17,8 @@
         <b-table
           striped
           hover
+          :per-page="perPage"
+          :current-page="currentPage"
           :items="articles"
           :fields="fields"
           @row-clicked="viewArticle"
@@ -32,6 +34,14 @@
             </router-link>
           </template>
         </b-table>
+        <b-pagination
+          size="sm"
+          align="center"
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          aria-controls="tbarticle"
+        ></b-pagination>
       </b-col>
     </b-row>
   </b-container>
@@ -43,6 +53,8 @@ import { listArticle } from "@/api/board";
 export default {
   data() {
     return {
+      perPage: 10,
+      currentPage: 1,
       articles: [],
       fields: [
         { key: "articleno", label: "글번호", tdClass: "tdClass" },
@@ -79,6 +91,14 @@ export default {
         name: "boarddetail",
         params: { articleno: article.articleno },
       });
+    },
+    totalPage() {
+      return Math.ceil(this.rows / this.perPage);
+    },
+  },
+  computed: {
+    rows() {
+      return this.articles.length;
     },
   },
 };
