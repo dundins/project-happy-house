@@ -1,6 +1,7 @@
 <template>
   <!-- block Header -->
   <div id="basic" fluid>
+    <div class="bg"></div>
     <div class="block-header py-4 py-lg-5">
       <div class="container">
         <div class="row mb-4">

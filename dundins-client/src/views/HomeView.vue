@@ -2,10 +2,18 @@
   <div id="homeview">
     <header-navbar></header-navbar>
     <home-center></home-center>
-    <div class="mt-550"></div>
-    <b-row class="justify-content-md-center">
-      <b-col cols="4"><home-news-list></home-news-list></b-col>
-      <b-col cols="4"><home-board-list></home-board-list></b-col>
+    <div class="mt-530"></div>
+    <b-row class="justify-content-md-center no-gutters">
+      <b-col cols="5">
+        <b-row>
+          <b-col><strong class="nav-link">부동산 최신 뉴스</strong></b-col>
+          <b-col>
+            <router-link class="nav-link" to="/news"> 더보기 </router-link>
+          </b-col>
+        </b-row>
+        <home-news-list class="mt-1"></home-news-list>
+      </b-col>
+      <b-col cols="5"><home-board-list></home-board-list></b-col>
     </b-row>
   </div>
 </template>
@@ -28,7 +36,10 @@ export default {
 </script>
 
 <style scoped>
-.mt-550 {
-  margin-top: 550px;
+#homeview {
+  width: 100%;
+}
+.mt-530 {
+  margin-top: 530px;
 }
 </style>

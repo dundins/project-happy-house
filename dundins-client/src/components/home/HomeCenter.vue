@@ -2,10 +2,10 @@
   <div>
     <section>
       <div class="bg"></div>
-      <h1>Learn to code by cloning real services</h1>
+      <h1>어떤 집을 찾고 계세요?</h1>
       <p>
-        Over 6,000+ students are cloning Instagram, Bitcoin, Netflix, Uber, and
-        More!
+        안녕하세요, 주택 실거래가 조회, 부동산 매물 조회 사이트 입니다. 둘러보고
+        싶은 지역이나 아파트를 구경해 보세요!
       </p>
       <div class="sb">
         <side-search-bar></side-search-bar>
