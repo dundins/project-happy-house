@@ -5,29 +5,32 @@
         <div class="list-group">
           <div
             class="list-group-item list-group-item-action"
-            v-for="article in articles"
-            v-bind:key="article.title"
+            v-for="(article, index) in articles"
+            :key="index"
+            :value="article.value"
             @click="go(article.url)"
           >
-            <b-row class="justify-content-md-center">
-              <b-col cols="3">
-                <div class="list-group-item-thumbnail">
-                  <img :src="article.img" alt="" />
-                </div>
-                <div class="list-group-item-writer mt-1">
-                  <span>{{ article.company }}</span>
-                  <small>{{ article.createdDate }}</small>
-                </div>
-              </b-col>
-              <b-col cols="9">
-                <div class="list-group-item-article">
-                  <h5 class="list-group-item-title">
-                    {{ article.title }}
-                  </h5>
-                  <p class="list-group-item-content">{{ article.content }}</p>
-                </div>
-              </b-col>
-            </b-row>
+            <div v-if="isOne">
+              <b-row class="justify-content-md-center">
+                <b-col cols="3">
+                  <div class="list-group-item-thumbnail">
+                    <img :src="article.img" alt="" />
+                  </div>
+                  <div class="list-group-item-writer mt-1">
+                    <span>{{ article.company }}</span>
+                    <small>{{ article.createdDate }}</small>
+                  </div>
+                </b-col>
+                <b-col cols="9">
+                  <div class="list-group-item-article">
+                    <h5 class="list-group-item-title">
+                      {{ article.title }}
+                    </h5>
+                    <p class="list-group-item-content">{{ article.content }}</p>
+                  </div>
+                </b-col>
+              </b-row>
+            </div>
           </div>
         </div>
       </b-col>
@@ -41,22 +44,16 @@ import { listNewsArticle } from "@/api/news";
 export default {
   data() {
     return {
+      isOne: true,
+      isTwo: false,
+      isThree: false,
       articles: [],
-      fields: [
-        { key: "title", label: "제목", tdClass: "tdClass" },
-        { key: "content", label: "요약", tdClass: "tdClass" },
-        { key: "img", label: "이미지", tdClass: "tdClass" },
-        { key: "url", label: "링크", tdClass: "tdClass" },
-        { key: "company", label: "신문사", tdClass: "tdClass" },
-        { key: "createdDate", label: "등록일", tdClass: "tdClass" },
-      ],
     };
   },
   created() {
     listNewsArticle(
       ({ data }) => {
         this.articles = data;
-        console.log(this.articles);
       },
       (error) => {
         console.log(error);
