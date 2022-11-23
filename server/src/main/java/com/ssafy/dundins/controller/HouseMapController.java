@@ -115,11 +115,12 @@ public class HouseMapController {
 	public ResponseEntity<Map<String, Object>> searchApt(@RequestBody String code) throws Exception {
 		String searchCode = code.replaceAll("\"", "");
 		String keyCode = searchCode.substring(searchCode.length() - 1);
+		System.out.println(keyCode);
 		System.out.println(searchCode);
 		Map<String, String> map = new HashMap<>();
 		if (keyCode.equals("구"))
 			map.put("key", "gugun");
-		else if (keyCode.equals("동"))
+		else if (keyCode.equals("동") || keyCode.equals("가"))
 			map.put("key", "dong");
 		else
 			map.put("key", "apt");

@@ -87,7 +87,7 @@ export default {
     searchBarApt() {
       if (this.searchCode) {
         this.SET_SEARCH_DATA(this.searchCode);
-        this.$router.push({ name: "apt" });
+        this.$router.push({ name: "apt" }).catch(() => {});
         this.getSearchList(this.searchCode);
       }
     },

@@ -14,6 +14,7 @@ const houseStore = {
     guguns: [],
     dongs: [],
     houses: [],
+    selected: false,
     searchData: null,
     type: null,
     house: null,
@@ -33,6 +34,12 @@ const houseStore = {
       state.houses = [];
       state.type = null;
       state.house = null;
+    },
+    CLEAR_SEARCH_DATA(state) {
+      state.searchData = null;
+    },
+    SET_HOUSE_SELECTED(state, bool) {
+      state.selected = bool;
     },
     SET_SIDO_LIST(state, sidos) {
       sidos.forEach((sido) => {
@@ -60,9 +67,6 @@ const houseStore = {
     },
     SET_SEARCH_DATA(state, searchData) {
       state.searchData = searchData;
-    },
-    CLEAR_SEARCH_DATA(state) {
-      state.searchData = null;
     },
   },
   actions: {
@@ -115,7 +119,7 @@ const houseStore = {
       );
     },
     getSearchList: ({ commit }, code) => {
-      console.log("getSearchList 호출", code);
+      // console.log("getSearchList 호출", code);
       searchList(
         code,
         ({ data }) => {

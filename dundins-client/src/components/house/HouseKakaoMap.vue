@@ -1,6 +1,43 @@
 <template>
   <div v-if="houses && houses.length != 0">
-    <div id="map"></div>
+    <div id="map">
+      <b-card v-show="selected" id="showList" class="no-paddings card p-0">
+        <b-row id="detail-title">
+          <b-col cols="10">
+            <h5 style="text-align: left; font-weight: bold">
+              {{ detail.aptName }}
+            </h5>
+            <h6 style="text-align: left">{{ detail.dongName }}</h6>
+          </b-col>
+          <b-col cols="2">
+            <b-icon
+              icon="backspace-fill"
+              id="xbtn"
+              @click="SET_HOUSE_SELECTED(false)"
+              font-scale="2"
+            ></b-icon>
+          </b-col>
+        </b-row>
+        <div class="col-xs-12" style="height: 30px"></div>
+        <b-row>
+          <b-col>
+            <div id="roadview" style="height: 240px"></div>
+          </b-col>
+        </b-row>
+        <b-row>
+          <div>상세 데이터 테이블 정리</div>
+        </b-row>
+        <b-row>
+          <div>최근 1년간 거래 chart.js</div>
+        </b-row>
+        <b-row>
+          <div>거주지 등록</div>
+        </b-row>
+        <b-row>
+          <div>관심 매물 등록</div>
+        </b-row>
+      </b-card>
+    </div>
   </div>
   <div v-else>
     <div id="map"></div>
@@ -17,16 +54,20 @@ export default {
   name: "HouseKakaoMap",
   data() {
     return {
+      detail: null,
+      houseSelected: true,
+      curIndex: -1,
       markers: [],
       polygonMarkers: [],
       markerOnMap: [],
     };
   },
   computed: {
-    ...mapState(houseStore, ["houses", "type"]),
+    ...mapState(houseStore, ["selected", "houses", "type"]),
     ...mapState(kakaoStore, ["sigs", "emds"]),
   },
   created() {
+    this.SET_HOUSE_SELECTED(false); // test용 false로 바꾸기!!
     this.CLEAR_SIG_LIST();
     this.CLEAR_EMD_LIST();
   },
@@ -50,6 +91,7 @@ export default {
       "SET_SIG_LIST",
       "SET_EMD_LIST",
     ]),
+    ...mapMutations(houseStore, ["SET_HOUSE_SELECTED"]),
     initMap() {
       const mapContainer = document.getElementById("map");
       const mapOption = {
@@ -70,7 +112,49 @@ export default {
       // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
       const zoomControl = new kakao.maps.ZoomControl();
       this.map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+      // let $this = this;
+      // kakao.maps.event.addListener(this.map, "idle", function () {
+      //   $this.searchAddrFromCoords(
+      //     $this.map.getCenter(),
+      //     $this.displayCenterInfo
+      //   );
+
+      //   // 지도의  레벨을 얻어옵니다
+      //   var level = $this.map.getLevel();
+
+      //   // 지도의 중심좌표를 얻어옵니다
+      //   var latlng = $this.map.getCenter();
+
+      //   // var message = "<p>지도 레벨은 " + level + " 이고</p>";
+      //   // message +=
+      //   //   "<p>중심 좌표는 위도 " +
+      //   //   latlng.getLat() +
+      //   //   ", 경도 " +
+      //   //   latlng.getLng() +
+      //   //   "입니다</p>";
+
+      //   // var resultDiv = document.getElementById("result");
+      //   // resultDiv.innerHTML = message;
+      //   console.log(level, latlng.getLat(), latlng.getLng());
+      // });
     },
+    // searchAddrFromCoords(coords, callback) {
+    //   var geocoder = new kakao.maps.services.Geocoder();
+    //   // 좌표로 행정동 주소 정보를 요청합니다
+    //   geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
+    // },
+    // displayCenterInfo(result, status) {
+    //   if (status === kakao.maps.services.Status.OK) {
+    //     for (var i = 0; i < result.length; i++) {
+    //       // 행정동의 region_type 값은 'H' 이므로
+    //       if (result[i].region_type === "H") {
+    //         console.log(result[i].address_name);
+    //         break;
+    //       }
+    //     }
+    //   }
+    // },
     displayTraffic() {
       this.btnClick1++;
 
@@ -84,6 +168,14 @@ export default {
     },
 
     showHouseDetail(coords, index) {
+      this.detail = this.houses[index];
+      this.SET_HOUSE_SELECTED(true);
+      let cds = new kakao.maps.LatLng(
+        this.houses[index].lat,
+        this.houses[index].lng
+      );
+      this.createRoadView(cds);
+      this.curIndex = index;
       console.log(this.houses[index].aptName);
       // this.curIndex = index;
       // const houseNo = this.houseList[index].houseNo;
@@ -290,6 +382,16 @@ export default {
       });
       this.polygonMarkers.push(polygon);
     },
+    createRoadView(cc) {
+      var roadviewContainer = document.getElementById("roadview"); //로드뷰를 표시할 div
+      var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+      var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+      // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+      roadviewClient.getNearestPanoId(cc, 50, function (panoId) {
+        roadview.setPanoId(panoId, cc); //panoId와 중심좌표를 통해 로드뷰 실행
+      });
+    },
   },
   watch: {
     houses: function () {
@@ -375,5 +477,24 @@ export default {
   width: 22px;
   height: 12px;
   background: url("../../assets/img/vertex_1E88E5.png");
+}
+#showList {
+  position: absolute;
+  padding: 10px;
+
+  width: 400px;
+  height: 100%;
+  z-index: 2;
+  border-radius: 10px;
+  /* background-color:rgba(255, 244, 244, 0.8); */
+  /* opacity: 0.5; */
+}
+#xbtn {
+  float: right;
+}
+#xbtn:hover {
+  cursor: pointer;
+}
+#detail-title {
 }
 </style>
