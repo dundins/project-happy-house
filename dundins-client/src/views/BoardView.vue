@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style>
-#boardview {
+/* #boardview {
   background-color: white;
-}
+} */
 </style>
