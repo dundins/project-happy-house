@@ -188,7 +188,17 @@ export default {
       }
     },
     validateForm() {
-      if (!this.userIdChk || !this.userPwdChk) {
+      console.log(this.userPassword);
+      console.log(this.userRePassword);
+      console.log(this.userPwdChk);
+
+      if (this.userPassword == "") {
+        return false;
+      }
+      if (this.userPassword !== this.userRePassword) {
+        return false;
+      }
+      if (!this.userIdChk) {
         return false;
       }
       return true;
@@ -200,7 +210,7 @@ export default {
           email: this.userEmail,
           userid: this.userId,
           username: this.userName,
-          userwd: this.userPassword,
+          userpwd: this.userPassword,
         };
         regist(
           user,
@@ -229,3 +239,4 @@ export default {
   background: #6e7c8c;
 }
 </style>
+>
