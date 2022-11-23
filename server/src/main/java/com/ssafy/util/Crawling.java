@@ -21,7 +21,7 @@ public class Crawling {
 
 		List<News> news = new ArrayList<>();
 		try {
-			String address = "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid2=260&sid1=101&date=20221122&page=1";
+			String address = "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid2=260&sid1=101&page=1";
 			// 네이버뉴스 사이트에 접속하게 해주는 객체 url 생성, 그안에 네이버뉴스 주소인 address를 넣어준다.
 			URL url = new URL(address);
 			// 사이트에 접속해줌. 엔터의 역할을 해준다.
