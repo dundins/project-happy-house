@@ -68,7 +68,7 @@ import { mapActions, mapMutations, mapState } from "vuex";
 const houseStore = "houseStore";
 
 export default {
-  name: "SideSearchBar",
+  name: "SideSelectSearchBar",
   data() {
     return {
       sidoCode: null,
@@ -89,7 +89,13 @@ export default {
   },
   methods: {
     // eslint-disable-next-line prettier/prettier
-    ...mapActions(houseStore, ["getSido", "getGugun", "getDong", "getHouseList", "getSearchList"]),
+    ...mapActions(houseStore, [
+      "getSido",
+      "getGugun",
+      "getDong",
+      "getHouseList",
+      "getSearchList",
+    ]),
     ...mapMutations(houseStore, [
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",

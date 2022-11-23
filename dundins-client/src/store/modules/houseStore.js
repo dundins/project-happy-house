@@ -1,5 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { sidoList, gugunList, dongList, houseList, searchList } from "@/api/house.js";
+import {
+  sidoList,
+  gugunList,
+  dongList,
+  houseList,
+  searchList,
+} from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
@@ -8,6 +14,7 @@ const houseStore = {
     guguns: [],
     dongs: [],
     houses: [],
+    searchData: null,
     type: null,
     house: null,
   },
@@ -50,6 +57,12 @@ const houseStore = {
     },
     SET_DETAIL_HOUSE(state, house) {
       state.house = house;
+    },
+    SET_SEARCH_DATA(state, searchData) {
+      state.searchData = searchData;
+    },
+    CLEAR_SEARCH_DATA(state) {
+      state.searchData = null;
     },
   },
   actions: {
@@ -102,6 +115,7 @@ const houseStore = {
       );
     },
     getSearchList: ({ commit }, code) => {
+      console.log("getSearchList 호출", code);
       searchList(
         code,
         ({ data }) => {
