@@ -7,7 +7,9 @@
         Over 6,000+ students are cloning Instagram, Bitcoin, Netflix, Uber, and
         More!
       </p>
-      <side-search-bar></side-search-bar>
+      <div class="sb">
+        <side-search-bar></side-search-bar>
+      </div>
     </section>
   </div>
 </template>
@@ -23,4 +25,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.sb {
+  width: 500px;
+  margin: auto;
+}
+</style>
