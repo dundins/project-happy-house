@@ -1,7 +1,7 @@
 <template>
-  <b-container class="bv-example-row">
-    <b-row>
-      <b-col>
+  <b-container class="bv-example-row mt-5">
+    <b-row class="justify-content-md-center">
+      <b-col cols="10">
         <div class="list-group">
           <div
             class="list-group-item list-group-item-action"
@@ -12,7 +12,7 @@
           >
             <div v-if="isOne">
               <b-row class="justify-content-md-center" align-v="center">
-                <b-col cols="3">
+                <b-col cols="2">
                   <div class="list-group-item-thumbnail">
                     <img :src="article.img" alt="noImage" />
                   </div>
@@ -21,7 +21,7 @@
                     <small>{{ article.createdDate }}</small>
                   </div>
                 </b-col>
-                <b-col cols="9">
+                <b-col cols="10">
                   <h5 class="list-group-item-title text-left">
                     {{ article.title }}
                   </h5>
@@ -35,6 +35,11 @@
         </div>
       </b-col>
     </b-row>
+    <br />
+    <a
+      href="https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=101&sid2=260"
+      >더보기</a
+    >
   </b-container>
 </template>
 
@@ -84,7 +89,7 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 }
 .list-group-item-content {
@@ -94,7 +99,7 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  font-size: 13px;
+  font-size: 15px;
 }
 .list-group-item-thumbnail > img {
   width: 100%;
