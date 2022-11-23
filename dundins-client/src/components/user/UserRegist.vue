@@ -189,7 +189,6 @@ export default {
     },
     validateForm() {
       if (!this.userIdChk || !this.userPwdChk) {
-        this.$swal("가입 양식을 다시 한 번 확인해주세요.", { icon: "error" });
         return false;
       }
       return true;
@@ -201,7 +200,7 @@ export default {
           email: this.userEmail,
           userid: this.userId,
           username: this.userName,
-          userpwd: this.userPassword,
+          userwd: this.userPassword,
         };
         regist(
           user,
