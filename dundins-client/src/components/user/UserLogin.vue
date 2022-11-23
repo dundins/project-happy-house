@@ -37,9 +37,9 @@
                   />
                 </div>
               </div>
-              <b-alert show variant="danger" v-if="isLoginError"
-                >아이디 또는 비밀번호를 확인하세요.</b-alert
-              >
+              <p class="text-md-left" v-if="isLoginError" id="le">
+                * 아이디 또는 비밀번호를 확인하세요.
+              </p>
               <div class="col-12 text-center mt-4">
                 <a
                   @click="confirm"
@@ -49,7 +49,7 @@
               </div>
               <div class="d-flex col-12 text-center mt-2">
                 <router-link
-                  to="/user/join"
+                  :to="{ name: 'regist' }"
                   class="flex-grow-1 btn btn-lg btn-block btn-secondary lift fs-6 text-uppercase"
                   >회원가입</router-link
                 >
@@ -126,5 +126,8 @@ export default {
   background-repeat: no-repeat;
   text-align: center;
   text-indent: 0;
+}
+#le {
+  color: #aa3939;
 }
 </style>
