@@ -42,8 +42,8 @@ public class Crawling {
 			Document doc = Jsoup.parse(url.openStream(), "EUC-KR", address);
 			Elements articleTitle = doc.select("ul[class=type06_headline] > li");
 
-
-			for (Element element : articleTitle) {
+			for (int i = 0; i < articleTitle.size(); i++) {
+				Element element = articleTitle.get(i);
 				News post = new News();
 				Elements e = element.select("dl > dt > a > img");
 				String eUrl = element.select("dl > dt > a").attr("href");
@@ -51,15 +51,17 @@ public class Crawling {
 				String company = element.select("dl > dd > span").next().first().text();
 				String regTime = element.select("dl > dd > span").next().next().text();
 
+				post.setNewsNo(i + 1);
 				post.setImg(e.attr("src"));
 				post.setTitle(e.attr("alt"));
 				post.setUrl(eUrl);
 				post.setContent(content);
 				post.setCompany(company);
 				post.setCreatedDate(regTime);
-				
+
 				news.add(post);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

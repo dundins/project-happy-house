@@ -11,7 +11,7 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
-        <router-link class="nav-link" to="/user">마이 페이지</router-link>
+        <router-link class="nav-link" to="/account">마이 페이지</router-link>
       </b-navbar-nav>
     </b-navbar>
   </div>

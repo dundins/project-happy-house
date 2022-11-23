@@ -2,12 +2,22 @@ package com.ssafy.util;
 
 public class News {
 
+	private int newsNo;
 	private String img;
 	private String title;
 	private String url;
 	private String content;
 	private String company;
 	private String regTime;
+
+	
+	public int getNewsNo() {
+		return newsNo;
+	}
+
+	public void setNewsNo(int newsNo) {
+		this.newsNo = newsNo;
+	}
 
 	public String getImg() {
 		return img;

@@ -1,5 +1,6 @@
 package com.ssafy.dundins.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,4 +50,18 @@ public class MemberServiceImpl implements MemberService {
 		sqlSession.getMapper(MemberMapper.class).deleteRefreshToken(map);
 	}
 
+	@Override
+	public void registMember(MemberDto memberDto) throws Exception {
+		sqlSession.getMapper(MemberMapper.class).registMember(memberDto);
+	}
+
+	@Override
+	public int idCheck(String userId) throws SQLException {
+		return sqlSession.getMapper(MemberMapper.class).idCheck(userId);
+	}
+
+	@Override
+	public void updateMember(MemberDto memberDto) throws Exception {
+		sqlSession.getMapper(MemberMapper.class).updateMember(memberDto);
+	}
 }

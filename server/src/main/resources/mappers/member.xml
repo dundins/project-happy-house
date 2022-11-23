@@ -4,12 +4,33 @@
 
 <mapper namespace="com.ssafy.dundins.dao.MemberMapper">
 
+	<insert id="registMember" parameterType="memberDto">
+		insert into member (userid, username, userpwd, email, joindate)
+		values (#{userid}, #{username}, md5(#{userpwd}), #{email}, now());
+	</insert>
+
+	<select id="idCheck" parameterType="string" resultType="int">
+		select count(userid)
+		from member
+		where userid = #{userid};
+	</select>
+	
+	<update id="updateMember" parameterType="memberDto">
+		update member
+		<trim prefix="set" suffixOverrides=",">
+			<if test="userpwd != null">userpwd = md5(#{userpwd}),</if>
+			<if test="username != null">username = #{username},</if>
+			<if test="email != null">email = #{email},</if>
+		</trim>
+		where userid = #{userid}
+	</update>
+
 	<select id="login" parameterType="memberDto"
 		resultType="memberDto">
 		select username, userid, email
 		from member
 		where userid =
-		#{userid} and userpwd = #{userpwd}
+		#{userid} and userpwd = md5(#{userpwd})
 	</select>
 
 	<select id="userInfo" parameterType="string"
