@@ -3,41 +3,48 @@
     <b-row>
       <b-col>
         <div class="list-group">
-          <b-row class="mb-2">
+          <b-row class="mb-3">
             <b-col cols="6"
               ><strong style="font-size: 1.25rem">공지사항</strong></b-col
             >
-            <b-col cols="6" style="text-align: right">
+            <b-col cols="5" style="text-align: right">
               <router-link to="/board"> 더보기 </router-link>
             </b-col>
           </b-row>
-          <div
-            class="list-group-item list-group-item-action"
-            v-for="(article, index) in $options.filters.limitArray(articles, 4)"
-            :key="index"
-            :value="article.value"
-            @click="go(article.url)"
+          <b-table
+            id="tboard"
+            hover
+            :per-page="perPage"
+            :current-page="currentPage"
+            :items="articles"
+            :fields="fields"
+            @row-clicked="viewArticle"
+            thead-class="d-none"
           >
-            <b-row class="justify-content-md-center" align-v="center">
-              <b-col cols="3">
-                <div class="list-group-item-thumbnail">
-                  <img :src="article.img" alt="noImage" />
-                </div>
-                <div class="list-group-item-writer mt-1">
-                  <span>{{ article.company }}</span>
-                  <small>{{ article.createdDate }}</small>
-                </div>
-              </b-col>
-              <b-col cols="9">
-                <h5 class="list-group-item-title text-left">
-                  {{ article.title }}
-                </h5>
-                <p class="list-group-item-content text-left mb-0">
-                  {{ article.content }}
-                </p>
-              </b-col>
-            </b-row>
-          </div>
+            <template #cell(subject)="data">
+              <router-link
+                id="title"
+                :to="{
+                  name: 'boarddetail',
+                  params: { articleno: data.item.articleno },
+                }"
+              >
+                <div class="col-xs-12" style="height: 7px"></div>
+                {{ data.item.subject }}
+                <div class="col-xs-12" style="height: 7px"></div>
+              </router-link>
+            </template>
+            <template #cell(articleno)>
+              <div class="col-xs-12" style="height: 7px"></div>
+              <span id="type">공지</span>
+              <div class="col-xs-12" style="height: 7px"></div>
+            </template>
+            <template #cell(regtime)="data">
+              <div class="col-xs-12" style="height: 7px"></div>
+              {{ data.item.regtime }}
+              <div class="col-xs-12" style="height: 7px"></div>
+            </template>
+          </b-table>
         </div>
       </b-col>
     </b-row>
@@ -45,19 +52,30 @@
 </template>
 
 <script>
-import { listNewsArticle } from "@/api/news";
+import { listArticle } from "@/api/board";
 
 export default {
   data() {
     return {
-      isOne: true,
-      isTwo: false,
-      isThree: false,
+      perPage: 10,
+      currentPage: 1,
       articles: [],
+      fields: [
+        { key: "articleno", label: "분류", tdClass: "tdClass" },
+        { key: "subject", label: "제목", tdClass: "tdSubject" },
+        { key: "regtime", label: "작성일", tdClass: "tdClass" },
+      ],
     };
   },
   created() {
-    listNewsArticle(
+    let param = {
+      pg: 1,
+      spp: 20,
+      key: null,
+      word: null,
+    };
+    listArticle(
+      param,
       ({ data }) => {
         this.articles = data;
       },
@@ -67,8 +85,11 @@ export default {
     );
   },
   methods: {
-    go(url) {
-      window.open(url, "_blank");
+    viewArticle(article) {
+      this.$router.push({
+        name: "boarddetail",
+        params: { articleno: article.articleno },
+      });
     },
   },
   filters: {

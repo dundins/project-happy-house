@@ -31,8 +31,8 @@
           <ul class="navbar-nav">
             <b-nav-item-dropdown right>
               <template #button-content>
-                {{ userInfo.username }} 님
-                <b-icon icon="people" font-scale="2"></b-icon>
+                {{ userInfo.username }} 님 안녕하세요
+                <b-icon icon="people" font-scale="2" class="mx-1"></b-icon>
               </template>
               <b-dropdown-item>
                 <span @click="onClickAccount()">

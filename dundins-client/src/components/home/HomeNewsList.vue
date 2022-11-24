@@ -9,7 +9,7 @@
                 >부동산 최신 뉴스</strong
               ></b-col
             >
-            <b-col cols="6" style="text-align: right">
+            <b-col cols="5" style="text-align: right">
               <router-link to="/news"> 더보기 </router-link>
             </b-col>
           </b-row>
@@ -52,9 +52,6 @@ import { listNewsArticle } from "@/api/news";
 export default {
   data() {
     return {
-      isOne: true,
-      isTwo: false,
-      isThree: false,
       articles: [],
     };
   },
