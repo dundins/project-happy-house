@@ -7,9 +7,7 @@
           class="d-flex justify-content-end mb-4"
           style="float: right"
         >
-          <b-button variant="outline-primary" @click="moveWrite()"
-            >글 작성</b-button
-          >
+          <b-button variant="primary" @click="moveWrite()">글작성</b-button>
         </b-col>
         <b-table
           id="tboard"

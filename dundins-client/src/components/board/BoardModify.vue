@@ -1,6 +1,6 @@
 <template>
-  <b-container id="bc" class="bv-example-row mt-5">
-    <board-input-item type="register" />
+  <b-container id="bc" class="bv-example-row mt-3">
+    <board-input-item type="modify" />
   </b-container>
 </template>
 
@@ -8,7 +8,7 @@
 import BoardInputItem from "@/components/board/item/BoardInputItem";
 
 export default {
-  name: "BoardWrite",
+  name: "BoardModify",
   components: {
     BoardInputItem,
   },

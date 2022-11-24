@@ -93,6 +93,18 @@ const routes = [
         beforeEnter: onlyAuthUser,
         component: () => import("@/components/board/BoardDetail.vue"),
       },
+      {
+        path: "modify/:articleno",
+        name: "boardmodify",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/board/BoardModify"),
+      },
+      {
+        path: "delete/:articleno",
+        name: "boarddelete",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/board/BoardDelete"),
+      },
     ],
   },
 ];
