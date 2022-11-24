@@ -43,7 +43,7 @@
                   <th>시도</th>
                   <th>구군</th>
                   <th>읍면동</th>
-                  <th>거래 금약</th>
+                  <th>거래 금액</th>
                 </tr>
               </thead>
               <tbody>
