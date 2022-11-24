@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.dundins.dao.HouseMapMapper;
 import com.ssafy.dundins.dto.HouseInfoDto;
+import com.ssafy.dundins.dto.HouseSaleDto;
 import com.ssafy.dundins.dto.SidoGugunCodeDto;
 
 @Service
@@ -43,4 +44,24 @@ public class HouseMapServiceImpl implements HouseMapService {
 		return sqlSession.getMapper(HouseMapMapper.class).getAptInSearch(map);
 	}
 
+	@Override
+	public List<HouseSaleDto> getAllHouseSales() throws SQLException {
+		return sqlSession.getMapper(HouseMapMapper.class).getAllHouseSales();
+	}
+
+	@Override
+	public HouseSaleDto getHouseSale(int saleId) throws SQLException {
+		return sqlSession.getMapper(HouseMapMapper.class).getHouseSale(saleId);
+	}
+
+	@Override
+	public void deleteHouseSale(int saleId) throws SQLException {
+		sqlSession.getMapper(HouseMapMapper.class).deleteHouseSale(saleId);
+	}
+
+	@Override
+	public void insertHouseSales(HouseSaleDto houseSaleDto) throws SQLException {
+		sqlSession.getMapper(HouseMapMapper.class).insertHouseSales(houseSaleDto);
+		
+	}
 }
