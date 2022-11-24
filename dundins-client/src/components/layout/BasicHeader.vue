@@ -8,7 +8,7 @@
           <div class="col">
             <ul class="breadcrumb bg-transparent mb-0">
               <li class="breadcrumb-item">
-                <router-link to="/" class="text-decoration-none"
+                <router-link to="/home" class="text-decoration-none"
                   >Home</router-link
                 >
               </li>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-navbar></header-navbar>
-    <BasicHeader id="bh-h" name="매물 관리" />
+    <basic-header id="bh-h" name="매물 관리" />
     <router-view></router-view>
   </div>
 </template>

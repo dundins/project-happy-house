@@ -1,174 +1,163 @@
 <template>
   <div>
-    <BasicHeader name="마이 페이지" />
-    <div>
-      <div class="block-header pt-4 pt-lg-5 pb-0">
-        <div class="container">
-          <div class="row mb-3">
-            <div class="col">
-              <ul class="breadcrumb bg-transparent mb-0">
-                <li class="breadcrumb-item">
-                  <router-link to="/" class="text-decoration-none"
-                    >Home</router-link
-                  >
-                </li>
-                <li class="breadcrumb-item active">내 정보</li>
-              </ul>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-body">
-                  <div
-                    class="d-flex align-items-center flex-column flex-md-row"
-                  >
-                    <img
-                      src="../../assets/img/account.png"
-                      alt="기본 프로필 이미지"
-                      class="rounded-circle"
-                      style="width: 70px"
-                    />
-                    <div
-                      class="media-body ms-md-5 m-0 mt-4 mt-md-0 text-md-start text-center"
+    <basic-header id="bh-user" name="마이 페이지" />
+    <div id="bc-user" class="block-header pt-4 pt-lg-5 pb-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <b-row align-v="center">
+                  <b-col cols="4">
+                    <p class="h1">
+                      <b-icon icon="person-circle"></b-icon>
+                    </p>
+                  </b-col>
+                  <b-col cols="7">
+                    <h5
+                      class="text-primary font-weight-bold d-inline-block me-2 mt-3"
                     >
-                      <h5 class="font-weight-bold d-inline-block me-2">
-                        {{ userInfo.username }}
-                      </h5>
-                      님
-                      <div class="text-muted mb-4">
-                        <span class="text-dark">가입일</span> :
-                        {{ userInfo.joindate }}
-                      </div>
+                      {{ userInfo.username }}
+                    </h5>
+                    님
+                    <div class="text-muted">
+                      <span class="text-dark">아이디</span> :
+                      {{ userInfo.userid }}
                     </div>
-                  </div>
-                </div>
+                    <div class="text-muted">
+                      <span class="text-dark">이메일</span> :
+                      {{ userInfo.email }}
+                    </div>
+                    <div class="text-muted mb-3">
+                      <span class="text-dark">가입일</span> :
+                      {{ userInfo.joindate }}
+                    </div>
+                  </b-col>
+                </b-row>
               </div>
             </div>
-            <div>
-              <div class="col-xs-12" style="height: 20px"></div>
-              <b-col
-                class="d-flex justify-content-end"
-                style="margin-left:10px: right"
+          </div>
+          <div>
+            <div class="col-xs-12" style="height: 20px"></div>
+            <b-col
+              class="d-flex justify-content-end"
+              style="margin-left:10px: right"
+            >
+              <b-button v-b-toggle.collapse-1 variant="outline-primary"
+                >회원 정보 수정</b-button
               >
-                <b-button v-b-toggle.collapse-1 variant="secondary"
-                  >회원 정보 수정</b-button
-                >
-              </b-col>
+            </b-col>
 
-              <b-collapse id="collapse-1" class="mt-2">
-                <b-card
-                  ><div class="container my-5">
-                    <div class="d-flex flex-column align-items-center">
-                      <form class="row g-1 p-0 p-md-4 w-100">
-                        <table>
-                          <tr>
-                            <td
-                              style="width: 15%"
-                              class="px-4 border-top border-dark"
+            <b-collapse id="collapse-1" class="mt-3">
+              <b-card
+                ><div class="container my-5">
+                  <div class="d-flex flex-column align-items-center">
+                    <form class="row g-1 p-0 p-md-4 w-100">
+                      <table>
+                        <tr>
+                          <td class="px-4 border-top border-dark">
+                            <label class="mb-4 form-label" for="userName"
+                              >이름 <span class="text-danger">*</span></label
                             >
-                              <label class="mb-4 form-label" for="userName"
-                                >이름 <span class="text-danger">*</span></label
-                              >
-                            </td>
-                            <td class="px-4">
-                              <input
-                                v-model="userName"
-                                id="userName"
-                                type="text"
-                                class="mb-4 form-control form-control-lg"
-                              />
-                            </td>
-                          </tr>
+                          </td>
+                          <td class="px-4">
+                            <input
+                              v-model="userName"
+                              id="userName"
+                              type="text"
+                              class="mb-4 form-control"
+                              required
+                            />
+                          </td>
+                        </tr>
 
-                          <tr>
-                            <td class="px-4 border-top border-dark">
-                              <label class="mb-4 form-label" for="userPassword"
-                                >비밀번호
-                                <span class="text-danger">*</span></label
-                              >
-                            </td>
-                            <td v-if="userPwdChk" class="px-4">
-                              <input
-                                v-model="userPassword"
-                                id="userPassword"
-                                type="password"
-                                class="mb-4 form-control form-control-lg"
-                              />
-                            </td>
-                            <td v-else class="px-4 form-floating">
-                              <input
-                                v-model="userPassword"
-                                id="userPassword"
-                                type="password"
-                                class="mb-4 form-control is-invalid form-control-lg"
-                              />
-                              <label for="userPassword" class="ps-5 text-danger"
-                                >비밀번호가 일치하지 않습니다.
-                              </label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="px-4 border-top border-dark">
-                              <label
-                                class="mb-4 form-label"
-                                for="userRePassword"
-                                >비밀번호 확인
-                                <span class="text-danger">*</span></label
-                              >
-                            </td>
-                            <td v-if="userPwdChk" class="px-4">
-                              <input
-                                v-model="userRePassword"
-                                @change="passwordcheck()"
-                                id="userRePassword"
-                                type="password"
-                                class="mb-4 form-control form-control-lg"
-                              />
-                            </td>
-                            <td v-else class="px-4 form-floating">
-                              <input
-                                v-model="userRePassword"
-                                @change="passwordcheck()"
-                                id="userRePassword"
-                                type="password"
-                                class="mb-4 form-control is-invalid form-control-lg"
-                              />
-                              <label
-                                for="userRePassword"
-                                class="ps-5 text-danger"
-                                >비밀번호가 일치하지 않습니다.
-                              </label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="px-4 border-top border-dark">
-                              <label class="mb-4 form-label" for="userEmail"
-                                >이메일
-                                <span class="text-danger">*</span></label
-                              >
-                            </td>
-                            <td class="px-4">
-                              <input
-                                v-model="userEmail"
-                                id="userEmail"
-                                type="email"
-                                class="mb-4 form-control form-control-lg"
-                              />
-                            </td>
-                          </tr>
-                        </table>
-                        <div class="col-12 text-center mt-4">
-                          <b-button variant="secondary" @click="updateInfo()"
-                            >저장</b-button
-                          >
-                        </div>
-                      </form>
-                    </div>
-                  </div></b-card
-                >
-              </b-collapse>
-            </div>
+                        <tr>
+                          <td class="px-4 border-top border-dark">
+                            <label class="mb-4 form-label" for="userPassword"
+                              >비밀번호
+                              <span class="text-danger">*</span></label
+                            >
+                          </td>
+                          <td v-if="userPwdChk" class="px-4">
+                            <input
+                              v-model="userPassword"
+                              id="userPassword"
+                              type="password"
+                              class="mb-4 form-control"
+                              required
+                            />
+                          </td>
+                          <td v-else class="px-4 form-floating">
+                            <input
+                              v-model="userPassword"
+                              id="userPassword"
+                              type="password"
+                              class="mb-4 form-control is-invalid"
+                              required
+                            />
+                            <label for="userPassword" class="ps-5 text-danger"
+                              >비밀번호가 일치하지 않습니다.
+                            </label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="px-4 border-top border-dark">
+                            <label class="mb-4 form-label" for="userRePassword"
+                              >비밀번호 확인
+                              <span class="text-danger">*</span></label
+                            >
+                          </td>
+                          <td v-if="userPwdChk" class="px-4">
+                            <input
+                              v-model="userRePassword"
+                              @change="passwordcheck()"
+                              id="userRePassword"
+                              type="password"
+                              class="mb-4 form-control"
+                              required
+                            />
+                          </td>
+                          <td v-else class="px-4 form-floating">
+                            <input
+                              v-model="userRePassword"
+                              @change="passwordcheck()"
+                              id="userRePassword"
+                              type="password"
+                              class="mb-4 form-control is-invalid"
+                              required
+                            />
+                            <label for="userRePassword" class="ps-5 text-danger"
+                              >비밀번호가 일치하지 않습니다.
+                            </label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="px-4 border-top border-dark">
+                            <label class="mb-4 form-label" for="userEmail"
+                              >이메일 <span class="text-danger">*</span></label
+                            >
+                          </td>
+                          <td class="px-4">
+                            <input
+                              v-model="userEmail"
+                              id="userEmail"
+                              type="email"
+                              class="mb-4 form-control"
+                              required
+                            />
+                          </td>
+                        </tr>
+                      </table>
+                      <div class="col-12 text-center">
+                        <b-button variant="primary" @click="updateInfo()"
+                          >저장</b-button
+                        >
+                      </div>
+                    </form>
+                  </div>
+                </div></b-card
+              >
+            </b-collapse>
           </div>
         </div>
       </div>
@@ -222,7 +211,11 @@ export default {
     },
     updateInfo() {
       console.log("??");
-      if (!this.validateForm()) return;
+      let msg = "입력한 내용을 다시 확인해주세요.";
+      if (!this.validateForm()) {
+        alert(msg);
+        return;
+      }
       console.log("!!");
       const user = {
         userid: this.userId,
@@ -234,6 +227,8 @@ export default {
         user,
         () => {
           console.log("회원 정보 수정 완료!");
+          msg = "회원 정보가 수정되었습니다.";
+          alert(msg);
           this.$router.push({ name: "home" });
         },
         (error) => {
@@ -251,4 +246,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

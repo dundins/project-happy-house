@@ -1,22 +1,20 @@
 <template>
   <div>
-    <BasicHeader name="로그인" />
-    <b-container class="bv-example-row mt-3">
+    <basic-header id="bh-user" name="로그인" />
+    <b-container id="bc-user" class="bv-example-row mt-3">
       <b-row>
-        <b-col></b-col>
-        <b-col cols="8">
-          <b-card class="text-center mt-3" style="width: 30rem">
-            <form class="row g-1 p-0 p-md-1">
+        <b-col>
+          <b-card class="text-center mt-5">
+            <form class="row g-1 p-0">
               <div class="col-12">
                 <div class="mb-2">
                   <label class="form-label" for="userId"></label>
                   <input
-                    style="height: 80px"
                     v-model="user.userid"
                     required
                     id="userId"
                     type="text"
-                    class="form-control form-control-lg"
+                    class="form-control"
                     placeholder="아이디"
                     @keyup.enter="confirm"
                   />
@@ -26,12 +24,11 @@
                 <div class="mb-2">
                   <div class="form-label" for="userpwd"></div>
                   <input
-                    style="height: 80px"
                     v-model="user.userpwd"
                     required
                     id="userpwd"
                     type="password"
-                    class="form-control form-control-lg"
+                    class="form-control"
                     placeholder="비밀번호"
                     @keyup.enter="confirm"
                   />

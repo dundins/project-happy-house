@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <b-col
-          v-if="userInfo.userid == 'admin'"
+          v-if="userInfo && userInfo.userid == 'admin'"
           class="d-flex justify-content-end mb-4"
           style="float: right"
         >

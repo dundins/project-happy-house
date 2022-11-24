@@ -46,4 +46,28 @@ nav a.router-link-exact-active {
 * {
   font-family: "Noto Sans KR", sans-serif;
 }
+#bc-user {
+  width: 40%;
+  margin: auto;
+}
+
+#bh-user {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+#bh-user::after {
+  width: 100%;
+  height: 100%;
+  content: "";
+  background-image: url(https://cdn.pixabay.com/photo/2018/04/16/16/16/sunset-3325080_960_720.jpg);
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.2;
+}
 </style>

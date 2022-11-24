@@ -1,7 +1,7 @@
 <template>
   <div id="newsview">
     <header-navbar></header-navbar>
-    <BasicHeader id="bh-n" name="부동산 최신 뉴스" />
+    <basic-header id="bh-n" name="부동산 최신 뉴스" />
     <news-list></news-list>
   </div>
 </template>

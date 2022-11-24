@@ -1,7 +1,7 @@
 <template>
   <div id="boardview">
     <header-navbar></header-navbar>
-    <BasicHeader id="bh-b" name="공지사항" />
+    <basic-header id="bh-b" name="공지사항" />
     <router-view></router-view>
   </div>
 </template>
