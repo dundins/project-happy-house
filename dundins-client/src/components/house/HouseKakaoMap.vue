@@ -8,7 +8,7 @@
               <h5 style="text-align: left; font-weight: bold">
                 {{ detail.aptName }}
               </h5>
-              <h6 style="text-align: left">{{ detail.dongName }}</h6>
+              <h6 style="text-align: left">{{ curAddr }}</h6>
             </div>
           </b-col>
           <b-col cols="2">
@@ -26,9 +26,70 @@
             <div id="roadview" style="height: 230px"></div>
           </b-col>
         </b-row>
+        <div class="col-xs-12" style="height: 20px"></div>
+        <hr class="my-2" />
+        <div class="col-xs-12" style="height: 20px"></div>
         <b-row>
-          <div>상세 데이터 테이블 정리</div>
+          <div v-if="detail">
+            <table class="tb1" style="align-items: center">
+              <colgroup>
+                <col style="width: 100px" />
+                <col style="width: 100px" />
+                <col style="width: 100px" />
+                <col style="width: 100px" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>시도</th>
+                  <th>구군</th>
+                  <th>읍면동</th>
+                  <th>거래 가격</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ detail.sidoName }}</td>
+                  <td>
+                    <div>{{ detail.gugunName }}</div>
+                  </td>
+                  <td>{{ detail.dongName }}</td>
+                  <td>{{ calcFormattingPrice(detail.recentPrice) }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="col-xs-12" style="height: 15px"></div>
+            <table class="tb1" style="align-items: center">
+              <colgroup>
+                <col style="width: 100px" />
+                <col style="width: 100px" />
+                <col style="width: 100px" />
+                <col style="width: 100px" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>건축연도</th>
+                  <th>면적</th>
+                  <th>거래일자</th>
+                  <th>지번</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ detail.buildYear }}년</td>
+                  <td>
+                    <div>{{ detail.area }}㎡</div>
+                    <div>{{ calcSize(detail.area) }}</div>
+                  </td>
+                  <td>{{ detail.dealYear }}년 {{ detail.dealMonth }}월</td>
+                  <td>{{ detail.jibun }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </b-row>
+        <div class="col-xs-12" style="height: 20px"></div>
+        <hr class="my-2" />
+        <div class="col-xs-12" style="height: 20px"></div>
         <b-row>
           <div>최근 1년간 거래 chart.js</div>
         </b-row>
@@ -56,6 +117,7 @@ export default {
   name: "HouseKakaoMap",
   data() {
     return {
+      curAddr: "",
       detail: null,
       houseSelected: true,
       curIndex: -1,
@@ -157,6 +219,13 @@ export default {
     //     }
     //   }
     // },
+
+    searchDetailAddrFromCoords(coords, callback) {
+      var geocoder = new kakao.maps.services.Geocoder();
+      // 좌표로 법정동 상세 주소 정보를 요청합니다
+      geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    },
+
     displayTraffic() {
       this.btnClick1++;
 
@@ -172,10 +241,21 @@ export default {
     showHouseDetail(coords, index) {
       this.detail = this.houses[index];
       this.SET_HOUSE_SELECTED(true);
+      let $this = this;
       let cds = new kakao.maps.LatLng(
         this.houses[index].lat,
         this.houses[index].lng
       );
+      this.searchDetailAddrFromCoords(cds, function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          if (result[0].road_address) {
+            $this.curAddr = result[0].address.address_name;
+          } else {
+            $this.curAddr = this.houses[index].dongName;
+          }
+        }
+      });
+
       this.createRoadView(cds);
       this.curIndex = index;
       console.log(this.houses[index].aptName);
@@ -186,8 +266,8 @@ export default {
       // this.getHouseReview(houseNo);
       // if (!this.listVisible) this.listVisible = true;
       // console.log("showHouseDetail" + index);
-      if (this.map.getLevel() >= 5) {
-        this.map.setLevel(3);
+      if (this.map.getLevel() >= 4) {
+        this.map.setLevel(2);
       }
       this.map.panTo(coords);
     },
@@ -224,6 +304,10 @@ export default {
         }
       }
       return resultString;
+    },
+    calcFormattingPrice(recentPrice) {
+      let price = this.removeComma(recentPrice);
+      return this.priceFormatting(price);
     },
     addMarkerWithAddress(coords, index) {
       let price = this.removeComma(this.houses[index].recentPrice);
@@ -497,6 +581,12 @@ export default {
 #xbtn:hover {
   cursor: pointer;
 }
-#detail-title {
+td {
+  text-align: center;
+  margin: auto;
+  table-layout: fixed;
+}
+tr {
+  font-size: small;
 }
 </style>
