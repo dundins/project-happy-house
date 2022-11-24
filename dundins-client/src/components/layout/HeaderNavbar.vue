@@ -19,7 +19,7 @@
           </li>
           <li class="ms-lg-2 ms-md-1 nav-item nav-link">|</li>
           <li class="ms-lg-2 ms-md-1 nav-item">
-            <router-link class="nav-link" to="/house">부동산 매물</router-link>
+            <router-link class="nav-link" to="/sale">부동산 매물</router-link>
           </li>
           <li class="ms-lg-2 ms-md-1 nav-item nav-link">|</li>
           <li class="ms-lg-2 ms-md-1 nav-item">

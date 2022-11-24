@@ -33,11 +33,6 @@ const routes = [
     component: () => import("@/views/ApartView"),
   },
   {
-    path: "/house",
-    name: "house",
-    component: () => import("@/views/HouseView"),
-  },
-  {
     path: "/home",
     name: "home",
     component: () => import("@/views/HomeView"),
@@ -103,6 +98,42 @@ const routes = [
         name: "boarddelete",
         beforeEnter: onlyAuthUser,
         component: () => import("@/components/board/BoardDelete"),
+      },
+    ],
+  },
+  {
+    path: "/sale",
+    name: "sale",
+    component: () => import("@/views/SaleView"),
+    redirect: "/sale/list",
+    children: [
+      {
+        path: "list",
+        name: "salelist",
+        component: () => import("@/components/sale/SaleList"),
+      },
+      {
+        path: "write",
+        name: "salewrite",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/sale/SaleWrite"),
+      },
+      {
+        path: "detail/:articleno",
+        name: "saledetail",
+        component: () => import("@/components/sale/SaleDetail"),
+      },
+      {
+        path: "modify/:articleno",
+        name: "salemodify",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/sale/SaleModify"),
+      },
+      {
+        path: "delete/:articleno",
+        name: "saledelete",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/sale/SaleDelete"),
       },
     ],
   },
