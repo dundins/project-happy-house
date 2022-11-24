@@ -72,11 +72,11 @@ export default {
       currentPage: 1,
       articles: [],
       fields: [
-        { key: "house_sale_id", label: "등록번호", tdClass: "tdClass" },
+        // { key: "house_sale_id", label: "등록번호", tdClass: "tdClass" },
         { key: "title", label: "매물", tdClass: "tdSubject" },
         { key: "dealAmount", label: "가격", tdClass: "tdClass" },
         { key: "floor", label: "층", tdClass: "tdClass" },
-        { key: "area", label: "지역", tdClass: "tdClass" },
+        { key: "area", label: "지역", tdClass: "tdSubject" },
         { key: "room", label: "방 개수", tdClass: "tdClass" },
       ],
     };
@@ -113,7 +113,7 @@ export default {
     viewArticle(article) {
       this.$router.push({
         name: "saledetail",
-        params: { articleno: article.house_sale_id },
+        params: { house_sale_id: article.house_sale_id },
       });
       console.log(this.currentPage);
     },

@@ -2,6 +2,19 @@
   <b-row class="mt-5">
     <b-col style="text-align: left">
       <b-form @submit="onSubmit" @reset="onReset">
+        <b-form-group
+          id="aptCode-group"
+          label="아파트 코드"
+          label-for="aptCode"
+        >
+          <b-form-input
+            id="aptCode"
+            v-model="article.aptCode"
+            type="text"
+            required
+            placeholder="아파트 코드를 입력하세요."
+          ></b-form-input>
+        </b-form-group>
         <b-form-group id="title-group" label="제목" label-for="title">
           <b-form-input
             id="title"
@@ -94,6 +107,7 @@ export default {
     return {
       article: {
         house_sale_id: 0,
+        aptCode: 0,
         title: "",
         content: "",
         dealAmount: "",
@@ -135,7 +149,12 @@ export default {
 
       let err = true;
       let msg = "";
-      !this.article.title &&
+      !this.article.aptCode &&
+        ((msg = "아파트 코드를 입력해주세요"),
+        (err = false),
+        this.$refs.aptCode.focus());
+      err &&
+        !this.article.title &&
         ((msg = "매물을 입력해주세요"),
         (err = false),
         this.$refs.title.focus());
@@ -163,6 +182,7 @@ export default {
     onReset(event) {
       event.preventDefault();
       this.article.house_sale_id = 0;
+      this.article.aptCode = 0;
       this.article.title = "";
       this.article.content = "";
       this.article.dealAmount = "";
@@ -173,6 +193,7 @@ export default {
     },
     registArticle() {
       let param = {
+        aptCode: this.article.aptCode,
         userid: this.userInfo.userid,
         title: this.article.title,
         content: this.article.content,
@@ -199,6 +220,7 @@ export default {
     modifyArticle() {
       let param = {
         house_sale_id: this.article.house_sale_id,
+        aptCode: this.article.aptCode,
         userid: this.userInfo.userid,
         title: this.article.title,
         content: this.article.content,
