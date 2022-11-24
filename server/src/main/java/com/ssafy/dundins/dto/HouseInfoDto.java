@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class HouseInfoDto {
 
 	@ApiModelProperty(value = "아파트일련번호")
-	private int aptCode;
+	private String aptCode;
 	@ApiModelProperty(value = "아파트이름")
 	private String aptName;
 	@ApiModelProperty(value = "동코드")
@@ -37,11 +37,11 @@ public class HouseInfoDto {
 	@ApiModelProperty(value = "월")
 	private int dealMonth;
 
-	public int getAptCode() {
+	public String getAptCode() {
 		return aptCode;
 	}
 
-	public void setAptCode(int aptCode) {
+	public void setAptCode(String aptCode) {
 		this.aptCode = aptCode;
 	}
 

@@ -3,12 +3,14 @@
     <div id="map">
       <b-card v-show="selected" id="showList" class="no-paddings card p-0">
         <b-row id="detail-title">
-          <b-col cols="10">
-            <h5 style="text-align: left; font-weight: bold">
-              {{ detail.aptName }}
-            </h5>
-            <h6 style="text-align: left">{{ detail.dongName }}</h6>
-          </b-col>
+          <div v-if="detail">
+            <b-col cols="10">
+              <h5 style="text-align: left; font-weight: bold">
+                {{ detail.aptName }}
+              </h5>
+              <h6 style="text-align: left">{{ detail.dongName }}</h6>
+            </b-col>
+          </div>
           <b-col cols="2">
             <b-icon
               icon="backspace-fill"
