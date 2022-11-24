@@ -36,10 +36,12 @@
       </b-col>
     </b-row>
     <br />
-    <a
-      href="https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=101&sid2=260"
-      >더보기</a
-    >
+    <div class="text-center">
+      <a
+        href="https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=101&sid2=260"
+        >더보기</a
+      >
+    </div>
   </b-container>
 </template>
 

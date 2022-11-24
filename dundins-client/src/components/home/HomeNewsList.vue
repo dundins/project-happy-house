@@ -3,34 +3,42 @@
     <b-row>
       <b-col>
         <div class="list-group">
+          <b-row class="mb-2">
+            <b-col cols="6"
+              ><strong style="font-size: 1.25rem"
+                >부동산 최신 뉴스</strong
+              ></b-col
+            >
+            <b-col cols="6" style="text-align: right">
+              <router-link to="/news"> 더보기 </router-link>
+            </b-col>
+          </b-row>
           <div
             class="list-group-item list-group-item-action"
-            v-for="(article, index) in articles"
+            v-for="(article, index) in $options.filters.limitArray(articles, 3)"
             :key="index"
             :value="article.value"
             @click="go(article.url)"
           >
-            <div v-if="isOne">
-              <b-row class="justify-content-md-center" align-v="center">
-                <b-col cols="3">
-                  <div class="list-group-item-thumbnail">
-                    <img :src="article.img" alt="noImage" />
-                  </div>
-                  <div class="list-group-item-writer mt-1">
-                    <span>{{ article.company }}</span>
-                    <small>{{ article.createdDate }}</small>
-                  </div>
-                </b-col>
-                <b-col cols="9">
-                  <h5 class="list-group-item-title text-left">
-                    {{ article.title }}
-                  </h5>
-                  <p class="list-group-item-content text-left mb-0">
-                    {{ article.content }}
-                  </p>
-                </b-col>
-              </b-row>
-            </div>
+            <b-row class="justify-content-md-center" align-v="center">
+              <b-col cols="3">
+                <div class="list-group-item-thumbnail">
+                  <img :src="article.img" alt="noImage" />
+                </div>
+                <div class="list-group-item-writer mt-1">
+                  <span>{{ article.company }}</span>
+                  <small>{{ article.createdDate }}</small>
+                </div>
+              </b-col>
+              <b-col cols="9">
+                <h5 class="list-group-item-title text-left">
+                  {{ article.title }}
+                </h5>
+                <p class="list-group-item-content text-left mb-0">
+                  {{ article.content }}
+                </p>
+              </b-col>
+            </b-row>
           </div>
         </div>
       </b-col>
@@ -63,6 +71,20 @@ export default {
   methods: {
     go(url) {
       window.open(url, "_blank");
+    },
+  },
+  filters: {
+    limitArray(arr, length = 3) {
+      if (arr && arr.length) {
+        if (length == -1) {
+          return arr;
+        }
+        if (length > arr.length) {
+          return arr;
+        }
+        return arr.slice(0, length);
+      }
+      return null;
     },
   },
 };
