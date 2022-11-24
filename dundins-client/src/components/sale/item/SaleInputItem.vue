@@ -78,6 +78,14 @@
             placeholder="방 개수를 입력하세요."
           ></b-form-input>
         </b-form-group>
+        <b-form-group id="file-group" label="사진 업로드" label-for="file">
+          <div class="custom-file">
+            <input id="customFile" type="file" @change="handleFileChange" />
+            <label class="custom-file-label" for="customFile">{{
+              file_name
+            }}</label>
+          </div>
+        </b-form-group>
         <b-button
           type="submit"
           variant="primary"
@@ -107,15 +115,17 @@ export default {
     return {
       article: {
         house_sale_id: 0,
-        aptCode: 0,
+        aptCode: 11110000000002,
         title: "",
         content: "",
         dealAmount: "",
         floor: "",
         area: "",
         room: 1,
+        userid: "",
       },
       isUserid: false,
+      file_name: "사진을 선택하세요.",
     };
   },
   props: {
@@ -247,6 +257,9 @@ export default {
     },
     moveList() {
       this.$router.push({ name: "salelist" });
+    },
+    handleFileChange(e) {
+      this.file_name = e.target.files[0].name;
     },
   },
 };

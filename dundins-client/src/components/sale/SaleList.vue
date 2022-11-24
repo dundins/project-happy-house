@@ -1,62 +1,65 @@
 <template>
   <b-container id="bc" class="bv-example-row mt-5">
-    <b-row>
-      <b-col>
-        <b-col class="d-flex justify-content-end mb-4" style="float: right">
-          <b-button variant="primary" @click="moveWrite()">매물 등록</b-button>
+    <div class="py-5">
+      <div class="container" style="text-align: center">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+          <b-card-group
+            deck
+            v-for="article in articles"
+            v-bind:key="article.house_sale_id"
+            :per-page="perPage"
+            :current-page="currentPage"
+            style="margin: 15px 0"
+          >
+            <b-card
+              border-variant="info"
+              header="info"
+              header-bg-variant="transparent"
+              align="center"
+            >
+              <template #header>
+                <div style="text-align: left">
+                  <card-title style="font-weight: bold; font-size: large">{{
+                    article.title
+                  }}</card-title>
+
+                  <b-card-text
+                    style="font-size: medium; padding-top: 10px; margin: 0"
+                    >{{ article.area }}</b-card-text
+                  >
+                  <b-card-text style="font-size: medium">{{
+                    article.dealAmount
+                  }}</b-card-text>
+                </div>
+              </template>
+              <div class="mb-3">
+                <img
+                  src="https://post-phinf.pstatic.net/MjAxOTExMThfMTk3/MDAxNTc0MDYzODE1Nzc3.8gtaRbg1njFRrqIumPZyH9VZO8wAYOsMlN5kG4DrNNog.59q7quubaw3zC2e2ezro2PMZeF999wYEDhyKZC69gJEg.JPEG/cm280018503.jpg?type=w1200"
+                  alt="noImg"
+                  style="width: 100%"
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary"
+                @click="viewArticle(article)"
+              >
+                보기
+              </button>
+            </b-card>
+          </b-card-group>
+        </div>
+      </div>
+      <b-row>
+        <b-col>
+          <b-col class="d-flex justify-content-end mb-4" style="float: right">
+            <b-button variant="primary" @click="moveWrite()"
+              >매물 등록</b-button
+            >
+          </b-col>
         </b-col>
-        <b-table
-          id="tboard"
-          hover
-          :per-page="perPage"
-          :current-page="currentPage"
-          :items="articles"
-          :fields="fields"
-          @row-clicked="viewArticle"
-        >
-          <template #cell(house_sale_id)="data">
-            <div class="col-xs-12" style="height: 7px"></div>
-            {{ data.item.house_sale_id }}
-            <div class="col-xs-12" style="height: 7px"></div>
-          </template>
-          <template #cell(title)="data">
-            <div class="col-xs-12" style="height: 7px"></div>
-            {{ data.item.title }}
-            <div class="col-xs-12" style="height: 7px"></div>
-          </template>
-          <template #cell(dealAmount)="data">
-            <div class="col-xs-12" style="height: 7px"></div>
-            {{ data.item.dealAmount }}
-            <div class="col-xs-12" style="height: 7px"></div>
-          </template>
-          <template #cell(floor)="data">
-            <div class="col-xs-12" style="height: 7px"></div>
-            {{ data.item.floor }}
-            <div class="col-xs-12" style="height: 7px"></div>
-          </template>
-          <template #cell(area)="data">
-            <div class="col-xs-12" style="height: 7px"></div>
-            {{ data.item.area }}
-            <div class="col-xs-12" style="height: 7px"></div>
-          </template>
-          <template #cell(room)="data">
-            <div class="col-xs-12" style="height: 7px"></div>
-            {{ data.item.room }}
-            <div class="col-xs-12" style="height: 7px"></div>
-          </template>
-        </b-table>
-        <div v-if="articles.length == 0">등록된 매물이 없습니다.</div>
-        <b-pagination
-          v-else
-          pills
-          align="center"
-          v-model="currentPage"
-          :total-rows="rows"
-          :per-page="perPage"
-          aria-controls="tboard"
-        ></b-pagination>
-      </b-col>
-    </b-row>
+      </b-row>
+    </div>
   </b-container>
 </template>
 
@@ -126,7 +129,7 @@ export default {
 
 <style scope>
 #bc {
-  width: 65%;
+  width: 70%;
 }
 .tdClass {
   width: 50px;
