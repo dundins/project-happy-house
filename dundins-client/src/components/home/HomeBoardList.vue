@@ -11,6 +11,7 @@
               <router-link to="/board"> 더보기 </router-link>
             </b-col>
           </b-row>
+          <div v-if="articles.length == 0">작성된 글이 없습니다.</div>
           <b-table
             id="tboard"
             hover

@@ -34,7 +34,9 @@
             <div class="col-xs-12" style="height: 7px"></div>
           </template>
         </b-table>
+        <div v-if="articles.length == 0">작성된 글이 없습니다.</div>
         <b-pagination
+          v-else
           pills
           align="center"
           v-model="currentPage"

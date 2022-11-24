@@ -44,17 +44,11 @@
                   >로그인</a
                 >
               </div>
-              <div class="d-flex col-12 text-center mt-2">
+              <div class="col-12 text-center mt-2">
                 <router-link
                   :to="{ name: 'regist' }"
                   class="flex-grow-1 btn btn-lg btn-block btn-secondary lift fs-6 text-uppercase"
                   >회원가입</router-link
-                >
-                &nbsp;&nbsp;
-                <router-link
-                  to="/user/password"
-                  class="flex-grow-1 btn btn-lg btn-block btn-secondary lift fs-6 text-uppercase"
-                  >비밀번호 찾기</router-link
                 >
               </div>
             </form>

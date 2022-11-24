@@ -119,15 +119,15 @@
             </tr>
           </table>
           <div class="col-12 text-center mt-3">
-            <router-link
-              :to="{ name: 'login' }"
-              class="btn px-4 btn-block btn-secondary lift text-uppercase"
-              >로그인 이동</router-link
-            >&nbsp;
             <a
               @click="join"
               class="btn px-4 btn-block btn-primary lift text-uppercase"
               >회원가입</a
+            >&nbsp;
+            <router-link
+              :to="{ name: 'login' }"
+              class="btn px-4 btn-block btn-secondary lift text-uppercase"
+              >로그인 이동</router-link
             >
           </div>
         </form>

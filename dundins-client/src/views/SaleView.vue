@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-navbar></header-navbar>
-    <basic-header id="bh-h" name="매물 관리" />
+    <basic-header id="bh-s" name="매물 관리" />
     <router-view></router-view>
   </div>
 </template>
@@ -11,20 +11,20 @@ import HeaderNavbar from "@/components/layout/HeaderNavbar";
 import BasicHeader from "@/components/layout/BasicHeader.vue";
 
 export default {
-  name: "HouseView",
+  name: "SaleView",
   components: { HeaderNavbar, BasicHeader },
 };
 </script>
 
 <style>
-#bh-h {
+#bh-s {
   width: 100%;
   height: 100%;
   text-align: center;
   position: relative;
   z-index: 1;
 }
-#bh-h::after {
+#bh-s::after {
   width: 100%;
   height: 100%;
   content: "";
