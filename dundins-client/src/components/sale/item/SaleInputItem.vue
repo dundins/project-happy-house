@@ -115,13 +115,13 @@ export default {
     return {
       article: {
         house_sale_id: 0,
-        aptCode: 11110000000002,
+        aptCode: "",
         title: "",
         content: "",
         dealAmount: "",
         floor: "",
         area: "",
-        room: 1,
+        room: "",
         userid: "",
       },
       isUserid: false,

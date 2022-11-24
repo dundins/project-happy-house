@@ -99,12 +99,39 @@
             ></line-chart>
           </div>
         </b-row>
+        <div class="col-xs-12" style="height: 20px"></div>
+        <hr class="my-2" />
+        <div class="col-xs-12" style="height: 20px"></div>
         <b-row>
-          <div>거주지 등록</div>
+          <b-col>
+            <router-link :to="{ name: 'salewrite' }">
+              <b-button
+                style="width: 80%"
+                v-b-toggle.collapse-1
+                variant="outline-secondary"
+                >매물 등록 하기</b-button
+              >
+            </router-link>
+          </b-col>
         </b-row>
-        <b-row>
-          <div>관심 매물 등록</div>
-        </b-row>
+        <div class="bg-white mb-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="p-3 m-0">주거 환경 리뷰</h6>
+            <i class="bi bi-plus-circle px-3 cursor-pointer"></i>
+          </div>
+          <div class="p-3 border-top">
+            <div>등록된 리뷰가 없습니다.</div>
+          </div>
+        </div>
+        <div class="bg-white mb-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="p-3 m-0">관심 현황</h6>
+            <i class="bi bi-plus-circle px-3 cursor-pointer"></i>
+          </div>
+          <div class="p-3 border-top">
+            <div>현재 0명의 이용자와 함께 보는 중</div>
+          </div>
+        </div>
       </b-card>
     </div>
   </div>
@@ -386,7 +413,7 @@ export default {
         map: this.map, // 다각형을 표시할 지도 객체
         path: area.path,
         strokeWeight: 2,
-        strokeColor: "hotpink",
+        strokeColor: "black",
         strokeOpacity: 0.5,
         fillColor: "#f5e4e2",
         fillOpacity: 0.4,
