@@ -1,22 +1,16 @@
 <template>
-  <b-container class="bv-example-row mt-3">
-    <!-- <b-row style="height: 130px">
-      <div style="height: 30px"></div>
-      <b-row id="board-header"
-        ><b-col class="d-flex justify-content-start"
-          ><span style="font-weight: bold; color: #254baa">Home /</span>
-          <div style="width: 10px"></div>
-          <span>공지 사항</span>
-        </b-col></b-row
-      >
-      <div style="height: 30px"></div>
-      <b-row>
-        <b-col class="d-flex justify-content-start"> <h4>공지 사항</h4></b-col>
-      </b-row>
-      <div class="col-xs-12" style="height: 10px"></div>
-    </b-row> -->
+  <b-container id="bc" class="bv-example-row mt-5">
     <b-row>
       <b-col>
+        <b-col
+          v-if="userInfo.userid == 'admin'"
+          class="d-flex justify-content-end mb-4"
+          style="float: right"
+        >
+          <b-button variant="outline-primary" @click="moveWrite()"
+            >글 작성</b-button
+          >
+        </b-col>
         <b-table
           id="tboard"
           hover
@@ -50,13 +44,9 @@
             <div class="col-xs-12" style="height: 7px"></div>
           </template>
         </b-table>
-        <!-- <b-col class="d-flex justify-content-end" style="float: right">
-          <b-button variant="outline-primary" @click="moveWrite()"
-            >글 작성</b-button
-          >
-        </b-col> -->
         <b-pagination
           id="bpage"
+          pills
           align="center"
           v-model="currentPage"
           :total-rows="rows"
@@ -70,6 +60,9 @@
 
 <script>
 import { listArticle } from "@/api/board";
+import { mapState, mapGetters } from "vuex";
+const memberStore = "memberStore";
+
 export default {
   data() {
     return {
@@ -100,6 +93,13 @@ export default {
       }
     );
   },
+  computed: {
+    ...mapState(memberStore, ["isLogin", "userInfo"]),
+    ...mapGetters(["checkUserInfo"]),
+    rows() {
+      return this.articles.length;
+    },
+  },
   methods: {
     moveWrite() {
       this.$router.push({ name: "boardwrite" });
@@ -114,15 +114,13 @@ export default {
       return Math.ceil(this.rows / this.perPage);
     },
   },
-  computed: {
-    rows() {
-      return this.articles.length;
-    },
-  },
 };
 </script>
 
 <style scope>
+#bc {
+  width: 65%;
+}
 .tdClass {
   width: 50px;
   text-align: center;

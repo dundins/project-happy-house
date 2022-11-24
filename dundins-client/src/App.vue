@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view id="rv" />
     <Footer v-if="$route.name !== 'apt'" class="mt-5"></Footer>
   </div>
 </template>
@@ -22,8 +22,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  height: 100%;
   color: #2c3e50;
+}
+
+#rv {
+  min-height: 1000px;
 }
 
 nav {

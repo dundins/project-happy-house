@@ -15,7 +15,7 @@
           </b-row>
           <div
             class="list-group-item list-group-item-action"
-            v-for="(article, index) in $options.filters.limitArray(articles, 3)"
+            v-for="(article, index) in $options.filters.limitArray(articles, 4)"
             :key="index"
             :value="article.value"
             @click="go(article.url)"
