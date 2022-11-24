@@ -19,17 +19,9 @@
           @row-clicked="viewArticle"
         >
           <template #cell(subject)="data">
-            <router-link
-              id="title"
-              :to="{
-                name: 'boarddetail',
-                params: { articleno: data.item.articleno },
-              }"
-            >
-              <div class="col-xs-12" style="height: 7px"></div>
-              {{ data.item.subject }}
-              <div class="col-xs-12" style="height: 7px"></div>
-            </router-link>
+            <div class="col-xs-12" style="height: 7px"></div>
+            {{ data.item.subject }}
+            <div class="col-xs-12" style="height: 7px"></div>
           </template>
           <template #cell(articleno)>
             <div class="col-xs-12" style="height: 7px"></div>
@@ -43,13 +35,12 @@
           </template>
         </b-table>
         <b-pagination
-          id="bpage"
           pills
           align="center"
           v-model="currentPage"
           :total-rows="rows"
           :per-page="perPage"
-          aria-controls="tbarticle"
+          aria-controls="tboard"
         ></b-pagination>
       </b-col>
     </b-row>
@@ -90,6 +81,7 @@ export default {
         console.log(error);
       }
     );
+    console.log(this.currentPage);
   },
   computed: {
     ...mapState(memberStore, ["isLogin", "userInfo"]),
@@ -107,6 +99,7 @@ export default {
         name: "boarddetail",
         params: { articleno: article.articleno },
       });
+      console.log(this.currentPage);
     },
     totalPage() {
       return Math.ceil(this.rows / this.perPage);

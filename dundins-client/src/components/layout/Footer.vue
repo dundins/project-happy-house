@@ -42,6 +42,9 @@
   font-size: 0.9rem;
   color: #808080;
 }
+a {
+  text-decoration: none;
+}
 footer {
   width: 100%;
   height: 90px;

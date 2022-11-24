@@ -17,9 +17,11 @@
           <li class="ms-lg-2 ms-md-1 nav-item">
             <router-link class="nav-link" to="/">실거래가</router-link>
           </li>
+          <li class="ms-lg-2 ms-md-1 nav-item nav-link">|</li>
           <li class="ms-lg-2 ms-md-1 nav-item">
             <router-link class="nav-link" to="/house">부동산 매물</router-link>
           </li>
+          <li class="ms-lg-2 ms-md-1 nav-item nav-link">|</li>
           <li class="ms-lg-2 ms-md-1 nav-item">
             <router-link class="nav-link" to="/board">공지사항</router-link>
           </li>
@@ -54,6 +56,7 @@
                 >로그인</router-link
               >
             </li>
+            <li class="ms-lg-2 ms-md-1 nav-item nav-link">|</li>
             <li class="ms-lg-2 ms-md-1 nav-item">
               <router-link class="nav-link" :to="{ name: 'regist' }"
                 >회원가입</router-link

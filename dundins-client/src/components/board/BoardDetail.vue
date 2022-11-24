@@ -31,14 +31,14 @@
       <b-col>
         <b-button variant="primary" @click="moveList">목록</b-button>
         <b-button
-          v-if="userInfo.userid === article.userid"
+          v-if="userInfo && userInfo.userid === article.userid"
           class="mx-3"
           variant="outline-info"
           @click="moveModifyArticle"
           >수정</b-button
         >
         <b-button
-          v-if="userInfo.userid === article.userid"
+          v-if="userInfo && userInfo.userid === article.userid"
           variant="outline-danger"
           @click="deleteArticle"
           >삭제</b-button
