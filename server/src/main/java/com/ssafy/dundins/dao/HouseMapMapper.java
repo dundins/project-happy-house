@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.dundins.dto.HouseInfoDto;
+import com.ssafy.dundins.dto.HouseSaleDto;
 import com.ssafy.dundins.dto.SidoGugunCodeDto;
 
 @Mapper
@@ -18,4 +19,8 @@ public interface HouseMapMapper {
 	List<HouseInfoDto> getAptInDong(String dong) throws SQLException;
 	List<HouseInfoDto> getAptInSearch(Map<String, String> map) throws SQLException;
 	
+	void insertHouseSales(HouseSaleDto houseSaleDto) throws SQLException;
+	List<HouseSaleDto> getAllHouseSales() throws SQLException;
+	HouseSaleDto getHouseSale(int saleId) throws SQLException;
+	void deleteHouseSale(int saleId) throws SQLException;
 }
