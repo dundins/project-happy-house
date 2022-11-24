@@ -24,4 +24,15 @@ function searchList(params, success, fail) {
   api.post(`/map/search`, params).then(success).catch(fail);
 }
 
-export { sidoList, gugunList, dongList, houseList, searchList };
+function getDealAmountAvgList(params, success, fail) {
+  api.get(`/map/avg/${params}`).then(success).catch(fail);
+}
+
+export {
+  sidoList,
+  gugunList,
+  dongList,
+  houseList,
+  searchList,
+  getDealAmountAvgList,
+};

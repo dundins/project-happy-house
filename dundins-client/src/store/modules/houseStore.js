@@ -5,6 +5,7 @@ import {
   dongList,
   houseList,
   searchList,
+  getDealAmountAvgList,
 } from "@/api/house.js";
 
 const houseStore = {
@@ -14,6 +15,7 @@ const houseStore = {
     guguns: [],
     dongs: [],
     houses: [],
+    avgList: [],
     selected: false,
     searchData: null,
     type: null,
@@ -67,6 +69,9 @@ const houseStore = {
     },
     SET_SEARCH_DATA(state, searchData) {
       state.searchData = searchData;
+    },
+    SET_AVG_LIST(state, list) {
+      state.avgList = list;
     },
   },
   actions: {
@@ -134,6 +139,19 @@ const houseStore = {
     detailHouse: ({ commit }, house) => {
       // 나중에 house.일련번호를 이용하여 API 호출
       commit("SET_DETAIL_HOUSE", house);
+    },
+
+    async getAvgList({ commit }, aptCode) {
+      console.log(`getAvgList : ${aptCode}`);
+      await getDealAmountAvgList(
+        aptCode,
+        ({ data }) => {
+          commit("SET_AVG_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     },
   },
 };

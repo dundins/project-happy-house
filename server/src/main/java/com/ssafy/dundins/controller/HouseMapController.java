@@ -182,4 +182,13 @@ public class HouseMapController {
 		}
 	}
 
+	@GetMapping("/avg/{apt_code}")
+	public ResponseEntity<List<Integer>> getDealAmontAvg(@PathVariable("apt_code") String aptCode) throws Exception {
+		try {
+			return new ResponseEntity<List<Integer>>(haHouseMapService.getDealAmountAvg(aptCode),HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<Integer>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

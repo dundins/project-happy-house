@@ -23,4 +23,6 @@ public interface HouseMapMapper {
 	List<HouseSaleDto> getAllHouseSales() throws SQLException;
 	HouseSaleDto getHouseSale(int saleId) throws SQLException;
 	void deleteHouseSale(int saleId) throws SQLException;
+	
+	List<Integer> getDealAmountAvg(String aptCode) throws SQLException;
 }

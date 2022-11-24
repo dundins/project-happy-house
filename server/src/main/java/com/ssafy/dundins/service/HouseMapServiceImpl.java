@@ -15,7 +15,7 @@ import com.ssafy.dundins.dto.SidoGugunCodeDto;
 
 @Service
 public class HouseMapServiceImpl implements HouseMapService {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -62,6 +62,10 @@ public class HouseMapServiceImpl implements HouseMapService {
 	@Override
 	public void insertHouseSales(HouseSaleDto houseSaleDto) throws SQLException {
 		sqlSession.getMapper(HouseMapMapper.class).insertHouseSales(houseSaleDto);
-		
+	}
+
+	@Override
+	public List<Integer> getDealAmountAvg(String aptCode) throws SQLException {
+		return sqlSession.getMapper(HouseMapMapper.class).getDealAmountAvg(aptCode);
 	}
 }

@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.ssafy.dundins.dao.BoardMapper">
 
 	<insert id="writeArticle" parameterType="boardDto">
-		insert into board (userid, subject, content, hit, regtime)
-		values (#{userid}, #{subject}, #{content}, 0, now())
+		insert into board
+		(userid, subject, content, hit, regtime)
+		values (#{userid}, #{subject},
+		#{content}, 0, now())
 	</insert>
-	
-	<select id="listArticle" parameterType="map" resultType="boardDto">
+
+	<select id="listArticle" parameterType="map"
+		resultType="boardDto">
 		select articleno, userid, subject, content, hit,
-				case when date_format(regtime, '%Y%m%d') = date_format(now(), '%Y%m%d')
-				then date_format(regtime, '%H:%i')
-				else date_format(regtime, '%y.%m.%d')
-				end regtime
+		case when date_format(regtime, '%Y%m%d') = date_format(now(), '%Y%m%d')
+		then date_format(regtime, '%H:%i')
+		else date_format(regtime, '%y.%m.%d')
+		end regtime
 		from board
 		<if test="word != null and word != ''">
 			<if test="key == 'subject'">
@@ -26,7 +29,7 @@
 		</if>
 		order by articleno desc
 	</select>
-	
+
 	<select id="getTotalCount" parameterType="map" resultType="int">
 		select count(articleno)
 		from board
@@ -39,37 +42,43 @@
 			</if>
 		</if>
 	</select>
-	
-	<select id="getArticle" parameterType="int" resultType="boardDto">
+
+	<select id="getArticle" parameterType="int"
+		resultType="boardDto">
 		select articleno, userid, subject, content, hit, regtime
 		from board
 		where articleno = #{articleno}
 	</select>
-	
+
 	<update id="updateHit" parameterType="int">
 		update board
-		set hit = hit + 1
+		set hit = hit +
+		1
 		where articleno = #{articleno}
 	</update>
-	
+
 	<update id="modifyArticle" parameterType="boardDto">
 		update board
-		set subject = #{subject}, content = #{content}
+		set subject
+		= #{subject}, content = #{content}
 		where articleno = #{articleno}
 	</update>
-	
+
 	<delete id="deleteMemo" parameterType="int">
 		delete from memo
-		where articleno = #{articleno}
+		where
+		articleno = #{articleno}
 	</delete>
-	
+
 	<delete id="deleteArticle" parameterType="int">
 		delete from board
-		where articleno = #{articleno}
+		where
+		articleno = #{articleno}
 	</delete>
 
 	<select id="getArticleCount" resultType="int">
-		select count(*) from board
+		select count(*) from
+		board
 	</select>
 </mapper>
 

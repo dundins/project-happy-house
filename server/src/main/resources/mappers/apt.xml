@@ -77,8 +77,6 @@
 		from housesale;
 	</select>
 
-
-
 	<select id="getHouseSale" parameterType="int" resultType="houseSaleDto">
 		select *
 		from housesale
@@ -89,4 +87,13 @@
 		delete from housesale
 		where house_sale_id = #{house_sale_id}
 	</delete>
+	
+	<select id="getDealAmountAvg" parameterType="string" resultType="int">
+		select ROUND(avg(dealAmount),2) from housedeal
+		where aptCode = #{aptCode} and dealYear > DATE_FORMAT(NOW(),'%Y') - 10
+		group by dealYear
+		order by dealYear;	
+	</select>
+	
+
 </mapper>
