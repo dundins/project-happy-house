@@ -1,46 +1,22 @@
 <template>
-  <v-row no-gutters>
-    <v-row>
-      <v-col>
-        <router-link style="text-decoration: none" to="/">
-          <v-btn>
-            <span class="material-icons"> home</span>
-            메인 화면
-          </v-btn>
-        </router-link>
-      </v-col>
-      <v-col>
-        <router-link style="text-decoration: none" to="/board">
-          <v-btn>
-            <span class="material-icons"> post_add</span>
-            게시판
-          </v-btn>
-        </router-link>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <router-link style="text-decoration: none" to="/apt">
-          <v-btn>
-            <span class="material-icons"> room</span>
-            관심 매물
-          </v-btn>
-        </router-link>
-      </v-col>
-      <v-col>
-        <router-link style="text-decoration: none" to="/login">
-          <v-btn>
-            <span class="material-icons"> people</span>
-            로그인
-          </v-btn>
-        </router-link>
-      </v-col>
-    </v-row>
-  </v-row>
+  <div>
+    <b-navbar style="padding: 0" variant="info" class="bg-white">
+      <router-link class="navbar-brand" to="/home">
+        <img style="width: 64px" src="@/assets/img/dundins-logo.png" />
+      </router-link>
+      <b-navbar-nav>
+        <router-link class="nav-link" to="/sale">부동산 매물</router-link>
+        <li class="ms-lg-2 ms-md-1 nav-item nav-link">|</li>
+        <router-link class="nav-link" to="/board">공지사항</router-link>
+        <li class="ms-lg-2 ms-md-1 nav-item nav-link">|</li>
+        <router-link class="nav-link" to="/account">마이 페이지</router-link>
+      </b-navbar-nav>
+    </b-navbar>
+  </div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style></style>
+<style scoped></style>

@@ -1,5 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { sidoList, gugunList, dongList, houseList, searchList } from "@/api/house.js";
+import {
+  sidoList,
+  gugunList,
+  dongList,
+  houseList,
+  searchList,
+  getDealAmountAvgList,
+} from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
@@ -8,6 +15,9 @@ const houseStore = {
     guguns: [],
     dongs: [],
     houses: [],
+    avgList: [],
+    selected: false,
+    searchData: null,
     type: null,
     house: null,
   },
@@ -26,6 +36,12 @@ const houseStore = {
       state.houses = [];
       state.type = null;
       state.house = null;
+    },
+    CLEAR_SEARCH_DATA(state) {
+      state.searchData = null;
+    },
+    SET_HOUSE_SELECTED(state, bool) {
+      state.selected = bool;
     },
     SET_SIDO_LIST(state, sidos) {
       sidos.forEach((sido) => {
@@ -50,6 +66,12 @@ const houseStore = {
     },
     SET_DETAIL_HOUSE(state, house) {
       state.house = house;
+    },
+    SET_SEARCH_DATA(state, searchData) {
+      state.searchData = searchData;
+    },
+    SET_AVG_LIST(state, list) {
+      state.avgList = list;
     },
   },
   actions: {
@@ -102,6 +124,7 @@ const houseStore = {
       );
     },
     getSearchList: ({ commit }, code) => {
+      // console.log("getSearchList 호출", code);
       searchList(
         code,
         ({ data }) => {
@@ -116,6 +139,19 @@ const houseStore = {
     detailHouse: ({ commit }, house) => {
       // 나중에 house.일련번호를 이용하여 API 호출
       commit("SET_DETAIL_HOUSE", house);
+    },
+
+    async getAvgList({ commit }, aptCode) {
+      console.log(`getAvgList : ${aptCode}`);
+      await getDealAmountAvgList(
+        aptCode,
+        ({ data }) => {
+          commit("SET_AVG_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     },
   },
 };

@@ -34,7 +34,6 @@
 		join housedeal d
 		on h.aptCode = h.aptCode
 		where dongCode = #{dong}  and no = (select max(no) from housedeal where aptCode = h.aptCode)
-		limit 100
 	</select>
 	
 	<select id="getAptInSearch" parameterType="string" resultType="houseInfoDto">
@@ -58,6 +57,43 @@
 			</if>
 		</if>
 		and no = (select max(no) from housedeal where aptCode = h.aptCode)
-		limit 100
 	</select>
+	
+	<insert id="insertHouseSales" parameterType="houseSaleDto">
+		INSERT INTO housesale
+		(aptCode, title, content, dealAmount, floor, dealYear, dealMonth, dealDay, area, room, userid)
+		VALUES
+		(#{aptCode},#{title}, #{content},#{dealAmount},#{floor}, date_format(now(),'%Y'),date_format(now(),'%m'),date_format(now(),'%d'),#{area},#{room},#{userId});
+	</insert>
+	
+
+	<insert id="registMember" parameterType="memberDto">
+		insert into member (userid, username, userpwd, email, joindate)
+		values (#{userid}, #{username}, md5(#{userpwd}), #{email}, now());
+	</insert>
+
+	<select id="getAllHouseSales" resultType="houseSaleDto">
+		select *
+		from housesale;
+	</select>
+
+	<select id="getHouseSale" parameterType="int" resultType="houseSaleDto">
+		select *
+		from housesale
+		where house_sale_id = #{house_sale_id};
+	</select>
+
+	<delete id="deleteHouseSale" parameterType="int">
+		delete from housesale
+		where house_sale_id = #{house_sale_id}
+	</delete>
+	
+	<select id="getDealAmountAvg" parameterType="string" resultType="int">
+		select ROUND(avg(dealAmount),2) from housedeal
+		where aptCode = #{aptCode} and dealYear > DATE_FORMAT(NOW(),'%Y') - 10
+		group by dealYear
+		order by dealYear;	
+	</select>
+	
+
 </mapper>

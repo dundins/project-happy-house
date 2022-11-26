@@ -1,25 +1,22 @@
 <template>
-  <v-card class="bar" elevation="10">
-    <v-container data-app>
-      <v-col></v-col>
-      <side-move-bar></side-move-bar>
-      <v-col></v-col>
-      <v-divider></v-divider>
-      <v-col></v-col>
-      <side-search-bar></side-search-bar>
-    </v-container>
-  </v-card>
+  <b-card class="no-paddings">
+    <side-move-bar></side-move-bar>
+    <hr class="my-2" />
+    <side-search-bar class="mt-3"></side-search-bar>
+    <side-select-search-bar class="mt-3"></side-select-search-bar>
+  </b-card>
 </template>
 
 <script>
 import SideMoveBar from "@/components/sidebar/SideMoveBar.vue";
 import SideSearchBar from "@/components/sidebar/SideSearchBar.vue";
+import SideSelectSearchBar from "@/components/sidebar/SideSelectSearchBar.vue";
 
 export default {
   data() {
     return {};
   },
-  components: { SideMoveBar, SideSearchBar },
+  components: { SideMoveBar, SideSearchBar, SideSelectSearchBar },
 };
 </script>
 
