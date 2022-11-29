@@ -19,9 +19,9 @@
             >
               <template #header>
                 <div style="text-align: left">
-                  <card-title style="font-weight: bold; font-size: large">{{
+                  <b-card-title style="font-weight: bold; font-size: large">{{
                     article.title
-                  }}</card-title>
+                  }}</b-card-title>
 
                   <b-card-text
                     style="font-size: medium; padding-top: 10px; margin: 0"
