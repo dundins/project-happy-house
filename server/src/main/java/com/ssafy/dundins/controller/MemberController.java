@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.dundins.dto.MemberDto;
@@ -40,6 +41,42 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	@GetMapping("/{userid}")
+	@ResponseBody
+	public ResponseEntity<String> idCheck(@PathVariable("userid") String userId) throws Exception {
+		try {
+			logger.info("idCheck user id : {}", userId);
+			int cnt = memberService.idCheck(userId);
+			return new ResponseEntity<String>(cnt + "", HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("아이디 체크 실패 : {}", e);
+			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PostMapping("/regist")
+	public ResponseEntity<Void> regist(@RequestBody MemberDto memberDto) {
+		try {
+			memberService.registMember(memberDto);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("회원가입 실패 : {}", e);
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PostMapping("/update")
+	public ResponseEntity<Void> update(@RequestBody MemberDto memberDto) throws Exception {
+		try {
+			System.out.println(memberDto.toString());
+			memberService.updateMember(memberDto);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("회원 정보 수정 실패 : {}", e);
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@ApiOperation(value = "로그인", notes = "Access-token과 로그인 결과 메세지를 반환한다.", response = Map.class)
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> login(

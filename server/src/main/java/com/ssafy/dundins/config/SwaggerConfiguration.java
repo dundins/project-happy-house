@@ -24,7 +24,6 @@ public class SwaggerConfiguration {
 	// Swagger 주소
 	// http://localhost:9999/dundins/swagger-ui.html
 
-
 	private String version = "V1";
 	private String title = "SSAFY Board-Vuejs API " + version;
 

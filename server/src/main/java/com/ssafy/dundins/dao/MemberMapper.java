@@ -10,6 +10,9 @@ import com.ssafy.dundins.dto.MemberDto;
 @Mapper
 public interface MemberMapper {
 
+	public void registMember(MemberDto memberDto) throws SQLException;
+	int idCheck(String userId) throws SQLException;
+	void updateMember(MemberDto memberDto) throws SQLException;
 	public MemberDto login(MemberDto memberDto) throws SQLException;
 	public MemberDto userInfo(String userid) throws SQLException;
 	public void saveRefreshToken(Map<String, String> map) throws SQLException;
