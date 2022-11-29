@@ -158,7 +158,7 @@ public class HouseMapController {
 	}
 
 	@PostMapping("/sale")
-	public ResponseEntity<Void> inserHouseSale(@RequestBody HouseSaleDto houseSaleDto) throws Exception {
+	public ResponseEntity<Void> insertHouseSale(@RequestBody HouseSaleDto houseSaleDto) throws Exception {
 		System.out.println("insert HouseSale - 호출");
 		System.out.println(houseSaleDto);
 		try {
