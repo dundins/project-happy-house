@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <router-view id="rv" />
+    <router-view v-if="$route.name !== 'apt'" id="mh" />
+    <router-view v-else />
     <Footer v-if="$route.name !== 'apt'" class="mt-5"></Footer>
   </div>
 </template>
@@ -25,7 +26,7 @@ export default {
   color: #2c3e50;
 }
 
-#rv {
+#mh {
   min-height: 1000px;
 }
 
