@@ -515,6 +515,8 @@ export default {
   border-radius: 10px;
   /* background-color:rgba(255, 244, 244, 0.8); */
   /* opacity: 0.5; */
+
+  overflow: auto;
 }
 #xbtn {
   float: right;
