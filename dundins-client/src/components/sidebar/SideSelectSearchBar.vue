@@ -28,7 +28,7 @@
             class="array-select form-control form-select"
             aria-label="example"
           >
-            <option value="null" disabled selected>구 선택</option>
+            <option value="null" disabled selected>-- 구/군 --</option>
             <option
               v-for="(item, index) in guguns"
               :key="index"
@@ -47,7 +47,7 @@
             class="array-select form-control form-select"
             aria-label="example"
           >
-            <option value="null" disabled selected>동 선택</option>
+            <option value="null" disabled selected>-- 동 --</option>
             <option
               v-for="(item, index) in dongs"
               :key="index"
