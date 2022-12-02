@@ -47,7 +47,7 @@
               <div class="col-12 text-center mt-2">
                 <router-link
                   :to="{ name: 'regist' }"
-                  class="flex-grow-1 btn btn-lg btn-block btn-secondary lift fs-6 text-uppercase"
+                  class="w-100 flex-grow-1 btn btn-lg btn-block btn-secondary lift fs-6 text-uppercase"
                   >회원가입</router-link
                 >
               </div>
