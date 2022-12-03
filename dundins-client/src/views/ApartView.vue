@@ -38,7 +38,7 @@ export default {
   margin-top: 10px;
   margin-left: 10px;
   position: absolute;
-  height: auto;
+  max-height: 90%;
   z-index: 2;
   width: 500px;
   border-radius: 20px;
