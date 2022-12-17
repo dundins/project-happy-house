@@ -63,6 +63,11 @@ public class SwaggerConfiguration {
 	}
 
 	@Bean
+	public Docket bookmarkApi() {
+		return getDocket("북마크", Predicates.or(PathSelectors.regex("/bookmark.*")));
+	}
+	
+	@Bean
 	public Docket allApi() {
 		return getDocket("전체", Predicates.or(PathSelectors.regex("/*.*")));
 	}
