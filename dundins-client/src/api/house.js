@@ -21,11 +21,11 @@ function houseList(params, success, fail) {
 }
 
 function searchList(params, success, fail) {
-  api.post(`/map/search`, params).then(success).catch(fail);
+  api.post(`/sale/search`, params).then(success).catch(fail);
 }
 
 function getDealAmountAvgList(params, success, fail) {
-  api.get(`/map/avg/${params}`).then(success).catch(fail);
+  api.get(`/sale/avg/${params}`).then(success).catch(fail);
 }
 
 export {
