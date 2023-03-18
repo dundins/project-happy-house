@@ -188,10 +188,10 @@ export default {
       if (!err) alert(msg);
       else
         this.type === "register" ? this.registArticle() : this.modifyArticle();
+      console.log("등록!!");
     },
     onReset(event) {
       event.preventDefault();
-      this.article.house_sale_id = 0;
       this.article.aptCode = 0;
       this.article.title = "";
       this.article.content = "";
@@ -204,7 +204,7 @@ export default {
     registArticle() {
       let param = {
         aptCode: this.article.aptCode,
-        userid: this.userInfo.userid,
+        userId: this.userInfo.userid,
         title: this.article.title,
         content: this.article.content,
         dealAmount: this.article.dealAmount,
@@ -214,22 +214,19 @@ export default {
       };
       writeArticle(
         param,
-        ({ data }) => {
-          let msg = "등록 처리시 문제가 발생했습니다.";
-          if (data === "success") {
-            msg = "등록이 완료되었습니다.";
-          }
+        () => {
+          let msg = "등록이 완료되었습니다.";
           alert(msg);
           this.moveList();
         },
         (error) => {
+          console.log("에러!");
           console.log(error);
         }
       );
     },
     modifyArticle() {
       let param = {
-        house_sale_id: this.article.house_sale_id,
         aptCode: this.article.aptCode,
         userid: this.userInfo.userid,
         title: this.article.title,

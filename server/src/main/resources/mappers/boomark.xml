@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.ssafy.dundins.dao.BookMarkMapper">
+
+<!-- 	<select id="getBookmarkHouseDetailListById" parameterType="string" resultType="com.ssafy.dundins.dto.HouseDetailDto"> -->
+<!-- 		select no as house_no, dong as dong_name, aptname as apt_name, buildyear as buildYear, jibun, lat, lng  -->
+<!-- 		from bookmark_house b, houseinfo h where b.house_no = h.no and user_id = #{userId} -->
+<!-- 	</select> -->
+
+	<select id="getBookmarkHouseDetailListById" parameterType="string" resultType="com.ssafy.dundins.dto.BookMarkResultDto">
+		select i.aptCode,i.aptName, concat(i.dongName," ",jibun) as address, i.buildYear, i.lat, i.lng
+		from bookmark_house h
+		join houseinfo i
+		on h.aptCode = i.aptCode
+		where userid = #{userId}
+	</select>
+	
+	<insert id="insertBookmarkHouseDetail" parameterType="com.ssafy.dundins.dto.BookMarkHouseDto">
+		INSERT INTO bookmark_house (userid, aptCode) VALUES	(#{userId}, #{aptCode})	
+	</insert>
+			
+	<delete id="deleteBookmarkHouseDetail" parameterType="com.ssafy.dundins.dto.BookMarkHouseDto">
+		DELETE FROM bookmark_house
+		WHERE bk_house_id = #{bkSaleId}
+		and aptCode = #{aptCode}
+	</delete>
+	
+<!-- 	<delete id="deleteBookmarkHouseOngoing" parameterType="com.ssafy.dundins.dto.BookMarkResultDto"> -->
+<!-- 		delete from bookmark_ongoing  -->
+<!-- 		where user_id = #{userId} -->
+<!-- 		and ongoing_id = #{ongoingId} -->
+<!-- 	</delete> -->
+
+</mapper>

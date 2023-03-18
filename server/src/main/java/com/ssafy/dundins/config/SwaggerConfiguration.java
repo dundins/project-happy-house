@@ -37,22 +37,36 @@ public class SwaggerConfiguration {
 	}
 
 	// API마다 구분짓기 위한 설정.
-//	@Bean
-//	public Docket userApi() {
-//		return getDocket("회원", Predicates.or(PathSelectors.regex("/user.*")));
-//	}
-//
-//	@Bean
-//	public Docket searchApi() {
-//		return getDocket("게시판", Predicates.or(PathSelectors.regex("/board.*")));
-//	}
-//
-//	@Bean
-//	public Docket commonApi() {
-//		return getDocket("아파트", Predicates.or(PathSelectors.regex("/map.*")));
-//
-//	}
+	@Bean
+	public Docket userApi() {
+		return getDocket("회원", Predicates.or(PathSelectors.regex("/user.*")));
+	}
 
+	@Bean
+	public Docket searchApi() {
+		return getDocket("게시판", Predicates.or(PathSelectors.regex("/board.*")));
+	}
+
+	@Bean
+	public Docket commonApi() {
+		return getDocket("아파트", Predicates.or(PathSelectors.regex("/map.*")));
+	}
+
+	@Bean
+	public Docket newsApi() {
+		return getDocket("뉴스", Predicates.or(PathSelectors.regex("/news.*")));
+	}
+
+	@Bean
+	public Docket saleApi() {
+		return getDocket("매매", Predicates.or(PathSelectors.regex("/sale.*")));
+	}
+
+	@Bean
+	public Docket bookmarkApi() {
+		return getDocket("북마크", Predicates.or(PathSelectors.regex("/bookmark.*")));
+	}
+	
 	@Bean
 	public Docket allApi() {
 		return getDocket("전체", Predicates.or(PathSelectors.regex("/*.*")));
