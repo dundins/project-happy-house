@@ -71,7 +71,7 @@
 <br><br>
 
 ## **DataBase 설계**
-![database](./img/db_tables.png)
+![database](./img/db_tables2.png)
 
 <br><br>
 
